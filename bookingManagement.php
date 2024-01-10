@@ -1,0 +1,342 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
+  header('Location: login.php');
+  exit;
+}
+
+include_once('includes/header.php');
+?>
+<div id="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Booking Management</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+  </div>
+  <style>
+    .time-slot-btn {
+      margin-right: 30px;
+      margin-bottom: 20px;
+      margin-left: 30px;
+      width: 300px;
+    }
+  </style>
+  <!-- /.row -->
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+
+        <section class="calendar-body">
+          <div class="calendar">
+            <div class="header">
+              <button id="prevBtn">&lt;</button>
+              <h2 id="monthYear"></h2>
+              <button id="nextBtn">&gt;</button>
+            </div>
+            <div class="days"></div>
+          </div>
+        </section>
+
+
+        <section>
+          <div class="section-title">
+            <h3 class="text-center"><span><b>SELECT YOUR TIME SLOT</b></span></h3>
+            <p></p>
+          </div>
+          <div class="container mt-8 ">
+            <div class="row ml-3" id="time-intervals">
+            </div>
+          </div>
+        </section>
+
+        <!-- Modal for the booking form -->
+        <div class="modal fade" role="dialog" id="bookingModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Booking Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="selectedDate">Selected Date:</label>
+                    <input type="text" class="form-control" id="selectedDate" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="selectedDate">Enter Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="selectedDate">Enter Contact:</label>
+                    <input type="text" class="form-control" id="contact" placeholder="Enter contact" name="contact" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="startTime">Start Time:</label>
+                    <input type="text" class="form-control" id="startTime" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="endTime">End Time:</label>
+                    <select class="form-control" id="endTime" required>
+
+                    </select>
+                  </div>
+                  <button type="button" class="btn btn-primary" onclick="submitBookingForm()">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const daysContainer = document.querySelector('.days');
+            const monthYearElement = document.getElementById('monthYear');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            let flag = true;
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+
+            if (flag) {
+              renderCalendar(currentMonth, currentYear);
+              flag = false;
+            }
+
+            function renderCalendar(month, year) {
+
+              daysContainer.innerHTML = '';
+              const firstDay = new Date(year, month, 1);
+              const lastDay = new Date(year, month + 1, 0);
+              const totalDays = lastDay.getDate();
+
+              monthYearElement.textContent = `${getMonthName(month)} ${year}`;
+              console.log(totalDays);
+              for (let i = 1; i <= totalDays; i++) {
+                const day = document.createElement('div');
+
+                day.classList.add('day');
+                day.textContent = i;
+                day.addEventListener('click', () => selectDate(i));
+                daysContainer.appendChild(day);
+                day.classList.remove('today');
+                const currentDate = new Date();
+                if (i == currentDate.getDate() && month == currentDate.getMonth() && year == currentDate.getFullYear()) {
+                  selectDate(i);
+                  console.log(month + " " + year);
+                  console.log(currentDate.getMonth() + " " + currentDate.getFullYear());
+                  day.classList.add('today');
+                  var temp = document.getElementById('selectedDate');
+                  temp.value = currentDate.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  });
+                }
+
+              }
+
+              const todayIndex = new Date().getDate() - 1;
+              //daysContainer.children[todayIndex].classList.add('today');
+            }
+
+            function getMonthName(month) {
+              const months = [
+                'January', 'February', 'March', 'April',
+                'May', 'June', 'July', 'August',
+                'September', 'October', 'November', 'December'
+              ];
+              return months[month];
+            }
+
+            function selectDate(day) {
+              const selectedDay = new Date(currentYear, currentMonth, day);
+
+              const today = new Date();
+              var dateWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+              //console.log(selectedDay);
+              //console.log(dateWithoutTime);
+
+              var fg = true;
+              if (selectedDay < dateWithoutTime) {
+                //alert('Please select a future date. ' + today);
+                fg = false;
+              }
+              console.log(fg);
+
+              const selectedElement = document.querySelector('.selected');
+              if (selectedElement) {
+                selectedElement.classList.remove('selected');
+              }
+
+              const clickedDayElement = daysContainer.children[day - 1];
+              clickedDayElement.classList.add('selected');
+
+              const selectedDateStr = selectedDay.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+              //alert(`You have selected: ${selectedDateStr}`);
+              //console.log(selectedDateStr);
+              var temp = document.getElementById('selectedDate');
+              temp.value = selectedDateStr;
+
+              var time_interval = document.getElementById('time-intervals');
+              time_interval.innerHTML = "";
+              var intervals = ['12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM', '12:00 AM'];
+
+              console.log("here");
+
+              for (let i = 0; i < intervals.length - 1; i++) {
+                if (fg) {
+                  var span = `<span class="btn btn-primary time-slot-btn" onclick="openBookingForm('${intervals[i]}', '${intervals[i+1]}')">${intervals[i]}-${intervals[i+1]}</span>`;
+                } else {
+                  var span = `<span class="btn btn-primary time-slot-btn">${intervals[i]}-${intervals[i+1]}</span>`;
+                }
+
+                time_interval.innerHTML += span;
+              }
+
+
+
+            }
+
+            prevBtn.addEventListener('click', () => {
+              currentMonth--;
+              if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+              }
+              renderCalendar(currentMonth, currentYear);
+            });
+
+            nextBtn.addEventListener('click', () => {
+              currentMonth++;
+              if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+              }
+              renderCalendar(currentMonth, currentYear);
+            });
+
+
+          });
+
+
+
+          function openBookingForm(startTime, endTime) {
+            document.getElementById('startTime').value = startTime;
+            populateEndTimeDropdown(startTime);
+            $('#bookingModal').modal('show');
+          }
+
+          function populateEndTimeDropdown(startTime) {
+            // Clear existing options
+            var endTimeDropdown = document.getElementById('endTime');
+            endTimeDropdown.innerHTML = '';
+
+            // Parse the provided start time
+            var startHour = parseInt(startTime.split(':')[0]);
+            var startMinute = parseInt(startTime.split(':')[1].split(' ')[0]);
+            var startAMPM = startTime.split(' ')[1];
+
+            // Set the initial values
+            var currentHour = startHour;
+            var currentMinute = startMinute;
+            var currentAMPM = startAMPM;
+
+            //console.log(currentHour + " " + currentMinute + " " + currentAMPM);
+            while (1) {
+
+              if (currentMinute == 30) {
+                currentMinute = 0;
+                currentHour++;
+              } else {
+                currentMinute = 30;
+              }
+              if (currentHour == 13) {
+                currentHour = 1;
+              }
+
+              if (currentHour == 12 && currentMinute == 0) {
+
+                if (currentAMPM == "AM") {
+                  currentAMPM = "PM";
+
+                } else {
+                  currentAMPM = "AM";
+                }
+              }
+              console.log(currentHour + " " + currentMinute + " " + currentAMPM);
+              var optionTime = currentHour + ':' + (currentMinute < 10 ? '0' : '') + currentMinute + ' ' + currentAMPM;
+              var option = document.createElement('option');
+              option.value = optionTime;
+              option.text = optionTime;
+              endTimeDropdown.add(option);
+              if (currentHour == 12 && currentMinute == 0 && currentAMPM == 'AM') {
+                break;
+              }
+
+            }
+
+          }
+
+          function submitBookingForm() {
+            let date = document.getElementById('selectedDate').value;
+            let startTime = document.getElementById('startTime').value;
+            let endTime = document.getElementById('endTime').value;
+            let name = document.getElementById('name').value;
+            let contact = document.getElementById('contact').value;
+
+            var mysqlDate = new Date(date).toISOString().split('T')[0];
+
+
+
+            //console.log(date);
+            if (name === "") {
+              alert("Please enter a valid Name");
+            } else if (contact === "") {
+              alert("Please provide a Contact Number");
+            } else {
+              $.ajax({
+                url: 'submit_booking.php',
+                type: 'POST',
+                data: {
+                  //date: mysqlDate,
+                  startTime: startTime,
+                  endTime: endTime,
+                  name: name,
+                  contact: contact
+                },
+                success: function(response) {
+                  alert(response);
+                  $('#bookingModal').modal('hide');
+                },
+                error: function(error) {
+                  console.error('Error submitting booking: ' + JSON.stringify(error));
+                  alert('An error occurred. Please try again later.');
+                }
+              });
+            }
+          }
+        </script>
+
+        </section>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+<?php include_once('includes/footer.php'); ?>
