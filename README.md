@@ -8,6 +8,6 @@ A Simple Admin Pannel written in core PHP. It contains an implementation of gene
 
 ### Live Demo :
 Credentials :  
-**username** : admin
-**password** : admin
+**email** : admin@admin.com
+**password** : 123
 
