@@ -1,13 +1,33 @@
-A Simple Admin Pannel written in core PHP. It contains an implementation of general features you might need in your website admin panel like :
+/admin-panel
+|-- assets
+|   |-- css
+|   |   |-- bootstrap.min.css
+|   |   |-- style.css
+|   |-- js
+|       |-- bootstrap.min.js
+|       |-- jquery.min.js
+|-- inc
+|   |-- config.php
+|   |-- db.php
+|   |-- functions.php
+|-- views
+|   |-- header.php
+|   |-- footer.php
+|-- index.php
+|-- login.php
+|-- dashboard.php
+|-- customers.php
+|-- add_customer.php
+|-- bookingManagement.php
+|-- slotManagement.php
+|-- logout.php
 
-  - Record management (CRUD)
-  - Bootstrap based HTML template.
-  - Secure Authentication
-  - Pagination
-  - Filters
 
-### Live Demo :
-Credentials :  
-**email** : admin@admin.com
-**password** : 123
+
+## Credentials
+
+Access the live demo with the following credentials:
+
+- **Email:** admin@admin.com
+- **Password:** 123
 
