@@ -20,13 +20,13 @@ include_once('includes/header.php');
     }
 
     #yourTableID th {
-        background-color: #343a40;
-        color: #ffffff;
+        background-color: #f8f9fa;
+        color: #343a40;
     }
 
     #yourTableID tbody tr:hover {
-        background-color: #495057;
-        color: #ffffff;
+        background-color: #f8f9fa;
+        color: #343a40;
     }
 
     /* Style for the modal */
