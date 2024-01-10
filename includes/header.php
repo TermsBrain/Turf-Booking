@@ -18,17 +18,15 @@
     <link href="assets/css/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
     <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
 <body>
 
     <div id="wrapper">
-
-        <!-- Navigation -->
-        <?php if (isset($_SESSION['name']) && $_SESSION['role'] == true) : ?>
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -77,9 +75,9 @@
                                     <li>
                                         <a href="customers.php"><i class="fa fa-list fa-fw"></i>List all</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="add_customer.php"><i class="fa fa-plus fa-fw"></i>Add New</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                             <li>
@@ -94,7 +92,6 @@
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
-        <?php endif; ?>
         <!-- The End of the Header -->
 
     </div>
