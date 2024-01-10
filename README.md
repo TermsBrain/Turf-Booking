@@ -1,13 +1,7 @@
-A Simple Admin Pannel written in core PHP. It contains an implementation of general features you might need in your website admin panel like :
+## Credentials
 
-  - Record management (CRUD)
-  - Bootstrap based HTML template.
-  - Secure Authentication
-  - Pagination
-  - Filters
+Access the site with the following credentials:
 
-### Live Demo :
-Credentials :  
-**username** : admin
-**password** : admin
+- **Email:** admin@admin.com
+- **Password:** 123
 
