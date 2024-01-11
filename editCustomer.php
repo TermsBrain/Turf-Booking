@@ -10,7 +10,7 @@ include_once('includes/header.php');
 ?>
 <?php
 $id = $_REQUEST['id'];
-$str = "SELECT * FROM users WHERE id=$id";
+$str = "SELECT * FROM transaction WHERE id=$id";
 $result = mysqli_query($conn, $str);
 $customer = mysqli_fetch_array($result);
 ?>
