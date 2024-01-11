@@ -43,7 +43,7 @@ include_once('includes/header.php');
                             <small class="text-muted">Number of slots can be generated</small></label>
                         <input type="number" disabled name="slotNumber" class="form-control purchase-inputmask" id="slotNumber" placeholder="Number of slots" />
                     </div>
-                    <button type="submit" name="submit" class="btn btn-primary">
+                    <button type="submit" disabled name="submit" id="submit" class="btn btn-primary">
                         Proceed
                     </button>
                 </form>
@@ -55,10 +55,11 @@ include_once('includes/header.php');
     <script>
         $(document).ready(function() {
             $("#slotInterval").change(function(event) {
+                $('#submit').removeAttr('disabled');
                 var startTime = $("#stime").val();
                 var endTime = $("#ftime").val();
                 var intervalInMinutes = $("#slotInterval").val();
-                console.log(startTime, endTime, intervalInMinutes);
+                // console.log(startTime, endTime, intervalInMinutes);
                 
                 // var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"><img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg"></div></div>';
                 // $("#text").val("");
@@ -71,9 +72,14 @@ include_once('includes/header.php');
                 const totalHours = calculateTotalHours(startTime, endTime);
                 const timeSlots = generateTimeSlots(startTime, endTime, intervalInMinutes);
 
-                console.log(`Total hours between ${startTime} and ${endTime}: ${totalHours} hours.`);
+                // console.log(`Total hours between ${startTime} and ${endTime}: ${totalHours} hours.`);
                 console.log("Time slots:");
-                timeSlots.forEach(timeSlot => console.log(timeSlot));
+                // timeSlots.forEach(timeSlot => console.log(timeSlot));
+                // console.log(timeSlots.length);
+                // for (var li of timeSlots) {
+                //     console.log($(li));
+                // }
+
                 event.preventDefault();
             });
 
@@ -90,12 +96,28 @@ include_once('includes/header.php');
                 return totalHours;
             }
 
+            // function generateTimeSlots(startTime, endTime, intervalInMinutes) {
+            //     const timeSlots = [];
+            //     let currentDateTime = new Date('2000-01-01 ' + startTime);
+
+            //     while (currentDateTime <= new Date('2000-01-01 ' + endTime)) {
+            //         timeSlots.push(currentDateTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }));
+            //         currentDateTime.setMinutes(currentDateTime.getMinutes() + intervalInMinutes);
+            //     }
+
+            //     return timeSlots;
+            // }
             function generateTimeSlots(startTime, endTime, intervalInMinutes) {
                 const timeSlots = [];
                 let currentDateTime = new Date('2000-01-01 ' + startTime);
-
-                while (currentDateTime <= new Date('2000-01-01 ' + endTime)) {
-                    timeSlots.push(currentDateTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }));
+                let endDateTime = new Date('2000-01-01 ' + endTime)
+                while (currentDateTime < endDateTime) {
+                    console.log("## "+currentDateTime);
+                    const hours = currentDateTime.getHours().toString().padStart(2, '0');
+                    const minutes = currentDateTime.getMinutes().toString().padStart(2, '0');
+                    const formattedTime = hours + ':' + minutes;
+                    timeSlots.push(formattedTime);
+                    console.log(">> "+formattedTime);
                     currentDateTime.setMinutes(currentDateTime.getMinutes() + intervalInMinutes);
                 }
 
