@@ -84,7 +84,13 @@
                                 <a href="bookingManagement.php"><i class="fa fa-users fa-fw"></i> Booking</a>
                             </li>
                             <li>
-                                <a href="slotManagement.php"><i class="fa fa-users fa-fw"></i> Slot</a>
+                                <a href="slotManagement.php"><i class="fa fa-home fa-fw"></i> Slot</a>
+                            </li>
+                            <li>
+                                <a href="transaction.php"><i class="fa fa-money fa-fw"></i> Transaction</a>
+                            </li>
+                            <li>
+                                <a href="report.php"><i class="fa fa-file fa-fw"></i> Report</a>
                             </li>
                         </ul>
                     </div>

@@ -1,147 +1,148 @@
 <?php
-include_once('connection.php');
-
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
+// Include connection.php and header.php
+include 'connection.php';
+include_once('includes/header.php');
+
+// Function to format date based on the interval
+function formatDate($date, $interval) {
+    switch ($interval) {
+        case 'weekly':
+            return date('W-Y', strtotime($date));
+        case 'monthly':
+            return date('M Y', strtotime($date));
+        case 'yearly':
+            return date('Y', strtotime($date));
+        default:
+            return date('M d, Y', strtotime($date));
+    }
+}
+
+// Check if user is not logged in, redirect to login page
 if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
     header('Location: login.php');
     exit;
 }
 
-$timeRange = isset($_GET['time_range']) ? $_GET['time_range'] : 'monthly';
+// Handle interval selection from the dropdown
+$interval = isset($_GET['interval']) ? $_GET['interval'] : 'all-time';
 
-if ($timeRange === 'monthly') {
-    $startTime = date('Y-m-01 00:00:00');
-    $endTime = date('Y-m-t 23:59:59');
-} elseif ($timeRange === 'yearly') {
-    $startTime = date('Y-01-01');
-    $endTime = date('Y-12-31');
-} else {
-    $startTime = '2014-01-01 00:00:00';
-    $endTime = date('Y-m-d H:i:s');
+// SQL query to fetch data based on the selected interval
+$sql = "SELECT DATE_FORMAT(`created_at`, '%Y-%m-%d') AS date,
+               SUM(`total`) AS total_amount
+        FROM `transaction`
+        GROUP BY " . ($interval == 'weekly' ? "WEEK(`created_at`), YEAR(`created_at`)" : ($interval == 'monthly' ? "MONTH(`created_at`), YEAR(`created_at`)" : "YEAR(`created_at`)"));
+
+$result = mysqli_query($conn, $sql);
+
+$labels = [];
+$data = [];
+
+// Fetch data and format labels
+while ($row = mysqli_fetch_assoc($result)) {
+    $labels[] = formatDate($row['date'], $interval);
+    $data[] = $row['total_amount'];
 }
 
-function fetchChartData($conn, $startTime, $endTime)
-{
-    $query = "SELECT 
-                CASE 
-                    WHEN '$startTime' = '$endTime' THEN DATE_FORMAT(created_at, '%Y-%m-%d')
-                    WHEN '$startTime' = DATE_FORMAT('$endTime', '%Y-%m-01 00:00:00') THEN DATE_FORMAT(created_at, '%Y-%m')
-                    ELSE DATE_FORMAT(created_at, '%Y-%m')
-                END AS date,
-                SUM(total) AS total_income 
-              FROM transaction 
-              WHERE created_at BETWEEN '$startTime' AND '$endTime' 
-              GROUP BY date;";
-
-    $result = mysqli_query($conn, $query);
-
-    if (!$result) {
-        die("Query failed: " . mysqli_error($conn));
-    }
-
-    $data = array('labels' => array(), 'data' => array());
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data['labels'][] = $row['date'];
-        $data['data'][] = $row['total_income'];
-    }
-
-    return $data;
-}
-
-$chartData = fetchChartData($conn, $startTime, $endTime);
-
-// header('Content-Type: application/json');
-// echo json_encode($chartData);
+mysqli_close($conn);
 ?>
+
+<!-- HTML content starts here -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Add some CSS styles for better presentation -->
+<style>
+    #transactionChart {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .filter-container {
+        margin-bottom: 20px;
+    }
+</style>
 
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Report</h1>
+            <h1 class="page-header">Reports</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
 
-            <label for="timeRange">Select Time Range:</label>
-            <select id="timeRange" onchange="upcreated_atChart()">
+    <div class="row">
+        <!-- Filter dropdown -->
+        <div class="filter-container">
+            <label for="interval">Select Interval:</label>
+            <select id="interval" onchange="updateChart()">
+                <option value="all-time">All Time</option>
+                <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>
                 <option value="yearly">Yearly</option>
-                <option value="all-time">All Time</option>
             </select>
-
         </div>
-    </div>
-</div>
 
-<?php include_once('includes/footer.php'); ?>
+        <canvas id="transactionChart" width="400" height="200"></canvas>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script>
+            var ctx = document.getElementById('transactionChart').getContext('2d');
+            var myChart;
 
+            function updateChart() {
+                // Get the selected interval from the dropdown
+                var selectedInterval = document.getElementById('interval').value;
 
-<script>
-    $(document).ready(function() {
-        // Define the chart creation function
-        function createChart(data) {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var labelFormat = (data.labels.length > 1) ? 'MMMM YYYY' : 'MMMM DD, YYYY';
+                // Fetch data based on the selected interval
+                fetchChartData(selectedInterval);
+            }
 
-            var myChart = new Chart(ctx, {
+            function fetchChartData(selectedInterval) {
+                // Fetch data from the server based on the interval
+                var apiUrl = 'report_html.php?interval=' + selectedInterval;
+
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update the chart data and labels
+                        myChart.data.labels = data.labels;
+                        myChart.data.datasets[0].data = data.data;
+                        myChart.update();
+                    });
+            }
+
+            myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: data.labels.map(function(label) {
-                        return moment(label).format(labelFormat);
-                    }),
+                    labels: <?php echo json_encode($labels); ?>,
                     datasets: [{
-                        label: 'Total Income',
-                        data: data.data,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        label: 'Total Amount',
+                        data: <?php echo json_encode($data); ?>,
+                        fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
+                        borderWidth: 2
                     }]
                 },
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value, index, values) {
-                                    return '$' + value;
-                                }
-                            }
+                            beginAtZero: true
                         }
                     }
                 }
             });
-        }
 
-        // Define the function to fetch data and update the chart
-        function upcreated_atChart() {
-            var selectedTimeRange = document.getElementById("timeRange").value;
-            $.ajax({
-                url: 'report.php',
-                data: {
-                    time_range: selectedTimeRange
-                },
-                dataType: 'json',
-                success: function(data) {
-                    // Call the chart creation function with the fetched data
-                    createChart(data);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error("AJAX Error: " + textStatus, errorThrown);
-                }
-            });
-        }
+            // Log the initial data to check if it's correct
+            console.log('Initial labels:', myChart.data.labels);
+            console.log('Initial data:', myChart.data.datasets[0].data);
 
-        // Call the chart creation function with empty data on page load
-        createChart({ labels: [], data: [] });
+            // Initially fetch data based on the selected interval
+            fetchChartData('all-time');
+        </script>
+    </div>
+</div>
 
-        // Event listener for select change
-        $('#timeRange').change(function() {
-            upcreated_atChart();
-        });
-    });
-</script>
+<?php include_once('includes/footer.php'); ?>
