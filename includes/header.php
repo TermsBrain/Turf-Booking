@@ -92,6 +92,25 @@
                             <li>
                                 <a href="report.php"><i class="fa fa-file fa-fw"></i> Report</a>
                             </li>
+                            
+                            <li>
+                                <a href="#"><i class="fa fa-users fa-fw"></i> Staff<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                <li>
+                                        <a href="addStaff.php"><i class="fa fa-plus fa-fw"></i>Add New Staff</a>
+                                    </li>
+                                    <li>
+                                        <a href="staff.php"><i class="fa fa-list fa-fw"></i>List all</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="profile.php"><i class="fa fa-user fa-fw"></i> Profile</a>
+                            </li>
+                            <li>
+                                <a href="settings.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->

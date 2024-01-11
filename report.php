@@ -102,7 +102,7 @@ mysqli_close($conn);
 
             function fetchChartData(selectedInterval) {
                 // Fetch data from the server based on the interval
-                var apiUrl = 'report_html.php?interval=' + selectedInterval;
+                var apiUrl = 'reportHtml.php?interval=' + selectedInterval;
 
                 fetch(apiUrl)
                     .then(response => response.json())
