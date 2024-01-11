@@ -39,14 +39,14 @@ include_once('includes/header.php');
           </div>
         </section>
 
-
         <section>
           <div class="section-title">
             <h3 class="text-center"><span><b>SELECT YOUR TIME SLOT</b></span></h3>
             <p></p>
           </div>
-          <div class="container mt-8 ">
-            <div class="row ml-3" id="time-intervals">
+          <div class="container ml-4">
+            <div class="row" id="time-intervals" style="margin-left: 25px">
+
             </div>
           </div>
         </section>
@@ -91,6 +91,18 @@ include_once('includes/header.php');
             </div>
           </div>
         </div>
+        <?php
+            include 'connection.php';
+            $sql = "SELECT * FROM slot_management WHERE status=1";
+            $result = mysqli_query($conn, $sql);
+            echo "<script> var periods = [];";
+
+            while($row = mysqli_fetch_array($result)){
+              echo "periods.push('".$row['period']."');";
+            }
+
+            echo "console.log(periods);</script>";
+        ?>
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             const daysContainer = document.querySelector('.days');
@@ -191,7 +203,7 @@ include_once('includes/header.php');
 
               var time_interval = document.getElementById('time-intervals');
               time_interval.innerHTML = "";
-              var intervals = ['12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM', '12:00 AM'];
+              /*var intervals = ['12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM', '12:00 AM'];
 
               console.log("here");
 
@@ -203,8 +215,22 @@ include_once('includes/header.php');
                 }
 
                 time_interval.innerHTML += span;
-              }
+              }*/
 
+              for (let i=0; i<periods.length; i++){
+                var startTime = periods[i].split('-')[0];
+                
+                var endTime = periods[i].split('-')[1];
+
+                
+                if (fg) {
+                  var span = `<span class="btn btn-primary time-slot-btn" onclick="openBookingForm('${startTime}', '${endTime}')">${startTime}-${endTime}</span>`;
+                } else {
+                  var span = `<span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span>`;
+                }
+                time_interval.innerHTML += span;
+              }
+              
 
 
             }

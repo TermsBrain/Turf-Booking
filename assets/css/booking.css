@@ -9,7 +9,8 @@
     background-image: url("turf.jpg");
     background-size: cover;
     background-position: center;
-    margin-bottom: 30px;
+    margin-bottom: -50px;
+    margin-top: -20px;
   }
   
   .calendar {
