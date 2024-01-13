@@ -50,8 +50,8 @@ $transaction = mysqli_fetch_array($result);
                         <input type="number" value="<?php echo $transaction['total'] ?>" class="form-control" name="total" id="" disabled>
                     </div>
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" name="submit" value="Update Customer">
-                        <a class="btn btn-info" href="Customers.php">List All Customer</a>
+                        <input class="btn btn-primary" type="submit" name="submit" value="Update Transaction">
+                        <a class="btn btn-info" href="transaction.php">List All Transaction</a>
                     </div>
                 </form>
             </div>
