@@ -28,8 +28,8 @@ include_once('includes/header.php');
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT transaction.*, users.name as user_name FROM transaction 
-                          LEFT JOIN users ON transaction.user_id = users.id";
+                $query = "SELECT transaction.*, customers.name as user_name FROM transaction 
+                          LEFT JOIN customers ON transaction.user_id = customers.id";
                 $sql = mysqli_query($conn, $query);
 
                 while ($row = mysqli_fetch_array($sql)) { ?>

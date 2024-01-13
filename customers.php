@@ -57,7 +57,7 @@ include_once('includes/header.php');
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT * FROM users";
+                $query = "SELECT * FROM customers";
                 $sql = mysqli_query($conn, $query);
                 while ($row = mysqli_fetch_array($sql)) { ?>
                     <tr>

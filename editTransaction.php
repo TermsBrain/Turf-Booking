@@ -10,7 +10,7 @@ include_once('includes/header.php');
 ?>
 <?php
 $id = $_REQUEST['id'];
-$str = "SELECT transaction.*, users.name as user_name FROM transaction LEFT JOIN users ON transaction.user_id = users.id WHERE transaction.id = $id";
+$str = "SELECT transaction.*, customers.name as user_name FROM transaction LEFT JOIN customers ON transaction.user_id = customers.id WHERE transaction.id = $id";
 $result = mysqli_query($conn, $str);
 $transaction = mysqli_fetch_array($result);
 

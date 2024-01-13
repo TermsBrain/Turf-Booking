@@ -10,7 +10,7 @@ include_once('includes/header.php');
 ?>
 <?php
 $id = $_REQUEST['id'];
-$str = "SELECT * FROM users WHERE id=$id";
+$str = "SELECT * FROM customers WHERE id=$id";
 $result = mysqli_query($conn, $str);
 $customer = mysqli_fetch_array($result);
 ?>
@@ -52,7 +52,7 @@ include_once('includes/footer.php');
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $phone = $_POST['phone'];
-    $str = "UPDATE users SET name='" . $name . "', phone='" . $phone . "' WHERE id= $id";
+    $str = "UPDATE customers SET name='" . $name . "', phone='" . $phone . "' WHERE id= $id";
     if (mysqli_query($conn, $str)) {
         echo "<script> window.location.replace('customers.php'); </script>";
     }

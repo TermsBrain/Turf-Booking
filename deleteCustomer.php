@@ -6,7 +6,7 @@ if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
 }
 include 'connection.php';
 $id = $_REQUEST['id']; //receive userid from query parameter
-$str = "DELETE FROM users where id=$id";
+$str = "DELETE FROM  customers where id=$id";
 if (mysqli_query($conn, $str)) {
     header('Location: customers.php');
 }

@@ -141,7 +141,7 @@ CREATE TABLE `transaction` (
   `method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `advance` int(11) DEFAULT NULL,
   `due` int(11) DEFAULT NULL,
-  `total` int(11) DEFAULT NULL,
+  `total` int(11) GENERATED ALWAYS AS (`advance` + `due`) STORED,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
