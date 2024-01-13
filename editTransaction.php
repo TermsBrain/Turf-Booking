@@ -10,7 +10,7 @@ include_once('includes/header.php');
 ?>
 <?php
 $id = $_REQUEST['id'];
-$str = "SELECT transaction.*, customers.name as user_name FROM transaction LEFT JOIN customers ON transaction.user_id = customers.id WHERE transaction.id = $id";
+$str = "SELECT transaction.*, customers.name as user_name, customers.phone as phone FROM transaction LEFT JOIN customers ON transaction.user_id = customers.id WHERE transaction.id = $id";
 $result = mysqli_query($conn, $str);
 $transaction = mysqli_fetch_array($result);
 
@@ -25,13 +25,17 @@ $transaction = mysqli_fetch_array($result);
         <div class="container">
             <div class="col-md-8">
                 <form method="post" action="">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="">ID</label>
                         <input type="text" value="<?php echo $transaction['id'] ?>" class="form-control" name="id" id="" disabled>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="">Name</label>
                         <input type="text" value="<?php echo $transaction['user_name'] ?>" class="form-control" name="name" id="" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Contact</label>
+                        <input type="text" value="<?php echo $transaction['phone'] ?>" class="form-control" name="name" id="" disabled>
                     </div>
                     <div class="form-group">
                         <label for="">Advance</label>

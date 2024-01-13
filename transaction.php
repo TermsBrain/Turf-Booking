@@ -19,7 +19,8 @@ include_once('includes/header.php');
         <table id="yourTableID" class="table table-dark table-striped">
             <thead>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Date</th>
+                <th>Contact</th>
                 <th>Advance</th>
                 <th>Due</th>
                 <th>Total</th>
@@ -28,14 +29,19 @@ include_once('includes/header.php');
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT transaction.*, customers.name as user_name FROM transaction 
+                $query = "SELECT transaction.*, customers.phone as phone FROM transaction 
                           LEFT JOIN customers ON transaction.user_id = customers.id";
                 $sql = mysqli_query($conn, $query);
 
                 while ($row = mysqli_fetch_array($sql)) { ?>
                     <tr>
                         <td><?php echo $row['id'] ?></td>
-                        <td><?php echo $row['user_name'] ?></td>
+                        <td><?php
+                            $temp = $row['created_at'];
+                            $dates = explode(' ',$temp);
+                            echo $dates[0];
+                        ?></td>
+                        <td><?php echo $row['phone'] ?></td>
                         <td><?php echo $row['advance'] ?></td>
                         <td><?php echo $row['due'] ?></td>
                         <td><?php echo $row['total'] ?></td>

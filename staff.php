@@ -94,6 +94,7 @@ include_once('includes/header.php');
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Status</th>
                 <th>Action</th>
             </thead>
             <tbody>
@@ -108,6 +109,8 @@ include_once('includes/header.php');
                         <td><?php echo $row['role'] ?></td>
                         <td>
                             <input type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
+                        </td>                        
+                        <td>
                             <a class="btn btn-primary" href="editStaff.php?id=<?php echo $row['id'] ?>">Edit</a>
                             <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Delete</button>
                             <!-- Delete Modal -->

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2024 at 12:29 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Generation Time: Jan 13, 2024 at 01:03 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,7 @@ CREATE TABLE `authentication` (
 --
 
 INSERT INTO `authentication` (`id`, `name`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin.com', '123', 'admin', 1, '2024-01-02 10:52:55', '2024-01-02 17:15:39');
+(1, 'admin', 'admin@admin.com', '123', 'admin', 1, '2024-01-02 10:52:55', '2024-01-13 17:39:01');
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,7 @@ CREATE TABLE `booking` (
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` varchar(14) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -82,11 +82,11 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `phone`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 1811111111, '2024-01-02 10:49:15', '2024-01-02 16:49:15'),
-(5, 'Mohsin', 3199956, '2024-01-10 03:27:02', '2024-01-10 16:57:27'),
-(8, 'Akib Hossain', 499956, '2024-01-10 03:45:09', '2024-01-10 16:55:33'),
-(9, 'Tanjibul Hasan', 22222222, '2024-01-10 03:46:15', '2024-01-11 15:19:49'),
-(10, 'Mohsin Ali', 5499956, '2024-01-10 03:48:00', '2024-01-10 16:52:58');
+(1, 'admin', '6', '2024-01-02 10:49:15', '2024-01-13 17:52:23'),
+(5, 'Mohsin', '123456345', '2024-01-10 03:27:02', '2024-01-13 17:58:47'),
+(8, 'Akib Hossain', '11234567896', '2024-01-10 03:45:09', '2024-01-13 17:58:52'),
+(9, 'Tanjibul Hasan', '1234545234', '2024-01-10 03:46:15', '2024-01-13 17:58:58'),
+(10, 'Mohsin Ali', '987654321', '2024-01-10 03:48:00', '2024-01-13 17:59:03');
 
 -- --------------------------------------------------------
 
@@ -157,7 +157,7 @@ CREATE TABLE `transaction` (
 INSERT INTO `transaction` (`id`, `user_id`, `method`, `advance`, `due`, `created_at`, `updated_at`) VALUES
 (1, 5, 'Credit Card', 200, 70, '2024-01-11 01:31:59', '2024-01-11 07:40:49'),
 (2, 8, 'Cash', 76, 25, '2024-01-11 01:31:59', '2024-01-11 07:31:59'),
-(3, 10, 'Credit Card', 300, 1000, '2024-01-11 01:31:59', '2024-01-11 09:58:25'),
+(3, 10, 'Paypal', 1200, 300, '2024-01-11 01:31:59', '2024-01-13 17:59:23'),
 (4, 9, 'PayPal', 120, 30, '2024-01-11 01:31:59', '2024-01-11 07:31:59');
 
 --
