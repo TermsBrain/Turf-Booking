@@ -10,7 +10,7 @@ include_once('includes/header.php');
 ?>
 <div id="page-wrapper">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-12">
       <h1 class="page-header">Booking Management</h1>
     </div>
     <!-- /.col-lg-12 -->
@@ -45,7 +45,7 @@ include_once('includes/header.php');
             <p></p>
           </div>
           <div class="container ml-4">
-            <div class="row" id="time-intervals" style="margin-left: 25px">
+            <div class="row" id="time-intervals">
 
             </div>
           </div>
@@ -95,15 +95,21 @@ include_once('includes/header.php');
             include 'connection.php';
             $sql = "SELECT * FROM slot_management WHERE status=1";
             $result = mysqli_query($conn, $sql);
+            
             echo "<script> var periods = [];";
-
-            while($row = mysqli_fetch_array($result)){
-              echo "periods.push('".$row['period']."');";
+            $row = mysqli_fetch_array($result);
+            echo "var admin = '".$_SESSION['name']."';";
+            echo "periods.push('".$row['start_time']."');"."periods.push('".$row['end_time']."');";
+            while($r = mysqli_fetch_array($result)){
+              echo "periods.push('".$r['end_time']."');";
             }
 
             echo "console.log(periods);</script>";
         ?>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
+          //console.log(periods);
+
           document.addEventListener('DOMContentLoaded', function() {
             const daysContainer = document.querySelector('.days');
             const monthYearElement = document.getElementById('monthYear');
@@ -217,10 +223,10 @@ include_once('includes/header.php');
                 time_interval.innerHTML += span;
               }*/
 
-              for (let i=0; i<periods.length; i++){
-                var startTime = periods[i].split('-')[0];
+              for (let i=0; i<periods.length-1; i++){
+                var startTime = periods[i];
                 
-                var endTime = periods[i].split('-')[1];
+                var endTime = periods[i+1];
 
                 
                 if (fg) {
@@ -265,7 +271,22 @@ include_once('includes/header.php');
           }
 
           function populateEndTimeDropdown(startTime) {
+            var endTimeDropdown = document.getElementById('endTime');
+            endTimeDropdown.innerHTML = '';
+            var x=periods.length+1;
+            for (let i=0; i<periods.length; i++){
+              if(x<i){
+                var option = document.createElement('option');
+                option.value = periods[i];
+                option.text = periods[i];
+                endTimeDropdown.add(option);
+              }   
+              if(periods[i]==startTime){
+                x=i;
+              }
+            }
             // Clear existing options
+            /*console.log('------------------'+periods);
             var endTimeDropdown = document.getElementById('endTime');
             endTimeDropdown.innerHTML = '';
 
@@ -311,11 +332,12 @@ include_once('includes/header.php');
                 break;
               }
 
-            }
+            }*/
 
           }
 
           function submitBookingForm() {
+            alert(admin);
             let date = document.getElementById('selectedDate').value;
             let startTime = document.getElementById('startTime').value;
             let endTime = document.getElementById('endTime').value;
@@ -324,7 +346,7 @@ include_once('includes/header.php');
 
             var mysqlDate = new Date(date).toISOString().split('T')[0];
 
-
+            console.log(mysqlDate);
 
             //console.log(date);
             if (name === "") {
@@ -333,14 +355,15 @@ include_once('includes/header.php');
               alert("Please provide a Contact Number");
             } else {
               $.ajax({
-                url: 'submit_booking.php',
+                url: 'api/submit_booking.php',
                 type: 'POST',
                 data: {
                   //date: mysqlDate,
                   startTime: startTime,
                   endTime: endTime,
                   name: name,
-                  contact: contact
+                  contact: contact,
+                  admin: admin
                 },
                 success: function(response) {
                   alert(response);
