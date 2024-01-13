@@ -9,8 +9,6 @@ include 'connection.php';
 include_once('includes/header.php');
 ?>
 
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <style>
     #yourTableID {
         width: 100%;
@@ -41,6 +39,45 @@ include_once('includes/header.php');
         background-color: #343a40;
         color: #ffffff;
     }
+
+    /* Style for the toggle checkbox */
+    .status-toggle {
+        appearance: none;
+        width: 50px;
+        /* Adjust the width as needed */
+        height: 30px;
+        /* Adjust the height as needed */
+        border-radius: 15px;
+        /* Adjust the border-radius as needed */
+        background-color: red;
+        /* Background color when unchecked */
+        position: relative;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .status-toggle:checked {
+        background-color: green;
+        /* Background color when checked */
+    }
+
+    .status-toggle:before {
+        content: '';
+        position: absolute;
+        width: 25px;
+        /* Adjust the handle width as needed */
+        height: 30px;
+        /* Adjust the handle height as needed */
+        border-radius: 50%;
+        background-color: #ddd;
+        /* Handle color */
+        transition: 0.3s;
+    }
+
+    .status-toggle:checked:before {
+        transform: translateX(25px);
+        /* Adjust the handle position when checked */
+    }
 </style>
 <div id="page-wrapper">
     <div class="row">
@@ -69,21 +106,8 @@ include_once('includes/header.php');
                         <td><?php echo $row['name'] ?></td>
                         <td><?php echo $row['email'] ?></td>
                         <td><?php echo $row['role'] ?></td>
-                        
-
                         <td>
-                            <style>
-                                .toggle.ios,
-                                .toggle-on.ios,
-                                .toggle-off.ios {
-                                    border-radius: 20rem;
-                                }
-
-                                .toggle.ios .toggle-handle {
-                                    border-radius: 20rem;
-                                }
-                            </style>
-                            <input type="checkbox" checked data-toggle="toggle" data-on="Active" data-off="Deactive" data-onstyle="success" data-offstyle="danger">
+                            <input type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
                             <a class="btn btn-primary" href="editCustomer.php?id=<?php echo $row['id'] ?>">Edit</a>
                             <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Delete</button>
                             <!-- Delete Modal -->
@@ -135,9 +159,30 @@ include_once('includes/header.php');
     $(document).ready(function() {
         $('#yourTableID').DataTable({
             dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        });
+
+        // Add event listener for the checkbox change event
+        $('.status-toggle').change(function() {
+            var status = this.checked ? 1 : 0; // 1 if checked, 0 if unchecked
+            var userId = $(this).data('id'); // Get the user ID from data-id attribute
+
+            // Use Ajax to send a request to updateStatus.php
+            $.ajax({
+                type: 'POST',
+                url: 'updateStatus.php',
+                data: {
+                    id: userId,
+                    status: status
+                },
+                success: function(response) {
+                    // Handle the response if needed
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
     });
 </script>
