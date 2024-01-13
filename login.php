@@ -6,9 +6,9 @@ function displayErrorModal($message)
 {
     echo <<<HTML
     <div id="errorModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="text-align: center;">
             <span class="close" onclick="closeModal()">&times;</span>
-            <p>$message</p>
+            <p style="font-weight: bold; color: black; display: inline-block;">$message</p>
         </div>
     </div>
     <script>
@@ -25,6 +25,7 @@ function displayErrorModal($message)
     </script>
 HTML;
 }
+
 
 if (isset($_SESSION['name']) && isset($_SESSION['role'])) {
     header('Location: index.php');
@@ -62,11 +63,11 @@ if (isset($_POST['submit'])) {
         // }
         else {
             // Incorrect password, display error modal
-            displayErrorModal("Wrong email or password");
+            displayErrorModal("Wrong Email or Password");
         }
     } else {
         // Incorrect email or password, display error modal
-        displayErrorModal("Wrong email or password");
+        displayErrorModal("Wrong Email or Password");
     }
 }
 ?>
@@ -298,47 +299,52 @@ if (isset($_POST['submit'])) {
 
     /* Add styles for the modal */
     .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    position: relative;
+}
+.close {
+    color: black;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
 
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 50%;
-    }
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
 </style>
 
 <body>
     <div class="main">
         <div class="container b-container" id="b-container">
             <form class="form" id="b-form" method="post" action="login.php">
-                <h2 class="form_title title">Sign in to Website</h2>
+                <h2 class="form_title title">Sign in to Turf</h2>
                 <div class="form__icons">
                     <i class='bx bxl-facebook-circle'></i>
                     <i class='bx bxl-instagram-alt'></i>
@@ -347,7 +353,7 @@ if (isset($_POST['submit'])) {
                 <span class="form__span">or use your email account</span>
                 <input class="form__input" type="email" name="email" placeholder="Email">
                 <input class="form__input" type="password" name="password" placeholder="Password">
-                <a class="form__link" href="#">Forgot your password?</a>
+                <a class="form__link" href="forgotPassword.php">Forgot your password?</a>
                 <button type="submit" name="submit" value="submit" class="form__button button submit">SIGN IN</button>
             </form>
         </div>

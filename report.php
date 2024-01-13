@@ -1,81 +1,93 @@
 <?php
 session_start();
 
-// Include connection.php and header.php
 include 'connection.php';
-include_once('includes/header.php');
-
-// Function to format date based on the interval
-function formatDate($date, $interval) {
-    switch ($interval) {
-        case 'weekly':
-            return date('W-Y', strtotime($date));
-        case 'monthly':
-            return date('M Y', strtotime($date));
-        case 'yearly':
-            return date('Y', strtotime($date));
-        default:
-            return date('M d, Y', strtotime($date));
-    }
-}
-
-// Check if user is not logged in, redirect to login page
 if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
     header('Location: login.php');
     exit;
 }
+include_once('includes/header.php');
 
-// Handle interval selection from the dropdown
+function formatDate($weekNumber, $month, $interval)
+{
+    return 'Week ' . $weekNumber . ' - ' . $month;
+}
+
 $interval = isset($_GET['interval']) ? $_GET['interval'] : 'all-time';
 
-// SQL query to fetch data based on the selected interval
-$sql = "SELECT DATE_FORMAT(`created_at`, '%Y-%m-%d') AS date,
+// Calculate the start and end dates for the current week and the previous four weeks
+$currentWeekStart = date('Y-m-d', strtotime('this week'));
+$currentWeekEnd = date('Y-m-d', strtotime('next week - 1 day'));
+$fourWeeksAgoStart = date('Y-m-d', strtotime('-4 weeks this week'));
+$fourWeeksAgoEnd = date('Y-m-d', strtotime('last week'));
+
+$sql = "SELECT WEEK(`created_at`) AS week_number,
+               MONTHNAME(`created_at`) AS month_name,
                SUM(`total`) AS total_amount
         FROM `transaction`
-        GROUP BY " . ($interval == 'weekly' ? "WEEK(`created_at`), YEAR(`created_at`)" : ($interval == 'monthly' ? "MONTH(`created_at`), YEAR(`created_at`)" : "YEAR(`created_at`)"));
+        WHERE (`created_at` BETWEEN '$currentWeekStart' AND '$currentWeekEnd') OR
+              (`created_at` BETWEEN '$fourWeeksAgoStart' AND '$fourWeeksAgoEnd')
+        GROUP BY week_number, month_name";
 
 $result = mysqli_query($conn, $sql);
 
 $labels = [];
 $data = [];
 
-// Fetch data and format labels
 while ($row = mysqli_fetch_assoc($result)) {
-    $labels[] = formatDate($row['date'], $interval);
+    $labels[] = formatDate($row['week_number'], $row['month_name'], $interval);
     $data[] = $row['total_amount'];
 }
 
 mysqli_close($conn);
 ?>
 
-<!-- HTML content starts here -->
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Add some CSS styles for better presentation -->
 <style>
     #transactionChart {
-        background-color: #fff;
+        background-color: #e1f7d5; /* Change this color */
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
     }
 
     .filter-container {
+        background-color: #e1f7d5; /* Change this color */
         margin-bottom: 20px;
+        padding: 15px; /* Add padding for a better visual appearance */
+        border-radius: 8px;
+    }
+
+    .filter-container label {
+        margin-right: 10px;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .filter-container select {
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        outline: none;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 </style>
+
 
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Reports</h1>
         </div>
-        <!-- /.col-lg-12 -->
     </div>
-    <!-- /.row -->
 
     <div class="row">
-        <!-- Filter dropdown -->
         <div class="filter-container">
             <label for="interval">Select Interval:</label>
             <select id="interval" onchange="updateChart()">
@@ -93,24 +105,23 @@ mysqli_close($conn);
             var myChart;
 
             function updateChart() {
-                // Get the selected interval from the dropdown
                 var selectedInterval = document.getElementById('interval').value;
 
-                // Fetch data based on the selected interval
                 fetchChartData(selectedInterval);
             }
 
             function fetchChartData(selectedInterval) {
-                // Fetch data from the server based on the interval
                 var apiUrl = 'reportHtml.php?interval=' + selectedInterval;
 
                 fetch(apiUrl)
                     .then(response => response.json())
                     .then(data => {
-                        // Update the chart data and labels
                         myChart.data.labels = data.labels;
                         myChart.data.datasets[0].data = data.data;
                         myChart.update();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
                     });
             }
 
@@ -135,11 +146,9 @@ mysqli_close($conn);
                 }
             });
 
-            // Log the initial data to check if it's correct
             console.log('Initial labels:', myChart.data.labels);
             console.log('Initial data:', myChart.data.datasets[0].data);
 
-            // Initially fetch data based on the selected interval
             fetchChartData('all-time');
         </script>
     </div>

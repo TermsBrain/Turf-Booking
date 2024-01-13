@@ -38,7 +38,7 @@ $customer = mysqli_fetch_array($result);
                     </div>
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" name="submit" value="Update Customer">
-                        <a class="btn btn-info" href="Customers.php">List All Customer</a>
+                        <a class="btn btn-info" href="customers.php">List All Customer</a>
                     </div>
                 </form>
             </div>

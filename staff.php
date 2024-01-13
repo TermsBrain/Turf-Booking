@@ -108,7 +108,7 @@ include_once('includes/header.php');
                         <td><?php echo $row['role'] ?></td>
                         <td>
                             <input type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
-                            <a class="btn btn-primary" href="editCustomer.php?id=<?php echo $row['id'] ?>">Edit</a>
+                            <a class="btn btn-primary" href="editStaff.php?id=<?php echo $row['id'] ?>">Edit</a>
                             <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Delete</button>
                             <!-- Delete Modal -->
                             <div class="modal fade" id="myModal<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

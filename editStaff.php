@@ -46,8 +46,8 @@ $staff = mysqli_fetch_array($result);
                     </div>
 
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" name="submit" value="Update Customer">
-                        <a class="btn btn-info" href="Customers.php">List All Customer</a>
+                        <input class="btn btn-primary" type="submit" name="submit" value="Update Staff">
+                        <a class="btn btn-info" href="staff.php">List All Staff</a>
                     </div>
                 </form>
             </div>
@@ -60,10 +60,13 @@ include_once('includes/footer.php');
 
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $str = "UPDATE users SET name='" . $name . "', phone='" . $phone . "' WHERE id= $id";
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+
+    $str = "UPDATE authentication SET name='" . $name . "', email='" . $email . "', password='" . $password . "', role='" . $role . "' WHERE id= $id";
     if (mysqli_query($conn, $str)) {
-        echo "<script> window.location.replace('staffs.php'); </script>";
+        echo "<script> window.location.replace('staff.php'); </script>";
     }
 }
 ?>
