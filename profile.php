@@ -13,9 +13,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT `id`, `name`, `email`, `password`, `role` FROM `authentication` WHERE `name` = ?";
+$sql = "SELECT `id`, `name`, `email`, `password`, `role` FROM `authentication` WHERE `id` = ?";
+
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $_SESSION['name']);
+$stmt->bind_param("s", $_SESSION['id']);
 $stmt->execute();
 $result = $stmt->get_result();
 $userData = $result->fetch_assoc();
