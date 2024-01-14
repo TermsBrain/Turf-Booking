@@ -2,7 +2,7 @@
 session_start();
 
 include 'connection.php';
-if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
+if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
     header('Location: login.php');
     exit;
 }
