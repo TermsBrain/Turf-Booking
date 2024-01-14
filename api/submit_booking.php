@@ -2,22 +2,19 @@
 
 include '../connection.php';
 
-$date = $_POST['data'];
+$date = $_POST['date'];
 $name = $_POST['name'];
+$ref_id = $_POST['ref_id'];
 $contact = $_POST['contact'];
 $startTime = $_POST['startTime'];
 $endTime = $_POST['endTime'];
-$admin = $_POST['admin'];
+$due = $_POST['due'];
+$total = $_POST['total'];
 
-$user_insert = "INSERT INTO `customers`(`name`, `phone`) VALUES ($name, $contact)";
+$customers = "INSERT INTO `customers`(`name`, `phone`) VALUES ($name, $contact)";
 $user_insert_qry = mysqli_query($conn, $str);
-// echo $date.'<br>'.$name.'<br>'.$contact.'<br>'.$startTime.'<br>'.$endTime;
-echo $date.'<br>'.$name.'<br>'.$contact.'<br>'.$startTime.'<br>'.$endTime.'<br>'.$admin;
-// $str = "UPDATE booking SET status = 'completed' WHERE id = $booking_id";
-// $result = mysqli_query($conn, $str);
-
-if(1){
-    echo "success";
+$last_id = mysqli_insert_id($conn);
+if($user_insert_qry){
+    echo "Successfully inserted to cutomers table!\n".$last_id;
 }
-
 ?>

@@ -34,8 +34,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['role']) && isset($_SESSION['statu
         } else {
             echo "Your account is not active.";
         }
-    } else {
-        echo "You do not have the required role.";
     }
 }
 
