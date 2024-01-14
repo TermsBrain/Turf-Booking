@@ -1,7 +1,5 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<body>
+
 <section id="footer">
    <div class="container">
      <div class="row">
