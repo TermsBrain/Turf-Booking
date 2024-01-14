@@ -109,90 +109,76 @@
             <li>Top-notch sound system with wireless microphone</li>
             <li>CCTV Camera surveillance & Free Wifi</li>
           </ul> -->
-    <div class="faq_area section_padding_100" id="faq">
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <!--Facilities Area-->
-            <div class="col-12 col-sm-10 col-lg-8">
-                <div class="accordion faq-accordian" id="faqAccordion">
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingOne1">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1" > Facilities 1 <span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseOne1" aria-labelledby="headingOne1" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Two Separate team rooms with toilet and change rooms</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                        </div>
-                       </div>
-                 </div>
-                    <!-- 2 -->
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingOne2">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">Facilities 2 <span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseOne2" aria-labelledby="headingOne2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>CCTV Camera surveillance & Free Wifi</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 3 -->
-                    <!-- <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingOne2">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">Seating arrangement in the roof<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseOne2" aria-labelledby="headingOne2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- 4 -->
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingOne2">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">Facilities 3<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseOne2" aria-labelledby="headingOne2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Top-notch sound system with wireless microphone</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 5 -->
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Facilities 4 <span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Drinks available to buy</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingThree">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Facilities 5 <span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Car Parking Facilities</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Facilities Section start Here! -->
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+      <div class="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
     </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Accordion Item #2
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Accordion Item #3
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Accordion Item #4
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+        Accordion Item #3
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+      <div class="accordion-body">
+        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
 </div>
 
-        </div>
+
+</div>
+<!-- Facilities Section End Here! -->
 
         <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="100">
         <!-- <h3>Key Features</h3> -->
@@ -203,107 +189,80 @@
             <li>Excellent drainage system allowing players to play during rain</li>
             <li>Rainwater does not clog</li>
           </ul> -->
-          
- <div class="faq_area section_padding_100" id="faq">
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <!--  Area-->
-            <div class="col-12 col-sm-10 col-lg-8">
-                <div class="accordion faq-accordian" id="faqAccordion">
-                  <!-- 1 -->
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingOne11">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne11" aria-expanded="true" aria-controls="collapseOne11">Key Features 1<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseOne11" aria-labelledby="headingOne11" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Dual-colored Astro turf</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 2 -->
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo22" aria-expanded="true" aria-controls="collapseTwo22">Key Features 2 <span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseTwo22" aria-labelledby="headingTwo22" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Rainwater does not clog</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
-                        </div>
-                    </div>
-                        <!-- 3 -->
-                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Key Features 3 <span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Match while having food.</p>
-                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
-                        </div>
-                    </div>
-                        <!-- 4 -->
-                        <!-- <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Artificial turf in China<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div> -->
-                        <!-- 5 -->
-                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Key Features 4<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div>
-                      <!-- 6 -->
-                      <!-- <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">The apps isn't installing?<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- 7 -->
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                        <div class="card-header" id="headingThree">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Key Features 5<span class="lni-chevron-up"></span></h6>
-                        </div>
-                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+   
+   <!-- Key Features Section start Here! -->       
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+      <div class="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
     </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Accordion Item #2
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Accordion Item #3
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Accordion Item #4
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+        Accordion Item #3
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+      <div class="accordion-body">
+        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
 </div>
         </div>
       </div>
 
     </div>
   </section>
+
+<!-- Key Features Section End Here! -->
 
   <section class="map-container">
   <!-- <div class="section-title text-center">
