@@ -393,7 +393,7 @@ include_once('includes/header.php');
                   endTime: endTime,
                   name: name,
                   contact: contact,
-                  admin: admin,
+                  ref_id: admin,
                   due: due,
                   total: total
                 },
