@@ -6,6 +6,33 @@ if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
     exit;
 }
 
+include 'connection.php';
+
+// Fetch the number of customers
+$sqlCustomers = "SELECT COUNT(*) as numCustomers FROM customers";
+$resultCustomers = mysqli_query($conn, $sqlCustomers);
+$rowCustomers = mysqli_fetch_assoc($resultCustomers);
+$numCustomers = $rowCustomers['numCustomers'];
+
+// Fetch the number of staff members
+$sqlStaff = "SELECT COUNT(*) as numStaff FROM authentication";
+$resultStaff = mysqli_query($conn, $sqlStaff);
+$rowStaff = mysqli_fetch_assoc($resultStaff);
+$numStaff = $rowStaff['numStaff'];
+
+// Fetch the total transactions from the transaction table
+$sqlBooking = "SELECT COUNT(*) as numBooking FROM booking";
+$resultBooking = mysqli_query($conn, $sqlBooking);
+$rowBooking = mysqli_fetch_assoc($resultBooking);
+$numBooking = $rowBooking['numBooking'];
+
+// Fetch the total transactions from the transaction table
+$sqlTransactions = "SELECT SUM(total) as totalTransactions FROM transaction";
+$resultTransactions = mysqli_query($conn, $sqlTransactions);
+$rowTransactions = mysqli_fetch_assoc($resultTransactions);
+$totalTransactions = $rowTransactions['totalTransactions'];
+
+// Include necessary files
 include_once('includes/header.php');
 ?>
 <div id="page-wrapper">
@@ -46,7 +73,7 @@ include_once('includes/header.php');
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
+                        <div class="huge"><?php echo $numStaff; ?></div>
                         <div>Staff</div>
                     </div>
                 </div>
@@ -68,7 +95,7 @@ include_once('includes/header.php');
                         <i class="fa fa-shopping-cart fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">8</div>
+                        <div class="huge"><?php echo $numBooking; ?></div>
                         <div>Booking</div>
                     </div>
                 </div>
@@ -90,7 +117,7 @@ include_once('includes/header.php');
                         <i class="fa fa-money fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">$1,200</div>
+                        <div class="huge">৳ <?php echo $totalTransactions; ?></div>
                         <div>Report</div>
                     </div>
                 </div>
