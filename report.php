@@ -39,28 +39,43 @@ while ($row = mysqli_fetch_assoc($result)) {
     $data[] = $row['total_amount'];
 }
 
+// Fetch data for the new chart (total amount of last twelve months and total customers in each month)
+$twelveMonthsAgo = date('Y-m-d', strtotime('-12 months'));
+
+$sqlTransactionsThisYear = "SELECT MONTH(`created_at`) AS month_number,
+                                   SUM(`total`) AS total_amount
+                            FROM `transaction`
+                            WHERE YEAR(`created_at`) = YEAR(CURDATE())
+                            GROUP BY month_number";
+
+$resultTransactionsThisYear = mysqli_query($conn, $sqlTransactionsThisYear);
+
+$labelsTransactionsThisYear = [];
+$dataTransactionsThisYear = [];
+
+while ($rowTransactionsThisYear = mysqli_fetch_assoc($resultTransactionsThisYear)) {
+    $labelsTransactionsThisYear[] = $rowTransactionsThisYear['month_number'];
+    $dataTransactionsThisYear[] = $rowTransactionsThisYear['total_amount'];
+}
+
 mysqli_close($conn);
 ?>
-
-
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-    #transactionChart {
-        background-color: #e1f7d5; /* Change this color */
+    #transactionChart,
+    #customerChart {
+        background-color: #e1f7d5;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
     }
 
     .filter-container {
-        background-color: #e1f7d5; /* Change this color */
+        background-color: #e1f7d5;
         margin-bottom: 20px;
-        padding: 15px; /* Add padding for a better visual appearance */
+        padding: 15px;
         border-radius: 8px;
     }
 
@@ -78,7 +93,6 @@ mysqli_close($conn);
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 </style>
-
 
 <div id="page-wrapper">
     <div class="row">
@@ -98,20 +112,33 @@ mysqli_close($conn);
             </select>
         </div>
 
-        <canvas id="transactionChart" width="400" height="200"></canvas>
+        
+        <canvas id="transactionChart" width="50" height="10"></canvas>
+
+        <canvas id="customerChart" width="50" height="10"></canvas>
+        <div style="width: 300px; height: 300px; margin: auto; display: flex; justify-content: center; align-items: center;">
+    <canvas id="transactionDoughnutChart"></canvas>
+</div>
+
+
+
+
 
         <script>
             var ctx = document.getElementById('transactionChart').getContext('2d');
+            var ctxCustomers = document.getElementById('customerChart').getContext('2d');
             var myChart;
+            var myCustomerChart;
 
             function updateChart() {
                 var selectedInterval = document.getElementById('interval').value;
 
                 fetchChartData(selectedInterval);
+                fetchCustomerChartData(selectedInterval);
             }
 
             function fetchChartData(selectedInterval) {
-                var apiUrl = 'reportHtml.php?interval=' + selectedInterval;
+                var apiUrl = 'api/reportHtml.php?interval=' + selectedInterval;
 
                 fetch(apiUrl)
                     .then(response => response.json())
@@ -122,6 +149,21 @@ mysqli_close($conn);
                     })
                     .catch(error => {
                         console.error('Error fetching data:', error);
+                    });
+            }
+
+            function fetchCustomerChartData(selectedInterval) {
+                var apiUrl = 'api/reportHtml.php?interval=' + selectedInterval;
+
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        myCustomerChart.data.labels = data.labelsCustomers;
+                        myCustomerChart.data.datasets[0].data = data.dataCustomers;
+                        myCustomerChart.update();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching customer data:', error);
                     });
             }
 
@@ -146,10 +188,181 @@ mysqli_close($conn);
                 }
             });
 
+
+            
+myCustomerChart = new Chart(ctxCustomers, {
+    type: 'bar',
+    data: {
+        labels: <?php echo json_encode($labelsCustomers); ?>,
+        datasets: [
+            {
+                label: 'Total Customers',
+                data: <?php echo json_encode($dataCustomers); ?>,
+                backgroundColor: 'rgba(255, 165, 0, 0.7)', // Bright orange for the bar
+                borderWidth: 1,
+                yAxisID: 'y-axis', // Use 'y-axis' for the bar dataset
+                order: 2, // Set a higher order for the bar dataset
+            },
+        ],
+    },
+    options: {
+        scales: {
+            y: [
+                {
+                    stacked: false,
+                    position: 'left',
+                    id: 'y-axis',
+                    ticks: {
+                        stepSize: 10,
+                        beginAtZero: true,
+                        callback: function (value) {
+                            console.log(value);
+                            return value;
+                        },
+                    },
+                },
+                {
+                    stacked: false,
+                    position: 'right',
+                    id: 'y-line-axis', // Use a different ID for the line dataset
+                    ticks: {
+                        stepSize: 10,
+                        beginAtZero: true,
+                        callback: function (value) {
+                            console.log(value);
+                            return value;
+                        },
+                    },
+                },
+            ],
+            x: {
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 45,
+                    minRotation: 45,
+                },
+            },
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        var label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += context.parsed.y;
+                        return label;
+                    },
+                },
+            },
+        },
+        // Set the background color of the chart
+        backgroundColor: 'rgba(255, 255, 255, 0.9)', // Bright white background
+    },
+});
+
+// Add the line chart to the existing chart
+myCustomerChart.data.datasets.push({
+    label: 'Total Transactions',
+    data: <?php echo json_encode($data); ?>,
+    type: 'line',
+    borderColor: 'rgba(255, 69, 0, 1)', // Bright orange for the line
+    backgroundColor: 'rgba(255, 69, 0, 0.2)',
+    borderWidth: 2,
+    fill: true,
+    yAxisID: 'y-line-axis', // Use the same ID as specified in the second y-axis
+    order: 1, // Set a lower order for the line dataset
+});
+
+// Update the chart to reflect the changes
+myCustomerChart.update();
+
+
+
+// doughnut
+
+var ctxDoughnut = document.getElementById('transactionDoughnutChart').getContext('2d');
+        var myDoughnutChart;
+
+        function fetchDoughnutChartData() {
+            var apiUrl = 'api/reportHtml.php?interval=this-year';
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    myDoughnutChart.data.labels = data.labelsTransactionsThisYear;
+                    myDoughnutChart.data.datasets[0].data = data.dataTransactionsThisYear;
+                    myDoughnutChart.update();
+                })
+                .catch(error => {
+                    console.error('Error fetching doughnut data:', error);
+                });
+        }
+
+        myDoughnutChart = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: <?php echo json_encode($labelsTransactionsThisYear); ?>,
+                datasets: [{
+                    data: <?php echo json_encode($dataTransactionsThisYear); ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 205, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(201, 203, 207, 0.7)',
+                        'rgba(255, 215, 0, 0.7)',
+                        'rgba(255, 140, 0, 0.7)',
+                        'rgba(0, 255, 0, 0.7)',
+                        'rgba(0, 0, 255, 0.7)',
+                        'rgba(128, 0, 128, 0.7)'
+                    ],
+                }],
+            },
+            options: {
+                responsive: false, 
+        maintainAspectRatio: false,
+                width: 20,
+                height: 20, 
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                },
+            },
+        });
+
+        // ... (existing JavaScript)
+
+        function updateChart() {
+            var selectedInterval = document.getElementById('interval').value;
+
+            fetchChartData(selectedInterval);
+            fetchCustomerChartData(selectedInterval);
+            fetchDoughnutChartData(); // Fetch data for the doughnut chart
+        }
+
+        // ... (existing JavaScript)
+
+        // Initial fetching of data
+        fetchChartData('all-time');
+        fetchCustomerChartData('all-time');
+        fetchDoughnutChartData();
+
+
+
+
             console.log('Initial labels:', myChart.data.labels);
             console.log('Initial data:', myChart.data.datasets[0].data);
+            console.log('Initial customer labels:', myCustomerChart.data.labels);
+            console.log('Initial customer data:', myCustomerChart.data.datasets[0].data);
 
             fetchChartData('all-time');
+            fetchCustomerChartData('all-time');
         </script>
     </div>
 </div>

@@ -83,9 +83,9 @@
                             <li>
                                 <a href="bookingManagement.php"><i class="fa fa-users fa-fw"></i> Booking</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="slotManagement.php"><i class="fa fa-home fa-fw"></i> Slot</a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="transaction.php"><i class="fa fa-money fa-fw"></i> Transaction</a>
                             </li>
@@ -96,9 +96,14 @@
                             <li>
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Staff<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
+                                <?php 
+                            if ($_SESSION['role'] == 'admin' && $_SESSION['status'] == 1 ) { ?>
                                 <li>
                                         <a href="addStaff.php"><i class="fa fa-plus fa-fw"></i>Add New Staff</a>
                                     </li>
+                                    <?php 
+                                }
+                            ?>
                                     <li>
                                         <a href="staff.php"><i class="fa fa-list fa-fw"></i>List all</a>
                                     </li>
@@ -108,9 +113,14 @@
                             <li>
                                 <a href="profile.php"><i class="fa fa-user fa-fw"></i> Profile</a>
                             </li>
-                            <li>
-                                <a href="settings.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
+                            <?php 
+                            if ($_SESSION['role'] == 'admin' && $_SESSION['status'] == 1 ) { ?>
+                                <li>
+                                    <a href="settings.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                </li>
+                            <?php 
+                                }
+                            ?>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->

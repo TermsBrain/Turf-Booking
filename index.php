@@ -1,12 +1,15 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
-    header('Location: login.php');
-    exit;
-}
-
 include 'connection.php';
+
+if (!isset($_SESSION['id']) || !isset($_SESSION['role']) || !isset($_SESSION['status'])) {
+    
+            header('Location: login.php');
+            exit;
+} 
+
+include_once('includes/header.php');
+
 
 // Fetch the number of customers
 $sqlCustomers = "SELECT COUNT(*) as numCustomers FROM customers";

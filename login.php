@@ -26,11 +26,21 @@ function displayErrorModal($message)
 HTML;
 }
 
+if (isset($_SESSION['id']) && isset($_SESSION['role']) && isset($_SESSION['status'])) {
+    if ($_SESSION['role'] == 'admin' ) {
+        if ($_SESSION['status'] == 1) {
+            header('Location: index.php');
+            exit;
+        } else {
+            echo "Your account is not active.";
+        }
+    } else {
+        echo "You do not have the required role.";
+    }
+} 
 
-if (isset($_SESSION['name']) && isset($_SESSION['role'])) {
-    header('Location: index.php');
-    exit;
-}
+
+
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
@@ -41,26 +51,24 @@ if (isset($_POST['submit'])) {
     $row = mysqli_fetch_array($sql);
 
     if ($row) {
+        $id = $row['id'];
         $role = $row['role'];
+        $status = $row['status'];
+    
+        $_SESSION['id'] = $id;
+        $_SESSION['role'] = $role;
+        $_SESSION['status'] = $status;
 
         // Admin login
         if ($role == 'admin') {
-            $name = $row['name'];
-            $_SESSION['name'] = $name;
-            $_SESSION['role'] = $role;
             header('Location: index.php');
             exit;
         }
-        // Teacher login (uncomment and modify as needed)
-        // else if($role == "teacher"){
-        //     $username = $row['name'];
-        //     $id = $row['id'];
-        //     $_SESSION['username'] = $username; 
-        //     $_SESSION['id'] = $id; 
-        //     $_SESSION['role'] = $role;
-        //     header('Location: teacher/dashboard.php');
-        //     exit;
-        // }
+        //Manager login
+        else if($role == "manager"){
+            header('Location: index.php');
+            exit;
+        }
         else {
             // Incorrect password, display error modal
             displayErrorModal("Wrong Email or Password");

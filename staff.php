@@ -173,7 +173,7 @@ include_once('includes/header.php');
             // Use Ajax to send a request to updateStatus.php
             $.ajax({
                 type: 'POST',
-                url: 'updateStatus.php',
+                url: 'api/updateStatus.php',
                 data: {
                     id: userId,
                     status: status
