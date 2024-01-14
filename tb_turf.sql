@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2024 at 01:03 PM
+-- Generation Time: Jan 14, 2024 at 12:55 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.2
 
@@ -38,13 +38,6 @@ CREATE TABLE `authentication` (
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `authentication`
---
-
-INSERT INTO `authentication` (`id`, `name`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin.com', '123', 'admin', 1, '2024-01-02 10:52:55', '2024-01-13 17:39:01');
-
 -- --------------------------------------------------------
 
 --
@@ -56,8 +49,8 @@ CREATE TABLE `booking` (
   `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `transaction_id` int(11) DEFAULT NULL,
-  `slot_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slot_id` int(11) DEFAULT NULL,
+  `reference_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -77,16 +70,23 @@ CREATE TABLE `customers` (
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `customers`
+-- Table structure for table `setting`
 --
 
-INSERT INTO `customers` (`id`, `name`, `phone`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '6', '2024-01-02 10:49:15', '2024-01-13 17:52:23'),
-(5, 'Mohsin', '123456345', '2024-01-10 03:27:02', '2024-01-13 17:58:47'),
-(8, 'Akib Hossain', '11234567896', '2024-01-10 03:45:09', '2024-01-13 17:58:52'),
-(9, 'Tanjibul Hasan', '1234545234', '2024-01-10 03:46:15', '2024-01-13 17:58:58'),
-(10, 'Mohsin Ali', '987654321', '2024-01-10 03:48:00', '2024-01-13 17:59:03');
+CREATE TABLE `setting` (
+  `brand` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `favicon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -119,20 +119,6 @@ CREATE TABLE `slot_management` (
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `slot_management`
---
-
-INSERT INTO `slot_management` (`id`, `name`, `start_time`, `end_time`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'slot-1', '12:30 PM', '1:00 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:54:25'),
-(2, 'slot-2', '1:00 PM', '1:30 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:54:53'),
-(3, 'slot-3', '1:30 PM', '2:00 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:55:01'),
-(4, 'slot-4', '2:00 PM', '2:30 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:55:36'),
-(5, 'slot-5', '2:30 PM', '3:00 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:55:44'),
-(6, 'slot-6', '3:00 PM', '3:30 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:55:55'),
-(7, 'slot-7', '3:30 PM', '4:00 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:56:02'),
-(8, 'slot-8', '4:00 PM', '4:30 PM', 1, '2024-01-13 08:05:26', '2024-01-13 16:56:16');
-
 -- --------------------------------------------------------
 
 --
@@ -145,20 +131,12 @@ CREATE TABLE `transaction` (
   `method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `advance` int(11) DEFAULT NULL,
   `due` int(11) DEFAULT NULL,
-  `total` int(11) GENERATED ALWAYS AS (`advance` + `due`) STORED,
+  `cash` int(11) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `transaction`
---
-
-INSERT INTO `transaction` (`id`, `user_id`, `method`, `advance`, `due`, `created_at`, `updated_at`) VALUES
-(1, 5, 'Credit Card', 200, 70, '2024-01-11 01:31:59', '2024-01-11 07:40:49'),
-(2, 8, 'Cash', 76, 25, '2024-01-11 01:31:59', '2024-01-11 07:31:59'),
-(3, 10, 'Paypal', 1200, 300, '2024-01-11 01:31:59', '2024-01-13 17:59:23'),
-(4, 9, 'PayPal', 120, 30, '2024-01-11 01:31:59', '2024-01-11 07:31:59');
 
 --
 -- Indexes for dumped tables
@@ -176,7 +154,9 @@ ALTER TABLE `authentication`
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `transaction_id` (`transaction_id`);
+  ADD KEY `transaction_id` (`transaction_id`),
+  ADD KEY `slot_id` (`slot_id`),
+  ADD KEY `reference_id` (`reference_id`);
 
 --
 -- Indexes for table `customers`
@@ -212,7 +192,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `authentication`
 --
 ALTER TABLE `authentication`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `booking`
@@ -224,7 +204,7 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `slot_live`
@@ -236,13 +216,13 @@ ALTER TABLE `slot_live`
 -- AUTO_INCREMENT for table `slot_management`
 --
 ALTER TABLE `slot_management`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -253,7 +233,9 @@ ALTER TABLE `transaction`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `customers` (`id`),
-  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`id`);
+  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`id`),
+  ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`slot_id`) REFERENCES `slot_management` (`id`),
+  ADD CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`reference_id`) REFERENCES `authentication` (`id`);
 
 --
 -- Constraints for table `slot_live`
