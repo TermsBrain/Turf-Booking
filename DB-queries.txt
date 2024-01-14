@@ -1,0 +1,80 @@
+CREATE TABLE `setting` (
+  `brand` varchar(255),
+  `logo` varchar(255),
+  `favicon` varchar(255),
+  `email` varchar(255),
+  `phone` varchar(255),
+  `social` varchar(255),
+  `location` varchar(255),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+);
+
+CREATE TABLE `authentication` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(255),
+  `email` varchar(255),
+  `password` varchar(255),
+  `role` varchar(255),
+  `status` int(11),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(255),
+  `phone` varchar(14),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+);
+
+CREATE TABLE `slot_management` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(255),
+  `start_time` varchar(255),
+  `end_time` varchar(255),
+  `status` int(11),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+);
+
+CREATE TABLE `slot_live` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `date` varchar(30),
+  `slot_id` int(11),
+  `status` int(11),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  FOREIGN KEY (slot_id) REFERENCES slot_management(id)
+);
+
+CREATE TABLE `transaction` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int(11),
+  `method` varchar(255),
+  `advance` int(11),
+  `due` int(11),
+  `cash` int(11),
+  `total` int(11),
+  `status` int(11),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  FOREIGN KEY (user_id) REFERENCES customers(id)
+);
+
+CREATE TABLE `booking` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `date` varchar(255),
+  `user_id` int(11),
+  `transaction_id` int(11),
+  `slot_id` int(11),
+  `reference_id` int(11),
+  `status` int(11),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  FOREIGN KEY (user_id) REFERENCES customers(id),
+  FOREIGN KEY (transaction_id) REFERENCES transaction(id),
+  FOREIGN KEY (slot_id) REFERENCES slot_management(id),
+  FOREIGN KEY (reference_id) REFERENCES authentication(id)
+);
