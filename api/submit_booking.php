@@ -12,10 +12,18 @@ $date = $_POST['date'];
 $method = $_POST['method'];
 
 $customers = "INSERT INTO `customers`(`name`, `phone`) VALUES ($name, $contact)";
-$user_insert_qry = mysqli_query($conn, $str);
-$last_id = mysqli_insert_id($conn);
-if($user_insert_qry){
-    echo "Successfully inserted to cutomers table! ID: ".$last_id;
+
+if(mysqli_query($conn, $customers)) {
+    echo "Succesfully inserted !!";
 }
+else {
+    echo mysqli_error();
+}
+
+// echo $customers;
+// $last_id = mysqli_insert_id($conn);
+// if($user_insert_qry){
+//     echo "Successfully inserted to cutomers table! ID: ".$last_id;
+// }
 
 ?>
