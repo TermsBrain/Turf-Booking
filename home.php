@@ -9,12 +9,8 @@
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-VoMzfrEiEKXG9P5XpoGhiXYrQBE8dJBKmyNePqEXaLyL9Z9nUzqsKusjUy4z1pgl5RVOdPeUdqA0vF9zf2iqrDQ==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-cU8e3XlqzyslKG6ZO4eyL/nBEiSNZjFfzQPpgv5vPEKzBm7lMQoqMBbqL7BfFOlM" crossorigin="anonymous">
-
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'>
-
-   <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></script>
-
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
   <title>Turf Website</title>
 </head>
@@ -24,9 +20,9 @@
   <!-- <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#016a39;"> -->
   <!-- <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#3779c8;"> -->
   <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#e9e7e7;">
-
-  <!-- <a class="navbar-brand" href="#" style="font-family: 'Your Font', sans-serif; font-size: 24px; font-weight: bold; color: #fff;">Your Brand</a> -->
-  <img src="ll2.png">
+  <!-- Logo -->
+  <img src="assets/img/logo.png">
+  <a class="navbar-brand" href="#" style="font-family: 'Your Font', sans-serif; font-size: 20px; font-weight: bold; color: #454545;">Terms Sports Arena</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,42 +37,43 @@
         <li class="nav-item">
           <a class="nav-link" href="#contact">Contact</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#faq">FAQ</a>
-        </li>
-        <li class="nav-item">
+        </li> -->
+        <!-- <li class="nav-item">
           <a class="nav-link book-now-btn" href="#">Book Now</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>
 
-  <div class="cover-content">
+  
     <!-- Left Side (Button and Tagline) -->
+    <!-- Cover Photo -->
+    <div class="cover-content">
+    <img src="assets/img/cover.jpg" alt="Cover Photo" class="cover-photo" >
+    </div>
     <div class="left-content">
       <h3 style="color:#000000">Unleash Your Inner Athlete</h3>
       <p class="tagline">Your tagline goes here</p>
-      <a href="#"><button class="cta-button">Book Now</button></a>
+      <a href="#"><button class="cta-button ">Book Now</button></a>
+      <!-- <a class="btn btn-primary btn-xlg" href="tel:713-992-0916" style="padding: 20px; background-color: rgba(0, 0, 238, 0.5)">
+        Book Now! <span class="glyphicon glyphicon-earphone" style="padding-left: 10px; padding-right: 10px;"></span>
+      </a> -->
       <!-- <button class="cta-button">Book Now</button> -->
     </div>
-    <!-- Cover Photo -->
-    <img src="ft.jpg" alt="Cover Photo" class="cover-photo">
-  </div>
-
 
   <!-- ======= About Section ======= -->
   <section id="about" class="about section-bg">
     <div class="container" data-aos="fade-up">
-
       <div class="section-title">
         <h2>About Us</h2>
-        <h3><span>Discover More About [Name] Turf</span></h3>
+        <h3><span>Discover More About Turf</span></h3>
         <p></p>
       </div>
-
       <div class="row">
         <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-          <img src="real.jpg" class="img-fluid" alt=" [Name] Turf Image">
+          <img src="assets/img/about.jpg" class="img-fluid" alt=" [Name] Turf Image" style="max-width: 100%; height: 80%;">
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
           <!-- <h3 class="mb-4">Unleash Your Inner Athlete</h3> -->
@@ -85,7 +82,6 @@
             Experience the perfect fusion of passion and sportsmanship at [Name] Turf – your unrivaled destination for heart-pounding Olympic-style football played on meticulously maintained turf courts. Immerse yourself in the game, book your playtime slots, and savor the thrill of competition. [Name] Turf: Where Football and Fun Collide!</p>
         </div>
       </div>
-
     </div>
   </section>
   <section id="features" class="features section-bg">
@@ -98,10 +94,8 @@
    
     <div class="section-title text-center pb-4">
       <h2>Features & Facilities</h2>
-      
       <p class="mb-4">Explore the Exceptional Amenities at Kick OFF Football Ground</p>
     </div>
-
       <div class="row">
         <div class="col-lg-6 " data-aos="fade-right" data-aos-delay="100">
           <!-- <h3>Facilities</h3> -->
@@ -115,27 +109,27 @@
             <li>Top-notch sound system with wireless microphone</li>
             <li>CCTV Camera surveillance & Free Wifi</li>
           </ul> -->
-  <div class="faq_area section_padding_100" id="faq">
+    <div class="faq_area section_padding_100" id="faq">
     <div class="container">
         <div class="row justify-content-center mt-5">
-            <!-- FAQ Area-->
+            <!--Facilities Area-->
             <div class="col-12 col-sm-10 col-lg-8">
                 <div class="accordion faq-accordian" id="faqAccordion">
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne1">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1"> <li>Facilities 1</li><span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1" > Facilities 1 <span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseOne1" aria-labelledby="headingOne1" data-parent="#faqAccordion">
                             <div class="card-body">
                                 <p>Two Separate team rooms with toilet and change rooms</p>
                                 <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
-                            </div>
                         </div>
-                    </div>
+                       </div>
+                 </div>
                     <!-- 2 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne2">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2"><li>Facilities 2</li> <span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">Facilities 2 <span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseOne2" aria-labelledby="headingOne2" data-parent="#faqAccordion">
                             <div class="card-body">
@@ -159,7 +153,7 @@
                     <!-- 4 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne2">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2"><li>Facilities 3</li><span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">Facilities 3<span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseOne2" aria-labelledby="headingOne2" data-parent="#faqAccordion">
                             <div class="card-body">
@@ -172,23 +166,23 @@
                     <!-- 5 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Drinks available to buy<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Facilities 4 <span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>Drinks available to buy</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingThree">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Car Parking Facilities<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Facilities 5 <span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>Car Parking Facilities</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
@@ -209,7 +203,8 @@
             <li>Excellent drainage system allowing players to play during rain</li>
             <li>Rainwater does not clog</li>
           </ul> -->
-          <div class="faq_area section_padding_100" id="faq">
+          
+ <div class="faq_area section_padding_100" id="faq">
     <div class="container">
         <div class="row justify-content-center mt-5">
             <!--  Area-->
@@ -230,24 +225,24 @@
                     <!-- 2 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo22" aria-expanded="true" aria-controls="collapseTwo22">Rainwater does not clog<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo22" aria-expanded="true" aria-controls="collapseTwo22">Key Features 2 <span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseTwo22" aria-labelledby="headingTwo22" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>Rainwater does not clog</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
                         <!-- 3 -->
                         <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Match while having food<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Key Features 3 <span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>Match while having food.</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
@@ -266,7 +261,7 @@
                         <!-- 5 -->
                         <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">The apps isn't installing?<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Key Features 4<span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
                             <div class="card-body">
@@ -290,7 +285,7 @@
                     <!-- 7 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingThree">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Contact form isn't working?<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Key Features 5<span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
                             <div class="card-body">
@@ -323,202 +318,8 @@
     </div>
   </section>
 
-<!-- FAQ -->
-<div class="container">
-<div class="row">
-      <div class="col-lx-12">
-          <div class="card">
-              <div class="card-body">
-                <div class="row justify-content-center mt-4">
-                    <div class="col-xl-5 col-lg-8">
-                        <div class="text-center">
-                            <h3>Frequently Asked Questions?</h3>
-                            <p class="text-muted">If several languages coalesce, the grammar of the resulting language
-                                is more simple and regular than that of the individual</p>
-                            <div>
-                                <button type="button" class="btn btn-primary me-2">Contact Us</button>
-                                <!-- <button type="button" class="btn btn-success">Send us a tweet</button> -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
-                <div class="row justify-content-center mt-5">
-                    <div class="col-9">
-                        <ul class="nav nav-tabs  nav-tabs-custom nav-justified justify-content-center faq-tab-box" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-genarel-tab" data-bs-toggle="pill" data-bs-target="#pills-genarel" type="button" role="tab" aria-controls="pills-genarel" aria-selected="true">
-                                    <span class="font-size-16">General Questions</span>
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-privacy_policy-tab" data-bs-toggle="pill" data-bs-target="#pills-privacy_policy" type="button" role="tab" aria-controls="pills-privacy_policy" aria-selected="false">
-                                    <span class="font-size-16">Privacy Policy</span>
-                                </button>
-                              </li>
-                              <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-teachers-tab" data-bs-toggle="pill" data-bs-target="#pills-pricing_plan" type="button" role="tab" aria-controls="pills-pricing_plan" aria-selected="false">
-                                    
-                                    <span class="font-size-16">Pricing &amp; Plans</span>
-                                </button>
-                              </li>
-                          </ul>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="tab-content pt-3" id="pills-tabContent">
-                            <div class="tab-pane fade active show" id="pills-genarel" role="tabpanel" aria-labelledby="pills-genarel-tab">
-                                <div class="row g-4 mt-2">
-                                    <div class="col-lg-6">
-                                        <h5>What is Lorem Ipsum ?</h5>
-                                    <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple 
-                                        and regular than that of the individual languages. The new common language will be more simple and 
-                                        regular than the existing</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>Why do we use it ?</h5>
-                                        <p class="text-muted">Their separate existence is a myth. For science, music, sport, etc, 
-                                            Europe uses the same vocabulary.</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>Where does it come from ?</h5>
-                                    <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple 
-                                        and regular than that of the individual languages. The new common language will be more simple and 
-                                        regular than the existing
-                                    </p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>Where can I get some?</h5>
-                                        <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more 
-                                            simple and regular than that of the individual languages. </p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="tab-pane fade" id="pills-privacy_policy" role="tabpanel" aria-labelledby="pills-privacy_policy-tab">
-                                <div class="row g-4 mt-2">
-                                    <div class="col-lg-6">
-                                        <h5>Where can I get some ?</h5>
-                                        <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple
-                                            and regular than that of the individual languages. The new common language will be more
-                                            simple and regular than the existing</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>Where does it come from ?</h5>
-                                        <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple
-                                            and regular than that of the individual languages. The new common language will be more
-                                            simple and regular than the existing</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>Why do we use it ?</h5>
-                                        <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple
-                                            and regular than that of the individual languages. The new common language will be more
-                                            simple and regular than the existing</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>What is Genius privacy policy</h5>
-                                        <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple
-                                            and regular than that of the individual languages. The new common language will be more
-                                            simple and regular than the existing</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-pricing_plan" role="tabpanel">
-                                <div class="row g-4 mt-4">
-                                    <div class="col-lg-6">
-                                        <h5>Where does it come from ?</h5>
-                                    <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple
-                                        and regular than that of the individual languages. The new common language will be more
-                                        simple and regular than the existing</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>Why do we use it ?</h5>
-                                        <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple
-                                            and regular than that of the individual languages. The new common language will be more
-                                            simple and regular than the existing</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>What is Lorem Ipsum ?</h5>
-                                    <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple 
-                                        and regular than that of the individual languages. The new common language will be more 
-                                        simple and regular than the existing</p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <h5>What is Lorem Ipsum?</h5>
-                                        <p class="lg-base">If several languages coalesce, the grammar of the resulting language is more simple 
-                                            and regular than that of the individual languages. The new common language will be more 
-                                            simple and regular than the existing</p>
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                    </div>
-                </div>
-                <!-- end row -->
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-<!-- FAQ -->
-  <!-- Footer -->
-  <!-- <section id="footer">
-    <div class="container">
-      <div class="row text-center text-xs-center text-sm-left text-md-left">
-        <div class="col-xs-12 col-sm-4 col-md-4">
-          <h5>Quick links</h5>
-          <ul class="list-unstyled quick-links">
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Home</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>About</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Videos</a></li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-          <h5>Quick links</h5>
-          <ul class="list-unstyled quick-links">
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Home</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>About</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Videos</a></li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-          <h5>Quick links</h5>
-          <ul class="list-unstyled quick-links">
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Home</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>About</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-            <li><a href=" "><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-            <li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-          <ul class="list-unstyled list-inline social text-center">
-            <li class="list-inline-item"><a href=" "><i class="fa fa-facebook"></i></a></li>
-            <li class="list-inline-item"><a href=" "><i class="fa fa-twitter"></i></a></li>
-            <li class="list-inline-item"><a href=" "><i class="fa fa-instagram"></i></a></li>
-            <li class="list-inline-item"><a href=" "><i class="fa fa-google-plus"></i></a></li>
-            <li class="list-inline-item"><a href=" " target="_blank"><i class="fa fa-envelope"></i></a></li>
-          </ul>
-        </div>
-        <hr>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-          <p><a href="https://termsbrain.com/">TermsBrain LTD.</a></p>
-          <p class="h6" style="color:black">© All right Reversed.<a class="text-green ml-2" href="#" target="_blank">TermsBrain</a></p>
-        </div>
-        <hr>
-      </div>
-    </div>
-  </section> -->
-
-  
+ <!-- Footer Start --> 
 
 <footer class="text-white text-center text-lg-start bg-dark">
   <!-- Grid container -->
@@ -540,28 +341,28 @@
         </p>
 
         <div class="mt-4">
-          <!-- Facebook -->
-          <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-facebook-f"></i></a>
-          <!-- Dribbble -->
-          <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-dribbble"></i></a>
-          <!-- Twitter -->
-          <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-twitter"></i></a>
-          <!-- Google + -->
-          <a type="button" class="btn btn-floating btn-light btn-lg"><i class="fab fa-google-plus-g"></i></a>
-          <!-- Linkedin -->
+            <!-- Facebook -->
+            <a class="btn btn-primary" style="background-color: #3b5998;" href="#!" role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <!-- Whatsapp -->
+            <a class="btn btn-primary" style="background-color: #25d366;" href="#!" role="button"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+            <!-- Instagram -->
+            <a class="btn btn-primary" style="background-color:  #bc2a8d;" href="#!" role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <!-- Youtube -->
+            <a class="btn btn-primary" style="background-color: #ed302f;" href="#!" role="button"
+              ><i class="fab fa-youtube"></i
+            ></a>
         </div>
       </div>
       <!--Grid column-->
 
       <!--Grid column-->
       <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-        <!-- <h5 class="text-uppercase mb-4 pb-1">Search something</h5>
-
-        <div class="form-outline form-white mb-4">
-          <input type="text" id="formControlLg" class="form-control form-control-lg" />
-          <label class="form-label" for="formControlLg">Search</label>
-        </div> -->
-
         <ul class="fa-ul" style="margin-left: 1.65em;">
           <li class="mb-3">
             <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">Lalkhan Bazar, 00-967, Poland</span>
@@ -609,12 +410,42 @@
   <!-- Copyright -->
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     © 2020 Copyright:
-    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    <a class="text-white" href="https://mdbootstrap.com/">Termsbrain.com</a>
   </div>
   <!-- Copyright -->
 </footer>
 
+<!-- Messenger Chat Plugin Code -->
+<!-- <div id="fb-root"></div> -->
 
+<!-- Your Chat Plugin code -->
+<!-- <div id="fb-customer-chat" class="fb-customerchat">
+</div>
+
+<script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "113909748473078");
+  chatbox.setAttribute("attribution", "biz_inbox");
+</script> -->
+
+<!-- Your SDK code -->
+<!-- <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml: true,
+      version: 'v18.0'
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script> -->
 <!-- End of .container -->
 
   <!-- ./Footer -->
@@ -624,7 +455,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/your_font_awesome_kit.js" crossorigin="anonymous"></script> <!-- Replace with your Font Awesome kit URL -->
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></script>
 </body>
-
 </html>
-<!-- Custom styles -->
+
