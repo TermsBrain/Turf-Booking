@@ -67,24 +67,52 @@ include_once('includes/header.php');
                     <label for="selectedDate">Selected Date:</label>
                     <input type="text" class="form-control" id="selectedDate" readonly>
                   </div>
-                  <div class="form-group">
-                    <label for="selectedDate">Enter Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="selectedDate">Enter Name:</label>
+                          <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="selectedDate">Enter Contact:</label>
+                          <input type="text" class="form-control" id="contact" placeholder="Enter contact" name="contact" required>
+                        </div>
+                      </div>
                   </div>
-                  <div class="form-group">
-                    <label for="selectedDate">Enter Contact:</label>
-                    <input type="text" class="form-control" id="contact" placeholder="Enter contact" name="contact" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="startTime">Start Time:</label>
-                    <input type="text" class="form-control" id="startTime" readonly>
-                  </div>
-                  <div class="form-group">
-                    <label for="endTime">End Time:</label>
-                    <select class="form-control" id="endTime" required>
+                  
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="startTime">Start Time:</label>
+                            <input type="text" class="form-control" id="startTime" readonly>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="endTime">End Time:</label>
+                          <select class="form-control" id="endTime" required>
 
-                    </select>
+                          </select>
+                        </div>
+                      </div>
                   </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="advance">Enter Advance:</label>
+                          <input type="text" class="form-control" id="due" placeholder="Enter due" name="due" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="total">Enter Total:</label>
+                          <input type="text" class="form-control" id="total" placeholder="Enter total" name="total" required>
+                        </div>
+                      </div>
+                  </div>
+                 
                   <button type="button" class="btn btn-primary" onclick="submitBookingForm()">Submit</button>
                 </form>
               </div>
@@ -343,6 +371,8 @@ include_once('includes/header.php');
             let endTime = document.getElementById('endTime').value;
             let name = document.getElementById('name').value;
             let contact = document.getElementById('contact').value;
+            let due = document.getElementById('due').value;
+            let total = document.getElementById('total').value;
 
             var mysqlDate = new Date(date).toISOString().split('T')[0];
 
@@ -363,7 +393,9 @@ include_once('includes/header.php');
                   endTime: endTime,
                   name: name,
                   contact: contact,
-                  admin: admin
+                  admin: admin,
+                  due: due,
+                  total: total
                 },
                 success: function(response) {
                   alert(response);
