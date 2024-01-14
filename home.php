@@ -21,8 +21,9 @@
 
 <body>
   <!-- <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right, #3498db, #6dd5fa);"> -->
-  <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#016a39;">
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#016a39;"> -->
   <!-- <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#3779c8;"> -->
+  <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#e9e7e7;">
 
   <!-- <a class="navbar-brand" href="#" style="font-family: 'Your Font', sans-serif; font-size: 24px; font-weight: bold; color: #fff;">Your Brand</a> -->
   <img src="ll2.png">
@@ -68,17 +69,18 @@
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>About</h2>
+        <h2>About Us</h2>
         <h3><span>Discover More About [Name] Turf</span></h3>
         <p></p>
       </div>
 
       <div class="row">
         <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-          <img src="turf-about.jpg" class="img-fluid" alt=" [Name] Turf Image">
+          <img src="real.jpg" class="img-fluid" alt=" [Name] Turf Image">
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="mb-4">Unleash Your Inner Athlete</h3>
+          <!-- <h3 class="mb-4">Unleash Your Inner Athlete</h3> -->
+          <h3 class="mb-4">Terms Brain Sports Arena</h3>
           <p>
             Experience the perfect fusion of passion and sportsmanship at [Name] Turf – your unrivaled destination for heart-pounding Olympic-style football played on meticulously maintained turf courts. Immerse yourself in the game, book your playtime slots, and savor the thrill of competition. [Name] Turf: Where Football and Fun Collide!</p>
         </div>
@@ -101,8 +103,8 @@
     </div>
 
       <div class="row">
-        <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-          <h3>Facilities</h3>
+        <div class="col-lg-6 " data-aos="fade-right" data-aos-delay="100">
+          <!-- <h3>Facilities</h3> -->
           <!-- <ul>
             <li>Two Separate team rooms with toilet and change rooms</li>
             <li>Drinks available to buy</li>
@@ -113,37 +115,37 @@
             <li>Top-notch sound system with wireless microphone</li>
             <li>CCTV Camera surveillance & Free Wifi</li>
           </ul> -->
-  <div class="faq_area section_padding_130" id="faq">
+  <div class="faq_area section_padding_100" id="faq">
     <div class="container">
-        <div class="row justify-content-left">
+        <div class="row justify-content-center mt-5">
             <!-- FAQ Area-->
             <div class="col-12 col-sm-10 col-lg-8">
                 <div class="accordion faq-accordian" id="faqAccordion">
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne1">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">Two Separate team rooms with toilet and change rooms<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1"> <li>Facilities 1</li><span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseOne1" aria-labelledby="headingOne1" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>Two Separate team rooms with toilet and change rooms</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
                     <!-- 2 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne2">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">CCTV Camera surveillance & Free Wifi<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2"><li>Facilities 2</li> <span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseOne2" aria-labelledby="headingOne2" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>CCTV Camera surveillance & Free Wifi</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
                     <!-- 3 -->
-                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <!-- <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne2">
                             <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">Seating arrangement in the roof<span class="lni-chevron-up"></span></h6>
                         </div>
@@ -153,16 +155,16 @@
                                 <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- 4 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne2">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">Top-notch sound system with wireless microphone<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2"><li>Facilities 3</li><span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseOne2" aria-labelledby="headingOne2" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>Top-notch sound system with wireless microphone</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
@@ -199,7 +201,7 @@
         </div>
 
         <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="100">
-        <h3>Key Features</h3>
+        <!-- <h3>Key Features</h3> -->
           <!-- <ul>
             <li>The Grass of Kick OFF Football Ground has been manufactured by FIFA Licensee manufacturer of artificial turf in China</li>
             <li>Dual-colored Astro turf</li>
@@ -207,21 +209,21 @@
             <li>Excellent drainage system allowing players to play during rain</li>
             <li>Rainwater does not clog</li>
           </ul> -->
-          <div class="faq_area section_padding_130" id="faq">
+          <div class="faq_area section_padding_100" id="faq">
     <div class="container">
-        <div class="row justify-content-left">
-            <!-- FAQ Area-->
+        <div class="row justify-content-center mt-5">
+            <!--  Area-->
             <div class="col-12 col-sm-10 col-lg-8">
                 <div class="accordion faq-accordian" id="faqAccordion">
                   <!-- 1 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingOne11">
-                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne11" aria-expanded="true" aria-controls="collapseOne11">Dual-colored Astro turf<span class="lni-chevron-up"></span></h6>
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne11" aria-expanded="true" aria-controls="collapseOne11">Key Features 1<span class="lni-chevron-up"></span></h6>
                         </div>
                         <div class="collapse" id="collapseOne11" aria-labelledby="headingOne11" data-parent="#faqAccordion">
                             <div class="card-body">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quidem facere deserunt sint animi sapiente vitae suscipit.</p>
-                                <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
+                                <p>Dual-colored Astro turf</p>
+                                <!-- <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p> -->
                             </div>
                         </div>
                     </div>
@@ -250,7 +252,7 @@
                         </div>
                     </div>
                         <!-- 4 -->
-                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <!-- <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
                             <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Artificial turf in China<span class="lni-chevron-up"></span></h6>
                         </div>
@@ -260,7 +262,7 @@
                                 <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                         <!-- 5 -->
                         <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
@@ -274,7 +276,7 @@
                         </div>
                     </div>
                       <!-- 6 -->
-                      <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                      <!-- <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingTwo">
                             <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">The apps isn't installing?<span class="lni-chevron-up"></span></h6>
                         </div>
@@ -284,7 +286,7 @@
                                 <p>Appland is completely creative, lightweight, clean &amp; super responsive app landing page.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- 7 -->
                     <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                         <div class="card-header" id="headingThree">
@@ -309,9 +311,13 @@
   </section>
 
   <section class="map-container">
-  <div class="section-title text-center">
-  <h3> <span>Find Us On Map</span></h3>
-      </div>
+  <!-- <div class="section-title text-center">
+  <h3> <span>Find Us On Map</span></h3> -->
+  <div class="section-title text-center pb-4 mb-4 pt-4">
+      <h2>Find Us On Map</h2>
+  </div>
+
+  </div>
     <div class="container responsive-map" data-wow-delay="0.1s">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387.67299698642506!2d91.86598556300748!3d22.421952870828974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30ad287ed3af39d1%3A0xcb2295afdaae100d!2sOli%20Ahmed%20CNG%20station!5e0!3m2!1sen!2sbd!4v1702215951917!5m2!1sen!2sbd" style="border:1;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
@@ -330,8 +336,8 @@
                             <p class="text-muted">If several languages coalesce, the grammar of the resulting language
                                 is more simple and regular than that of the individual</p>
                             <div>
-                                <button type="button" class="btn btn-primary me-2">Email Us</button>
-                                <button type="button" class="btn btn-success">Send us a tweet</button>
+                                <button type="button" class="btn btn-primary me-2">Contact Us</button>
+                                <!-- <button type="button" class="btn btn-success">Send us a tweet</button> -->
                             </div>
                         </div>
                     </div>
@@ -521,7 +527,7 @@
     <div class="row mt-4">
       <!--Grid column-->
       <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
-        <h5 class="text-uppercase mb-4">About company</h5>
+        <h5 class="text-uppercase mb-4">Trams Brain Sports Arena</h5>
 
         <p>
           At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
