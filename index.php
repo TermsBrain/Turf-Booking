@@ -3,7 +3,6 @@ session_start();
 include 'connection.php';
 
 if (!isset($_SESSION['id']) || !isset($_SESSION['role']) || !isset($_SESSION['status'])) {
-    
             header('Location: login.php');
             exit;
 } 

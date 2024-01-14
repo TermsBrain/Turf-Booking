@@ -1,12 +1,11 @@
 <?php
 session_start();
-include 'connection.php';
 
-if (!isset($_SESSION['id']) || $_SESSION['role']) {
+if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
     header('Location: login.php');
-   exit;
+    exit;
 }
-
+include 'connection.php';
 include_once('includes/header.php');
 ?>
 <?php

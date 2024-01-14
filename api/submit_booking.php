@@ -11,13 +11,14 @@ $total = $_POST['total'];
 $date = $_POST['date'];
 $method = $_POST['method'];
 
-$customers = "INSERT INTO `customers`(`name`, `phone`) VALUES ($name, $contact)";
+
+$customers = "INSERT INTO customers(name, phone) VALUES ('$name', '$contact')";
 
 if(mysqli_query($conn, $customers)) {
     echo "Succesfully inserted !!";
 }
 else {
-    echo mysqli_error();
+    echo mysqli_error($conn);
 }
 
 // echo $customers;
