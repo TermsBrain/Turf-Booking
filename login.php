@@ -27,7 +27,7 @@ HTML;
 }
 
 if (isset($_SESSION['id']) && isset($_SESSION['role']) && isset($_SESSION['status'])) {
-    if ($_SESSION['role'] == 'admin' ) {
+    if ($_SESSION['role'] == 'admin') {
         if ($_SESSION['status'] == 1) {
             header('Location: index.php');
             exit;
@@ -35,7 +35,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role']) && isset($_SESSION['statu
             echo "Your account is not active.";
         }
     }
-} 
+}
 
 
 
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
         $id = $row['id'];
         $role = $row['role'];
         $status = $row['status'];
-    
+
         $_SESSION['id'] = $id;
         $_SESSION['role'] = $role;
         $_SESSION['status'] = $status;
@@ -63,11 +63,10 @@ if (isset($_POST['submit'])) {
             exit;
         }
         //Manager login
-        else if($role == "manager"){
+        else if ($role == "manager") {
             header('Location: index.php');
             exit;
-        }
-        else {
+        } else {
             // Incorrect password, display error modal
             displayErrorModal("Wrong Email or Password");
         }
@@ -83,290 +82,139 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turf Login</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <title>Turf Management System Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <style>
-    :root {
-        --bg: #EDF2F0;
-        --bg-main: #0A2647;
-        --neu-1: #ecf0f3;
-        --neu-2: #d1d9e6;
-        --white: #f9f9f9;
-        --gray: #a0a5a8;
-        --black: #181818;
-        --purple: #4B70E2;
-        --transition: 1.25s;
-    }
-
-    *,
-    *::after,
-    *::before {
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-        user-select: none;
-    }
-
-    body {
-        width: 100%;
-        height: 100vh;
         display: flex;
-        justify-content: center;
         align-items: center;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 12px;
-        background-color: var(--bg-main);
-        color: var(--gray);
+        justify-content: center;
+        height: 100vh;
     }
 
     .main {
-        position: relative;
-        width: 600px;
-        min-width: 400px;
-        min-height: 600px;
-        height: 600px;
-        background-color: var(--neu-1);
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    @media (max-width: 1200px) {
-        .main {
-            transform: scale(0.8);
-        }
-    }
-
-    @media (max-width: 1000px) {
-        .main {
-            transform: scale(0.7);
-        }
-    }
-
-    @media (max-width: 800px) {
-        .main {
-            transform: scale(0.6);
-        }
-    }
-
-    @media (max-width: 600px) {
-        .main {
-            transform: scale(0.5);
-        }
-    }
-
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        padding: 25px;
-        background-color: var(--neu-2);
-        transition: var(--transition);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
     }
 
     .form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
+        text-align: center;
     }
 
-
-    .form__icons i {
-        font-size: 2rem;
-        cursor: pointer;
-        margin: 0 10px;
+    .form_title {
+        margin-bottom: 20px;
+        color: #333;
     }
 
     .form__input {
-        width: 350px;
-        height: 40px;
-        margin: 4px 0;
-        padding-left: 25px;
-        font-size: 16px;
-        letter-spacing: 0.15px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form__button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
         border: none;
-        outline: none;
-        font-family: 'Montserrat', sans-serif;
-        background-color: var(--neu-1);
-        transition: 0.25s ease;
-        border-radius: 8px;
-        box-shadow: inset 2px 2px 4px var(--neu-2), inset -2px -2px 4px var(--white);
-    }
-
-    .form__input:focus {
-        box-shadow: inset 4px 4px 4px var(--neu-2), inset -4px -4px 4px var(--white);
-    }
-
-    .form__span {
-        margin-top: 30px;
-        margin-bottom: 12px;
-        font-size: 18px;
-    }
-
-    .form__link {
-        color: var(--black);
-        font-size: 15px;
-        margin-top: 25px;
-        border-bottom: 1px solid var(--gray);
-        line-height: 2;
+        border-radius: 4px;
         cursor: pointer;
     }
 
-    .title {
-        font-size: 34px;
-        font-weight: 700;
-        line-height: 3;
-        color: var(--black);
+    .form__button:hover {
+        background-color: #45a049;
     }
 
-    .description {
-        font-size: 14px;
-        letter-spacing: 0.25px;
-        text-align: center;
-        line-height: 1.6;
+    .form_title {
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 24px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
 
-    .button {
-        width: 180px;
-        height: 50px;
-        border-radius: 25px;
-        margin-top: 50px;
-        font-weight: 700;
-        font-size: 14px;
-        letter-spacing: 1.15px;
-        background-color: var(--purple);
-        color: var(--white);
-        box-shadow: 8px 8px 16px var(--neu-2), -8px -8px 16px var(--white);
-        border: none;
-        outline: none;
-        cursor: pointer;
+    .form_title::after {
+        content: '';
+        display: block;
+        width: 50%;
+        margin: 10px auto;
+        border-bottom: 2px solid #3498db;
     }
 
-    .button:active,
-    .button:focus {
-        box-shadow:
-            2px 2px 6px --neu-2,
-            -2px -2px 6px var(--white);
-        transform: scale(.97);
-        transition: .25s;
-    }
-
-    /**/
-    .is-txr {
-        left: calc(100% - 400px);
-        transition: var(--transition);
-        transform-origin: left;
-    }
-
-    .is-txl {
-        left: 0;
-        transition: var(--transition);
-        transform-origin: right;
-    }
-
-    .is-z200 {
-        z-index: 200;
-        transition: var(--transition);
-    }
-
-    .is-hidden {
-        visibility: hidden;
-        opacity: 0;
-        position: absolute;
-        transition: var(--transition);
-    }
-
-    .is-gx {
-        animation: is-gx var(--transition);
-    }
-
-    @keyframes is-gx {
-
-        0%,
-        10%,
-        100% {
-            width: 400px;
-        }
-
-        30%,
-        50% {
-            width: 500px;
-        }
-    }
-
-    /* Add styles for the modal */
     .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-}
-.modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    position: relative;
-}
-.close {
-    color: black;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 28px;
-    font-weight: bold;
+        display: none;
+        position: fixed;
+        top: 40;
+        left: 38%;
+        width: 320px;
+        height: 50px;
+        background-color: rgba(255, 158, 137);
+        justify-content: center;
+        align-items: center;
+    }
 
-}
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .modal-content {
+        background-color: #fefefe;
+        padding: 20px;
+        border-radius: 8px;
+    }
 
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: #333;
+    }
+
+    .powered-by {
+        text-align: center;
+        margin-top: 20px;
+        color: #555;
+    }
+
+    .powered-by a {
+        color: #3498db;
+        text-decoration: none;
+    }
+
+    .powered-by a:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <body>
     <div class="main">
         <div class="container b-container" id="b-container">
             <form class="form" id="b-form" method="post" action="login.php">
-                <h2 class="form_title title">Sign in to Turf</h2>
-                <div class="form__icons">
-                    <i class='bx bxl-facebook-circle'></i>
-                    <i class='bx bxl-instagram-alt'></i>
-                    <i class='bx bxl-twitter'></i>
-                </div>
-                <span class="form__span">or use your email account</span>
-                <input class="form__input" type="email" name="email" placeholder="Email">
-                <input class="form__input" type="password" name="password" placeholder="Password">
-                <a class="form__link" href="forgotPassword.php">Forgot your password?</a>
+                <h2 class="form_title title">Turf Management System</h2>
+                <h2>LOGIN</h2>
+                <input class="form__input" type="email" name="email" placeholder="Email" required>
+                <input class="form__input" type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="submit" value="submit" class="form__button button submit">SIGN IN</button>
             </form>
         </div>
+        <div class="powered-by">
+            <p>Powered By <a href="https://termsbrain.com" target="_blank">TermsBrain</a></p>
+        </div>
     </div>
-</body>
 
-</html>
 </body>
 
 </html>
