@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['name']) || !isset($_SESSION['role'])) {
+if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
   header('Location: login.php');
   exit;
 }
@@ -99,21 +99,32 @@ include_once('includes/header.php');
                       </div>
                   </div>
                   <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <div class="form-group">
                           <label for="advance">Enter Advance:</label>
                           <input type="text" class="form-control" id="due" placeholder="Enter due" name="due" required>
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <div class="form-group">
                           <label for="total">Enter Total:</label>
                           <input type="text" class="form-control" id="total" placeholder="Enter total" name="total" required>
                         </div>
                       </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="total">Payment Method:</label>
+                            <select class="form-control" id="method" required>
+                              <option value="bkash"> BKash </option>
+                              <option value="nagad"> Nagad </option>
+                              <option value="cash"> Cash </option>
+                              <option value="cash"> Blowjob </option>
+                            </select>
+                        </div>
+                      </div>
                   </div>
                  
-                  <button type="button" class="btn btn-primary" onclick="submitBookingForm()">Submit</button>
+                  <button type="button" class="btn btn-success" onclick="submitBookingForm()">Book</button>
                 </form>
               </div>
             </div>
@@ -126,7 +137,7 @@ include_once('includes/header.php');
             
             echo "<script> var periods = [];";
             $row = mysqli_fetch_array($result);
-            echo "var admin = '".$_SESSION['name']."';";
+            echo "var admin = '".$_SESSION['id']."';";
             echo "periods.push('".$row['start_time']."');"."periods.push('".$row['end_time']."');";
             while($r = mysqli_fetch_array($result)){
               echo "periods.push('".$r['end_time']."');";
@@ -365,7 +376,7 @@ include_once('includes/header.php');
           }
 
           function submitBookingForm() {
-            alert(admin);
+            
             let date = document.getElementById('selectedDate').value;
             let startTime = document.getElementById('startTime').value;
             let endTime = document.getElementById('endTime').value;
@@ -373,6 +384,7 @@ include_once('includes/header.php');
             let contact = document.getElementById('contact').value;
             let due = document.getElementById('due').value;
             let total = document.getElementById('total').value;
+            let method = document.getElementById('method').value;
 
             var mysqlDate = new Date(date).toISOString().split('T')[0];
 
@@ -383,19 +395,24 @@ include_once('includes/header.php');
               alert("Please enter a valid Name");
             } else if (contact === "") {
               alert("Please provide a Contact Number");
-            } else {
+            } else if(due=""){
+              alert("Please provide a Due");
+            }else if(due=""){
+              alert("Please provide a Total");
+            }else {
               $.ajax({
                 url: 'api/submit_booking.php',
                 type: 'POST',
                 data: {
-                  //date: mysqlDate,
+                  date: mysqlDate,
                   startTime: startTime,
                   endTime: endTime,
                   name: name,
                   contact: contact,
                   ref_id: admin,
                   due: due,
-                  total: total
+                  total: total,
+                  method: method
                 },
                 success: function(response) {
                   alert(response);
