@@ -385,7 +385,6 @@ include_once('includes/header.php');
             let due = document.getElementById('due').value;
             let total = document.getElementById('total').value;
             let method = document.getElementById('method').value;
-
             var mysqlDate = new Date(date).toISOString().split('T')[0];
 
             console.log(mysqlDate);
@@ -395,9 +394,9 @@ include_once('includes/header.php');
               alert("Please enter a valid Name");
             } else if (contact === "") {
               alert("Please provide a Contact Number");
-            } else if(due=""){
+            } else if(due===""){
               alert("Please provide a Due");
-            }else if(due=""){
+            }else if(total===""){
               alert("Please provide a Total");
             }else {
               $.ajax({
