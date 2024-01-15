@@ -1,11 +1,43 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
     header('Location: login.php');
     exit;
 }
 include 'connection.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the "status" button is clicked
+    if (isset($_POST['updatestatus']) && isset($_POST['transactionId'])) {
+        $transactionId = $_POST['transactionId'];
+
+        // Retrieve the current "due" and "cash" values
+        $query = "SELECT due, cash FROM transaction WHERE id = $transactionId";
+        $result = mysqli_query($conn, $query);
+
+        if ($row = mysqli_fetch_assoc($result)) {
+            $dueValue = $row['due'];
+            $cashValue = $row['cash'];
+            $status = $row['status'];
+
+            // Perform the update to set "due" to 0 and add "due" to "cash"
+            $updateQuery = "UPDATE transaction SET due = 0, status = 1, cash = cash + $dueValue WHERE id = $transactionId";
+
+            $updateResult = mysqli_query($conn, $updateQuery);
+
+            if ($updateResult) {
+                // Redirect or perform any additional actions after the update
+                header('Location: transaction.php');
+                exit;
+            } else {
+                // Handle the update failure
+                echo "Failed to update due value and add to cash.";
+            }
+        } else {
+            // Handle error if the transaction ID is not valid
+            echo "Invalid transaction ID.";
+        }
+    }
+}
 include_once('includes/header.php');
 ?>
 
@@ -19,15 +51,15 @@ include_once('includes/header.php');
         <div class="table-responsive">
             <table id="yourTableID" class="table table-dark table-striped">
                 <thead>
-                    <th>ID</th>
                     <th>Date</th>
                     <th>Contact</th>
                     <th>Advance</th>
+                    <th>Cash</th>
                     <th>Due</th>
                     <th>Total</th>
                     <th>Method</th>
                     <th>Action</th>
-                    <th>Status</th>
+                    <th>status</th>
                 </thead>
                 <tbody>
                     <?php
@@ -37,14 +69,14 @@ include_once('includes/header.php');
 
                     while ($row = mysqli_fetch_array($sql)) { ?>
                         <tr>
-                            <td><?php echo $row['id'] ?></td>
                             <td><?php
                                 $temp = $row['created_at'];
                                 $dates = explode(' ', $temp);
                                 echo $dates[0];
-                            ?></td>
+                                ?></td>
                             <td><?php echo $row['phone'] ?></td>
                             <td><?php echo $row['advance'] ?></td>
+                            <td><?php echo $row['cash'] ?></td>
                             <td><?php echo $row['due'] ?></td>
                             <td><?php echo $row['total'] ?></td>
                             <td><?php echo $row['method'] ?></td>
@@ -53,13 +85,18 @@ include_once('includes/header.php');
                             </td>
                             <td>
                                 <?php
-                                // Set button color based on the value of "Due"
+                                // Set button color and label based on the value of "Due" and "Status"
                                 $buttonColor = ($row['due'] == 0) ? 'btn-success' : 'btn-danger';
+                                $buttonLabel = ($row['due'] == 0) ? 'Paid' : 'Unpaid';
 
-                                // Output the button with dynamic color
-                                echo '<a class="btn ' . $buttonColor . '" href="editTransaction.php?id=' . $row['id'] . '">Status</a>';
+                                // Output the button with dynamic color and label, conditionally disabling it
+                                echo '<form method="post" action="">
+                                            <input type="hidden" name="transactionId" value="' . $row['id'] . '">
+                                            <button type="submit" class="btn ' . $buttonColor . '" name="updatestatus" ' . ($row['due'] == 0 && $row['status'] == 1 ? 'disabled' : '') . '>' . $buttonLabel . '</button>
+                                        </form>';
                                 ?>
                             </td>
+
                         </tr>
                     <?php
                     }
@@ -97,9 +134,14 @@ include_once('includes/header.php');
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ],
-            columnDefs: [
-                { "orderable": false, "targets": -2 }, // Disable sorting for the second-to-last column (Action)
-                { "orderable": false, "targets": -1 } // Disable sorting for the last column (Status)
+            columnDefs: [{
+                    "orderable": false,
+                    "targets": -2
+                }, // Disable sorting for the second-to-last column (Action)
+                {
+                    "orderable": false,
+                    "targets": -1
+                } // Disable sorting for the last column (status)
             ]
         });
     });
