@@ -49,10 +49,10 @@ include_once('includes/header.php');
 
     <div class="row" style="margin-left: px;">
         <div class="col-lg-6">
-            <form action="process_settings.php" method="post" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="name">Brand Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Brand Name" required>
+                    <label for="brand">Brand Name:</label>
+                    <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter Your Brand Name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
@@ -63,8 +63,8 @@ include_once('includes/header.php');
                     <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
                 </div>
                 <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter Your Address" required>
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter Your location" required>
                 </div>
                 <div class="form-group">
                     <label for="social">Social Media:</label>
@@ -78,10 +78,80 @@ include_once('includes/header.php');
                     <label for="logo">Brand Logo:</label>
                     <input type="file" class="form-control-file" id="logo" name="logo" accept="image/*">
                 </div>
-                <button type="submit" class="btn btn-primary">Save Settings</button>
+                <button type="submit"  name="submit" class="btn btn-primary">Save Settings</button>
             </form>
         </div>
     </div>
 </div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="successMessage"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="errorMessage"></p>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include_once('includes/footer.php'); ?>
+
+
+<?php
+include("connection.php");
+
+if (isset($_POST['submit'])) {
+    $brand = $_POST['brand'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $location = $_POST['location'];
+    $social = $_POST['social'];
+
+    $favicon = $_FILES['favicon']['name'];
+    $logo = $_FILES['logo']['name'];
+
+    move_uploaded_file($_FILES['favicon']['tmp_name'], 'assets/uploads/' . $favicon);
+    move_uploaded_file($_FILES['logo']['tmp_name'], 'assets/uploads/' . $logo);
+
+    $q = "INSERT INTO `setting` (brand, email, phone, location, social, favicon, logo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = mysqli_prepare($conn, $q);
+    mysqli_stmt_bind_param($stmt, 'sssssss', $brand, $email, $phone, $location, $social, $favicon, $logo);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo '<script>
+                $("#successMessage").text("Successfully Added");
+                $("#successModal").modal("show");
+              </script>';
+    } else {
+        echo '<script>
+                $("#errorMessage").text("Error: ' . mysqli_error($conn) . '");
+                $("#errorModal").modal("show");
+              </script>';
+    }
+
+    mysqli_stmt_close($stmt);
+}
+?>
