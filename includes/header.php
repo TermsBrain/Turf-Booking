@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Administrator</title>
+    <title>Turf Booking Administrator</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link href="assets/js/metisMenu/metisMenu.min.css" rel="stylesheet">

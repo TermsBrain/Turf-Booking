@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 14, 2024 at 12:55 PM
+-- Generation Time: Jan 15, 2024 at 03:27 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.2
 
@@ -38,6 +38,14 @@ CREATE TABLE `authentication` (
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `authentication`
+--
+
+INSERT INTO `authentication` (`id`, `name`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@gmail.com', '12345', 'admin', 1, '2024-01-14 12:36:51', '2024-01-15 20:26:27'),
+(2, 'Rafi', 'manager@gmail.com', '12345', 'manager', 1, '2024-01-14 12:36:51', '2024-01-14 18:36:51');
+
 -- --------------------------------------------------------
 
 --
@@ -49,7 +57,8 @@ CREATE TABLE `booking` (
   `date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `transaction_id` int(11) DEFAULT NULL,
-  `slot_id` int(11) DEFAULT NULL,
+  `start_slot_id` int(11) DEFAULT NULL,
+  `end_slot_id` int(11) DEFAULT NULL,
   `reference_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -119,6 +128,20 @@ CREATE TABLE `slot_management` (
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `slot_management`
+--
+
+INSERT INTO `slot_management` (`id`, `name`, `start_time`, `end_time`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'slot-1', '12:00 PM', '12:30 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15'),
+(2, 'slot-2', '12:30 PM', '1:00 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15'),
+(3, 'slot-3', '1:00 PM', '1:30 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15'),
+(4, 'slot-4', '1:30 PM', '2:00 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15'),
+(5, 'slot-5', '2:00 PM', '2:30 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15'),
+(6, 'slot-6', '2:30 PM', '3:00 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15'),
+(7, 'slot-7', '3:00 PM', '3:30 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15'),
+(8, 'slot-7', '3:30 PM', '4:00 PM', 1, '2024-01-14 12:39:15', '2024-01-14 18:39:15');
+
 -- --------------------------------------------------------
 
 --
@@ -155,7 +178,8 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `transaction_id` (`transaction_id`),
-  ADD KEY `slot_id` (`slot_id`),
+  ADD KEY `start_slot_id` (`start_slot_id`),
+  ADD KEY `end_slot_id` (`end_slot_id`),
   ADD KEY `reference_id` (`reference_id`);
 
 --
@@ -192,7 +216,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `authentication`
 --
 ALTER TABLE `authentication`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `booking`
@@ -216,7 +240,7 @@ ALTER TABLE `slot_live`
 -- AUTO_INCREMENT for table `slot_management`
 --
 ALTER TABLE `slot_management`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `transaction`
@@ -234,8 +258,9 @@ ALTER TABLE `transaction`
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `customers` (`id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`id`),
-  ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`slot_id`) REFERENCES `slot_management` (`id`),
-  ADD CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`reference_id`) REFERENCES `authentication` (`id`);
+  ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`start_slot_id`) REFERENCES `slot_management` (`id`),
+  ADD CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`end_slot_id`) REFERENCES `slot_management` (`id`),
+  ADD CONSTRAINT `booking_ibfk_5` FOREIGN KEY (`reference_id`) REFERENCES `authentication` (`id`);
 
 --
 -- Constraints for table `slot_live`

@@ -102,7 +102,7 @@ include_once('includes/header.php');
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="advance">Enter Advance:</label>
-                          <input type="text" class="form-control" id="due" placeholder="Enter due" name="due" required>
+                          <input type="text" class="form-control" id="advance" placeholder="Enter advance" name="advance" required>
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -118,7 +118,7 @@ include_once('includes/header.php');
                               <option value="bkash"> BKash </option>
                               <option value="nagad"> Nagad </option>
                               <option value="cash"> Cash </option>
-                              <option value="cash"> Blowjob </option>
+                              
                             </select>
                         </div>
                       </div>
@@ -324,55 +324,7 @@ include_once('includes/header.php');
                 x=i;
               }
             }
-            // Clear existing options
-            /*console.log('------------------'+periods);
-            var endTimeDropdown = document.getElementById('endTime');
-            endTimeDropdown.innerHTML = '';
-
-            // Parse the provided start time
-            var startHour = parseInt(startTime.split(':')[0]);
-            var startMinute = parseInt(startTime.split(':')[1].split(' ')[0]);
-            var startAMPM = startTime.split(' ')[1];
-
-            // Set the initial values
-            var currentHour = startHour;
-            var currentMinute = startMinute;
-            var currentAMPM = startAMPM;
-
-            //console.log(currentHour + " " + currentMinute + " " + currentAMPM);
-            while (1) {
-
-              if (currentMinute == 30) {
-                currentMinute = 0;
-                currentHour++;
-              } else {
-                currentMinute = 30;
-              }
-              if (currentHour == 13) {
-                currentHour = 1;
-              }
-
-              if (currentHour == 12 && currentMinute == 0) {
-
-                if (currentAMPM == "AM") {
-                  currentAMPM = "PM";
-
-                } else {
-                  currentAMPM = "AM";
-                }
-              }
-              console.log(currentHour + " " + currentMinute + " " + currentAMPM);
-              var optionTime = currentHour + ':' + (currentMinute < 10 ? '0' : '') + currentMinute + ' ' + currentAMPM;
-              var option = document.createElement('option');
-              option.value = optionTime;
-              option.text = optionTime;
-              endTimeDropdown.add(option);
-              if (currentHour == 12 && currentMinute == 0 && currentAMPM == 'AM') {
-                break;
-              }
-
-            }*/
-
+            
           }
 
           function submitBookingForm() {
@@ -382,7 +334,7 @@ include_once('includes/header.php');
             let endTime = document.getElementById('endTime').value;
             let name = document.getElementById('name').value;
             let contact = document.getElementById('contact').value;
-            let due = document.getElementById('due').value;
+            let advance = document.getElementById('advance').value;
             let total = document.getElementById('total').value;
             let method = document.getElementById('method').value;
             var mysqlDate = new Date(date).toISOString().split('T')[0];
@@ -394,8 +346,8 @@ include_once('includes/header.php');
               alert("Please enter a valid Name");
             } else if (contact === "") {
               alert("Please provide a Contact Number");
-            } else if(due===""){
-              alert("Please provide a Due");
+            } else if(advance===""){
+              alert("Please provide a advance");
             }else if(total===""){
               alert("Please provide a Total");
             }else {
@@ -409,18 +361,25 @@ include_once('includes/header.php');
                   name: name,
                   contact: contact,
                   ref_id: admin,
-                  due: due,
+                  advance: advance,
                   total: total,
                   method: method
                 },
                 success: function(response) {
-                  alert(response);
-                  $('#bookingModal').modal('hide');
+                  // console.log('debug: ' + response);
+                  if (response==='1'){
+                    alert("Booked successfully");
+                    $('#bookingModal').modal('hide');
+                    window.location.replace('bookingManagement.php');
+                  }
+                  else {
+                      alert('An error occurred. Please try again later.');
+                      //console.error('Error submitting booking: ' + response.err);
+                  }
                 },
-                error: function(error) {
-                  console.error('Error submitting booking: ' + JSON.stringify(error));
-                  alert('An error occurred. Please try again later.');
-                }
+                // error: function(error) {
+                //   console.error('Error submitting booking: ' + JSON.stringify(error));
+                // }
               });
             }
           }
