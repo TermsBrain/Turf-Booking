@@ -118,7 +118,7 @@ include_once('includes/header.php');
                               <option value="bkash"> BKash </option>
                               <option value="nagad"> Nagad </option>
                               <option value="cash"> Cash </option>
-                              <option value="cash"> Blowjob </option>
+                              
                             </select>
                         </div>
                       </div>
@@ -324,55 +324,7 @@ include_once('includes/header.php');
                 x=i;
               }
             }
-            // Clear existing options
-            /*console.log('------------------'+periods);
-            var endTimeDropdown = document.getElementById('endTime');
-            endTimeDropdown.innerHTML = '';
-
-            // Parse the provided start time
-            var startHour = parseInt(startTime.split(':')[0]);
-            var startMinute = parseInt(startTime.split(':')[1].split(' ')[0]);
-            var startAMPM = startTime.split(' ')[1];
-
-            // Set the initial values
-            var currentHour = startHour;
-            var currentMinute = startMinute;
-            var currentAMPM = startAMPM;
-
-            //console.log(currentHour + " " + currentMinute + " " + currentAMPM);
-            while (1) {
-
-              if (currentMinute == 30) {
-                currentMinute = 0;
-                currentHour++;
-              } else {
-                currentMinute = 30;
-              }
-              if (currentHour == 13) {
-                currentHour = 1;
-              }
-
-              if (currentHour == 12 && currentMinute == 0) {
-
-                if (currentAMPM == "AM") {
-                  currentAMPM = "PM";
-
-                } else {
-                  currentAMPM = "AM";
-                }
-              }
-              console.log(currentHour + " " + currentMinute + " " + currentAMPM);
-              var optionTime = currentHour + ':' + (currentMinute < 10 ? '0' : '') + currentMinute + ' ' + currentAMPM;
-              var option = document.createElement('option');
-              option.value = optionTime;
-              option.text = optionTime;
-              endTimeDropdown.add(option);
-              if (currentHour == 12 && currentMinute == 0 && currentAMPM == 'AM') {
-                break;
-              }
-
-            }*/
-
+            
           }
 
           function submitBookingForm() {
@@ -414,13 +366,20 @@ include_once('includes/header.php');
                   method: method
                 },
                 success: function(response) {
-                  alert(response);
-                  $('#bookingModal').modal('hide');
+                  // console.log('debug: ' + response);
+                  if (response==='1'){
+                    alert("Booked successfully");
+                    $('#bookingModal').modal('hide');
+                    window.location.replace('bookingManagement.php');
+                  }
+                  else {
+                      alert('An error occurred. Please try again later.');
+                      //console.error('Error submitting booking: ' + response.err);
+                  }
                 },
-                error: function(error) {
-                  console.error('Error submitting booking: ' + JSON.stringify(error));
-                  alert('An error occurred. Please try again later.');
-                }
+                // error: function(error) {
+                //   console.error('Error submitting booking: ' + JSON.stringify(error));
+                // }
               });
             }
           }

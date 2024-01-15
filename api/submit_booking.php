@@ -53,7 +53,7 @@ if(mysqli_query($conn, $customer)) {
         $booking = "INSERT INTO `booking`(`date`, `user_id`, `transaction_id`, `start_slot_id`, `end_slot_id`, `reference_id`, `status`) VALUES ('$date', $user_id, $transaction_id, $sTimeId, $fTimeId, $ref_id, 0)";
 
         if(mysqli_query($conn, $booking)) {
-            echo json_encode(array("data" => "Successfully booked!"));
+            echo 1;
         }        
         else {
             echo json_encode(array("err" => mysqli_error()));
