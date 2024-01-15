@@ -139,6 +139,73 @@
     font-size: 16px;
     color: #6c757d; /* Content text color */
   }
+
+  .features-section {
+    /* background-color: #f5f5f5; */
+    padding: 20px 0px;
+    text-align: center;
+  }
+
+  .features-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+  }
+
+  .features-box {
+    flex: 1;
+    max-width: calc(25% - 20px);
+    margin: 10px;
+    border-radius: 20px;
+    /* background: #fff; */
+    /* background-image: url('img/acc-bg2.jpg'); */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+    transition: transform 0.3s ease, background-position 0.3s ease;
+  }
+
+  .features-box:hover {
+    transform: scale(1.05);
+    background-position: 0% 20%;
+  }
+
+  .features-box img {
+    max-width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+  }
+
+  .features-title {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+    border-radius: 20px;
+    font-size: 24px;
+    margin: 10px 0;
+    color: #000;
+  }
+
+  .features-info {
+    text-align: left;
+    color: #041734;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  /* Responsive layout for mobile */
+  @media (max-width: 768px) {
+    .features-container {
+      flex-direction: column;
+    }
+
+    .features-box {
+      max-width: 100%;
+    }
+  }
   
   section#footer {
     background: linear-gradient(
