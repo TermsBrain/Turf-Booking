@@ -102,7 +102,7 @@ include_once('includes/header.php');
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="advance">Enter Advance:</label>
-                          <input type="text" class="form-control" id="due" placeholder="Enter due" name="due" required>
+                          <input type="text" class="form-control" id="advance" placeholder="Enter advance" name="advance" required>
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -382,7 +382,7 @@ include_once('includes/header.php');
             let endTime = document.getElementById('endTime').value;
             let name = document.getElementById('name').value;
             let contact = document.getElementById('contact').value;
-            let due = document.getElementById('due').value;
+            let advance = document.getElementById('advance').value;
             let total = document.getElementById('total').value;
             let method = document.getElementById('method').value;
             var mysqlDate = new Date(date).toISOString().split('T')[0];
@@ -394,8 +394,8 @@ include_once('includes/header.php');
               alert("Please enter a valid Name");
             } else if (contact === "") {
               alert("Please provide a Contact Number");
-            } else if(due===""){
-              alert("Please provide a Due");
+            } else if(advance===""){
+              alert("Please provide a advance");
             }else if(total===""){
               alert("Please provide a Total");
             }else {
@@ -409,7 +409,7 @@ include_once('includes/header.php');
                   name: name,
                   contact: contact,
                   ref_id: admin,
-                  due: due,
+                  advance: advance,
                   total: total,
                   method: method
                 },
