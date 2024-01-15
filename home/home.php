@@ -4,10 +4,6 @@
 <?php include_once('includes/header.php'); ?>
 
 <body>
-
-  <!-- <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right, #3498db, #6dd5fa);"> -->
-  <!-- <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#016a39;"> -->
-  <!-- <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#3779c8;"> -->
   <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#e9e7e7;">
     <!-- Logo -->
     <img src="assets/img/logo.png">
@@ -26,12 +22,6 @@
         <li class="nav-item">
           <a class="nav-link" href="#contact">Contact</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#faq">FAQ</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link book-now-btn" href="#">Book Now</a>
-        </li> -->
       </ul>
     </div>
   </nav>
@@ -46,10 +36,6 @@
     <a href="#" id="bookNowButton">
       <button class="cta-button">Book Now</button>
     </a>
-    <!-- <a class="btn btn-primary btn-xlg" href="tel:713-992-0916" style="padding: 20px; background-color: rgba(0, 0, 238, 0.5)">
-        Book Now! <span class="glyphicon glyphicon-earphone" style="padding-left: 10px; padding-right: 10px;"></span>
-      </a> -->
-    <!-- <button class="cta-button">Book Now</button> -->
   </div>
 
   <!-- ======= About Section ======= -->
@@ -77,7 +63,7 @@
     <div class="container">
       <div class="features-section">
       <div class="section-title text-center pb-4">
-        <h2>Features</h2>
+        <h2>Special Features</h2>
       </div>
         <div class="features-container">
           <div class="features-box" style="background-image: url('assets/img/football.jpg');">
@@ -130,8 +116,8 @@
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  Accordion Item #1
+                <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"  style="font-weight: bold;">
+                Facilities #1
                 </button>
               </h2>
               <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -140,8 +126,8 @@
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                  Accordion Item #2
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo"  style="font-weight: bold;">
+                Facilities #2
                 </button>
               </h2>
               <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -150,8 +136,8 @@
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                  Accordion Item #3
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree"  style="font-weight: bold;">
+                Facilities #3
                 </button>
               </h2>
               <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
@@ -175,32 +161,32 @@
           <!-- Key Features Section start Here! -->
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  Accordion Item #1
+              <h2 class="accordion-header" id="flush-headingOne1">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1" aria-expanded="false" aria-controls="flush-collapseOne"  style="font-weight: bold;">
+                Key Features #1
                 </button>
               </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div id="flush-collapseOne1" class="accordion-collapse collapse" aria-labelledby="flush-headingOne1" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
               </div>
             </div>
             <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                  Accordion Item #2
+              <h2 class="accordion-header" id="flush-headingTwo2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo2" aria-expanded="false" aria-controls="flush-collapseTwo"  style="font-weight: bold;">
+                Key Features #2
                 </button>
               </h2>
-              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div id="flush-collapseTwo2" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo2" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
               </div>
             </div>
             <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                  Accordion Item #3
+              <h2 class="accordion-header" id="flush-headingThree3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree3" aria-expanded="false" aria-controls="flush-collapseThree"  style="font-weight: bold;">
+                Key Features #3
                 </button>
               </h2>
-              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+              <div id="flush-collapseThree3" class="accordion-collapse collapse" aria-labelledby="flush-headingThree3" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
               </div>
             </div>
