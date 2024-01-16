@@ -81,7 +81,15 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="bookingManagement.php"><i class="fa fa-users fa-fw"></i> Booking</a>
+                                <a href="#"><i class="fa fa-ticket fa-fw"></i> Booking <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="bookingManagement.php"><i class="fa fa-plus fa-fw"></i>Add New Booking</a>
+                                    </li>
+                                    <li>
+                                        <a href="bookingList.php"><i class="fa fa-list fa-fw"></i>Booking List</a>
+                                    </li>
+                                </ul>
                             </li>
                             <!-- <li>
                                 <a href="slotManagement.php"><i class="fa fa-home fa-fw"></i> Slot</a>
