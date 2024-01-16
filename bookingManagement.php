@@ -16,13 +16,19 @@ include_once('includes/header.php');
     <!-- /.col-lg-12 -->
   </div>
   <style>
-    .time-slot-btn {
-      margin-right: 30px;
-      margin-bottom: 20px;
-      margin-left: 30px;
-      width: 300px;
-    }
-  </style>
+        .myElement{margin-top: -80px; }
+        @media (max-width: 767px) {
+          .myElement {margin-top: 80px; }
+        }
+
+        /* Media query for large screens (lg) */
+        @media (min-width: 1200px) {
+          .myElement {margin-top: -120px; }
+        }
+
+        
+    
+</style>
   <!-- /.row -->
   <div class="row">
     <div class="card">
@@ -37,19 +43,24 @@ include_once('includes/header.php');
             </div>
             <div class="days"></div>
           </div>
+          
         </section>
 
         <section>
           <div class="section-title">
-            <h3 class="text-center"><span><b>SELECT YOUR TIME SLOT</b></span></h3>
+            <h3 class="text-center" ><span><b>SELECT YOUR TIME SLOT</b></span></h3>
             <p></p>
           </div>
-          <div class="container ml-4">
-            <div class="row" id="time-intervals">
-
+          <div class="row mx-auto calendar-body myElement"  >
+            <div class="row" id="time-intervals" >
+              
             </div>
-          </div>
+            
+        </div>
+          
         </section>
+
+        
 
         <!-- Modal for the booking form -->
         <div class="modal fade" role="dialog" id="bookingModal">
@@ -269,9 +280,9 @@ include_once('includes/header.php');
 
                 
                 if (fg) {
-                  var span = `<span class="btn btn-primary time-slot-btn" onclick="openBookingForm('${startTime}', '${endTime}')">${startTime}-${endTime}</span>`;
+                  var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-center"><span class="btn btn-success btn-lg  time-slot-btn" onclick="openBookingForm('${startTime}', '${endTime}')">${startTime}-${endTime}</span></div>`;
                 } else {
-                  var span = `<span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span>`;
+                  var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
                 }
                 time_interval.innerHTML += span;
               }
