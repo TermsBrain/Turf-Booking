@@ -56,15 +56,18 @@ if(mysqli_query($conn, $customer)) {
             echo 1;
         }        
         else {
-            echo json_encode(array("err" => mysqli_error()));
+            echo 0;
+            // echo json_encode(array("err" => mysqli_error()));
         }
     }
     else {
-        echo json_encode(array("err" => mysqli_error()));
+        echo 0;
+        // echo json_encode(array("err" => mysqli_error()));
     }
 }
-    else {
-        echo json_encode(array("err" => mysqli_error()));
+else {
+    echo 0;
+    // echo json_encode(array("err" => mysqli_error()));
 }
 
 mysqli_close($conn);
