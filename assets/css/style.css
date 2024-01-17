@@ -252,5 +252,9 @@
     top: 0;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
+  }
+  
+  .interval-buttons {
+    margin-top: 500px; /* Adjust the margin top for small screens as needed */
   }
