@@ -20,32 +20,38 @@ include_once('includes/header.php');
                 <thead>
                     <th>Date</th>
                     <th>Contact</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Action</th>
+                    <th>Slot Time</th>
+                    <th>Booked By</th>
+                    <th>Status</th>
+                    <!-- <th>Action</th> -->
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT booking.date as booking_date,
-                    customers.phone as phone, 
-                    start_slot.start_time as start_time, 
-                    end_slot.end_time as end_time
-             FROM booking 
-             LEFT JOIN customers ON booking.user_id = customers.id
-             LEFT JOIN slot_management AS start_slot ON booking.start_slot_id = start_slot.id
-             LEFT JOIN slot_management AS end_slot ON booking.end_slot_id = end_slot.id;
-             ";
+                    $query = "SELECT booking.id as booking_id,
+                        booking.date as booking_date,
+                        authentication.name as ref_name,
+                        transaction.status as transaction_status,
+                        customers.phone as phone, 
+                        start_slot.start_time as start_time, 
+                        end_slot.end_time as end_time
+                 FROM booking 
+                 LEFT JOIN authentication ON booking.reference_id = authentication.id
+                 LEFT JOIN customers ON booking.user_id = customers.id
+                 LEFT JOIN transaction ON booking.transaction_id = transaction.id
+                 LEFT JOIN slot_management AS start_slot ON booking.start_slot_id = start_slot.id
+                 LEFT JOIN slot_management AS end_slot ON booking.end_slot_id = end_slot.id";
                     $sql = mysqli_query($conn, $query);
 
                     while ($row = mysqli_fetch_array($sql)) { ?>
                         <tr>
                             <td><?php echo $row['booking_date']; ?></td>
                             <td><?php echo $row['phone']; ?></td>
-                            <td><?php echo $row['start_time']; ?></td>
-                            <td><?php echo $row['end_time']; ?></td>
-                            <td>
-                                <!-- <a class="btn btn-primary" href="editBooking.php?id=<?php echo $row['id']; ?>">Edit</a> -->
-                            </td>
+                            <td><?php echo $row['start_time']; ?> - <?php echo $row['end_time']; ?></td>
+                            <td><?php echo $row['ref_name']; ?></td>
+                            <td><?php echo ($row['transaction_status'] == 0) ? 'Unpaid' : 'Paid'; ?></td>
+                            <!-- <td>
+                                <a class="btn btn-primary" href="editBooking.php?id=<?php echo $row['booking_id']; ?>">Edit</a>
+                            </td> -->
                         </tr>
                     <?php
                     }
@@ -83,10 +89,7 @@ include_once('includes/header.php');
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ],
-            columnDefs: [{
-                    "orderable": false,
-                    "targets": -2
-                }, // Disable sorting for the second-to-last column (Action)
+            columnDefs: [
                 {
                     "orderable": false,
                     "targets": -1

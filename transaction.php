@@ -134,15 +134,15 @@ include_once('includes/header.php');
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ],
-            columnDefs: [{
-                    "orderable": false,
-                    "targets": -2
-                }, // Disable sorting for the second-to-last column (Action)
-                {
-                    "orderable": false,
-                    "targets": -1
-                } // Disable sorting for the last column (status)
-            ]
+            // columnDefs: [{
+            //         "orderable": false,
+            //         "targets": -2
+            //     }, // Disable sorting for the second-to-last column (Action)
+            //     {
+            //         "orderable": false,
+            //         "targets": -1
+            //     } // Disable sorting for the last column (status)
+            // ]
         });
     });
 </script>
