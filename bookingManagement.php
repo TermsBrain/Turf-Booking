@@ -348,8 +348,14 @@ include_once('includes/header.php');
             let advance = document.getElementById('advance').value;
             let total = document.getElementById('total').value;
             let method = document.getElementById('method').value;
-            var mysqlDate = new Date(date).toISOString().split('T')[0];
 
+            var inputDate = new Date(date);
+
+            var month = String(inputDate.getMonth() + 1).padStart(2, '0');
+
+            var mysqlDate = inputDate.getFullYear() + '-' + month + '-' + inputDate.getDate();
+
+            console.log(date);
             console.log(mysqlDate);
 
             //console.log(date);
