@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 include_once('includes/header.php');
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-zt4p0WigVNZ71UKsgm3q2Kd6BP3sXcFRwhPQc9zLbU/GyZHPsAxe90BRsdMr1yejzEFB5xbjNc9PnByhJkTKZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div id="page-wrapper">
     <div class="row">
@@ -82,6 +83,7 @@ include_once('includes/header.php');
                             <td><?php echo $row['method'] ?></td>
                             <td>
                                 <a class="btn btn-primary" href="editTransaction.php?id=<?php echo $row['id'] ?>">Edit</a>
+                                <a class="btn btn-primary" href="invoice.php?id=<?php echo $row['id'] ?>"><i class="fas fa-file-invoice"></i> Invoice</a>
                             </td>
                             <td>
                                 <?php
