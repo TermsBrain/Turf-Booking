@@ -94,7 +94,9 @@ include_once('includes/header.php');
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Status</th>
+                <?php if ($_SESSION['role'] != 'manager') : ?>
+                    <th>Status</th>
+                <?php endif; ?>
                 <th>Action</th>
             </thead>
             <tbody>
@@ -107,32 +109,13 @@ include_once('includes/header.php');
                         <td><?php echo $row['name'] ?></td>
                         <td><?php echo $row['email'] ?></td>
                         <td><?php echo $row['role'] ?></td>
-                        <td>
-                            <input type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
-                        </td>                        
+                        <?php if ($_SESSION['role'] != 'manager') : ?>
+                            <td>
+                                <input type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
+                            </td>
+                        <?php endif; ?>                       
                         <td>
                             <a class="btn btn-primary" href="editStaff.php?id=<?php echo $row['id'] ?>">Edit</a>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row['id'] ?>">Delete</button>
-                            <!-- Delete Modal -->
-                            <div class="modal fade" id="myModal<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Confirmation</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to delete <strong><?php echo $row['name'] ?></strong>?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a class="btn btn-success" href="deleteCustomer.php?id=<?php echo $row['id'] ?>">Delete</a>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 <?php
@@ -146,9 +129,11 @@ include_once('includes/header.php');
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Include Bootstrap JavaScript library -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Include DataTables and its dependencies -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -156,8 +141,7 @@ include_once('includes/header.php');
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 
-
-<!-- Add DataTables initialization script -->
+<!-- Your custom scripts -->
 <script>
     $(document).ready(function() {
         $('#yourTableID').DataTable({
@@ -167,13 +151,13 @@ include_once('includes/header.php');
 
         // Add event listener for the checkbox change event
         $('.status-toggle').change(function() {
-            var status = this.checked ? 1 : 0; // 1 if checked, 0 if unchecked
-            var userId = $(this).data('id'); // Get the user ID from data-id attribute
+            var status = this.checked ? 1 : 0;
+            var userId = $(this).data('id');
 
             // Use Ajax to send a request to updateStatus.php
             $.ajax({
                 type: 'POST',
-                url: 'api/updateStatus.php',
+                url: 'updateStatus.php',
                 data: {
                     id: userId,
                     status: status

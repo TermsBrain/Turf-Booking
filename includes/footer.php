@@ -1,13 +1,17 @@
-<section id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="text-center text-white font-weight-bold" style="font-size: 16px";>
-                <p><a href="https://termsbrain.com/">TermsBrain LTD.</a></p>
+<hr>
+<section id="" style="background-color: #f8f9fa; padding: 20px 0;">
+    <div class="">
+        <div class="">
+            <div class="text-center font-weight-bold" style="font-size: 16px; color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+                <p><a href="https://termsbrain.com/" style="color: black; text-decoration: none;">Terms Brain LTD.</a></p>
                 <!-- <p class="h6" style="color:black">© Copyright <a class="text-green ml-2" href="#" target="_blank">TermsBrain</a></p> -->
             </div>
         </div>
     </div>
 </section>
+
+
+
 
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/metisMenu/metisMenu.min.js"></script>
@@ -16,3 +20,4 @@
 </body>
 
 </html>
+

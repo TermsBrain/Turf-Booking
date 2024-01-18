@@ -42,6 +42,18 @@ include_once('includes/header.php');
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-zt4p0WigVNZ71UKsgm3q2Kd6BP3sXcFRwhPQc9zLbU/GyZHPsAxe90BRsdMr1yejzEFB5xbjNc9PnByhJkTKZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<style>
+        #page-wrapper {
+            text-align: center;
+        }
+
+        #yourTableID {
+            margin: 0 auto;
+            width: 80%;
+        }
+    </style>
+
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -60,7 +72,8 @@ include_once('includes/header.php');
                     <th>Total</th>
                     <th>Method</th>
                     <th>Action</th>
-                    <th>status</th>
+                    <th>Status</th>
+                    <th>Invoice</th>
                 </thead>
                 <tbody>
                     <?php
@@ -83,7 +96,6 @@ include_once('includes/header.php');
                             <td><?php echo $row['method'] ?></td>
                             <td>
                                 <a class="btn btn-primary" href="editTransaction.php?id=<?php echo $row['id'] ?>">Edit</a>
-                                <a class="btn btn-primary" href="invoice.php?id=<?php echo $row['id'] ?>"><i class="fas fa-file-invoice"></i> Invoice</a>
                             </td>
                             <td>
                                 <?php
@@ -98,6 +110,11 @@ include_once('includes/header.php');
                                         </form>';
                                 ?>
                             </td>
+                            <td><a style="display: inline-block; font-size: 30px; text-align: center; text-decoration: none; color: #fff; border-radius: 5px; " href="invoice.php?id=<?php echo $row['id'] ?>">
+                                    <svg style="margin-right: 10px; color: #ffd700; font-size: 30px;" class="fas fa-file-invoice" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30">
+                                        <path d="M4 1h16a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm14 6H6a1 1 0 0 0 0 2h12a1 1 0 0 0 0-2zM6 14h12a1 1 0 0 0 0-2H6a1 1 0 0 0 0 2zm0 4h12a1 1 0 0 0 0-2H6a1 1 0 0 0 0 2z" />
+                                    </svg>
+                                </a></td>
 
                         </tr>
                     <?php

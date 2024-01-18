@@ -27,7 +27,7 @@ HTML;
 }
 
 if (isset($_SESSION['id']) && isset($_SESSION['role']) && isset($_SESSION['status'])) {
-    if ($_SESSION['role'] == 'admin') {
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager') {
         if ($_SESSION['status'] == 1) {
             header('Location: index.php');
             exit;
@@ -37,16 +37,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['role']) && isset($_SESSION['statu
     }
 }
 
-
-
-
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM authentication WHERE email = '$email' AND password='$password'";
-    $sql = mysqli_query($conn, $query);
-    $row = mysqli_fetch_array($sql);
+    $query = "SELECT * FROM authentication WHERE email = ? AND password = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_array($result);
+    
 
     if ($row) {
         $id = $row['id'];

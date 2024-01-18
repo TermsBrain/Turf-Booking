@@ -41,7 +41,6 @@ $staff = mysqli_fetch_array($result);
                         <select class="form-control" name="role" id="role">
                             <option value="admin" <?php echo $staff['role'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
                             <option value="manager" <?php echo $staff['role'] == 'manager' ? 'selected' : ''; ?>>Manager</option>
-                            <option value="staff" <?php echo $staff['role'] == 'staff' ? 'selected' : ''; ?>>Staff</option>
                         </select>
                     </div>
 
