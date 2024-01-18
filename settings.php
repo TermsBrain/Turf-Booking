@@ -132,26 +132,51 @@ if (isset($_POST['submit'])) {
     $favicon = $_FILES['favicon']['name'];
     $logo = $_FILES['logo']['name'];
 
-    move_uploaded_file($_FILES['favicon']['tmp_name'], 'assets/uploads/' . $favicon);
-    move_uploaded_file($_FILES['logo']['tmp_name'], 'assets/uploads/' . $logo);
+    $favicon = $_FILES['favicon']['name'];
+    $logo = $_FILES['logo']['name'];
 
-    $q = "INSERT INTO `setting` (brand, email, phone, location, social, favicon, logo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+   
 
-    $stmt = mysqli_prepare($conn, $q);
-    mysqli_stmt_bind_param($stmt, 'sssssss', $brand, $email, $phone, $location, $social, $favicon, $logo);
+    // Additional debugging statement
+    echo 'Debugging Information: ' . print_r($_FILES, true);
 
-    if (mysqli_stmt_execute($stmt)) {
-        echo '<script>
-                $("#successMessage").text("Successfully Added");
-                $("#successModal").modal("show");
-              </script>';
+    // File upload paths
+    $faviconPath = 'assets/uploads/' . $favicon;
+    $logoPath = 'assets/uploads/' . $logo;
+
+    // Move uploaded files to the specified paths
+    if (move_uploaded_file($_FILES['favicon']['tmp_name'], $faviconPath) &&
+        move_uploaded_file($_FILES['logo']['tmp_name'], $logoPath)) {
+
+        // Rest of your code...
+        $q = "INSERT INTO `setting` (brand, favicon, logo) VALUES (?, ?, ?)";
+
+        $stmt = mysqli_prepare($conn, $q);
+        mysqli_stmt_bind_param($stmt, 'sss', $brand, $favicon, $logo);
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo '<script>
+                    $("#successMessage").text("Successfully Added");
+                    $("#successModal").modal("show");
+                  </script>';
+        } else {
+            echo '<script>
+                    $("#errorMessage").text("Error: ' . mysqli_error($conn) . '");
+                    $("#errorModal").modal("show");
+                  </script>';
+        }
+
+        mysqli_stmt_close($stmt);
+
     } else {
+        // File upload failed: Show error modal and debugging information
         echo '<script>
-                $("#errorMessage").text("Error: ' . mysqli_error($conn) . '");
+                $("#errorMessage").text("File upload failed.");
                 $("#errorModal").modal("show");
               </script>';
     }
-
-    mysqli_stmt_close($stmt);
 }
 ?>
+
+
+

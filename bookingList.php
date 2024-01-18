@@ -31,6 +31,7 @@ include_once('includes/header.php');
                         booking.date as booking_date,
                         authentication.name as ref_name,
                         transaction.status as transaction_status,
+                        customers.name as cus_name,
                         customers.phone as phone, 
                         start_slot.start_time as start_time, 
                         end_slot.end_time as end_time
@@ -45,7 +46,7 @@ include_once('includes/header.php');
                     while ($row = mysqli_fetch_array($sql)) { ?>
                         <tr>
                             <td><?php echo $row['booking_date']; ?></td>
-                            <td><?php echo $row['phone']; ?></td>
+                            <td><?php echo $row['phone']; ?> (<?php echo $row['cus_name']; ?>)</td>
                             <td><?php echo $row['start_time']; ?> - <?php echo $row['end_time']; ?></td>
                             <td><?php echo $row['ref_name']; ?></td>
                             <td><?php echo ($row['transaction_status'] == 0) ? 'Unpaid' : 'Paid'; ?></td>
