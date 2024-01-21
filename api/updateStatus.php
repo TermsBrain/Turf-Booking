@@ -1,5 +1,5 @@
 <?php
-include 'connection.php';
+include '../connection.php';
 
 if (isset($_POST['id']) && isset($_POST['status'])) {
     $id = $_POST['id'];

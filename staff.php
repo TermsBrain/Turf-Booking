@@ -153,11 +153,12 @@ include_once('includes/header.php');
         $('.status-toggle').change(function() {
             var status = this.checked ? 1 : 0;
             var userId = $(this).data('id');
-
+            console.log(status);
+            console.log(userId);
             // Use Ajax to send a request to updateStatus.php
             $.ajax({
                 type: 'POST',
-                url: 'updateStatus.php',
+                url: 'api/updateStatus.php',
                 data: {
                     id: userId,
                     status: status
