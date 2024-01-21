@@ -11,9 +11,11 @@
     .invoice-container {
         justify-content: center;
         align-items: center;
-        background-color: #ffffff;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        border-radius: 5px;
+        padding: 20px;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
 
     .invoice-header {
@@ -85,6 +87,7 @@
     }
 
     .signature-section {
+        text-align: center;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -92,7 +95,7 @@
 
     .signature-box {
         width: 45%;
-        border-top: 1px solid #ddd;
+        border-top: 2px solid #ddd;
         padding-top: 20px;
     }
 
@@ -185,7 +188,7 @@ if ($row = mysqli_fetch_array($sql)) { ?>
                             </tr>
                         </tbody>
                     </table>
-                </div><br><br>
+                </div><br><br><br>
 
                 <div class="signature-section">
                     <div class="signature-box">

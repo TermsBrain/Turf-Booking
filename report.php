@@ -53,23 +53,23 @@ include_once('includes/header.php');
         <div class="container mt-4">
             <!-- Filter Select Box -->
             <form method="post" class="mb-3">
-    <div class="filter-container">
-        <label for="interval">Select Interval:</label>
-        <select id="interval" name="filter" onchange="updateChart()" class="form-select">
-            <option value="last-30-days" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'last-30-days' ? 'selected' : ''; ?>>Last 30 Days</option>
-            <option value="monthly" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'monthly' ? 'selected' : ''; ?>>Monthly</option>
-            <option value="yearly" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'yearly' ? 'selected' : ''; ?>>Yearly</option>
-            <option value="all-time" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'all-time' ? 'selected' : ''; ?>>All Time</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Apply</button>
-    </div>
-</form>
+                <div class="filter-container">
+                    <label for="interval">Select Interval:</label>
+                    <select id="interval" name="filter" onchange="updateChart()" class="form-select">
+                        <option value="last-30-days" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'last-30-days' ? 'selected' : ''; ?>>Last 30 Days</option>
+                        <option value="monthly" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'monthly' ? 'selected' : ''; ?>>Monthly</option>
+                        <option value="yearly" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'yearly' ? 'selected' : ''; ?>>Yearly</option>
+                        <option value="all-time" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'all-time' ? 'selected' : ''; ?>>All Time</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+            </form>
 
 
             <!-- Stylish Canvas for Chart.js -->
             <div class="card">
                 <div class="card-body">
-                    <canvas id="myChart" width="400" height="200"></canvas>
+                    <canvas id="myChart" width="400" height="150"></canvas>
                 </div>
             </div>
 

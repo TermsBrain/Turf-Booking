@@ -77,8 +77,10 @@ include_once('includes/header.php');
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT transaction.*, customers.phone as phone FROM transaction 
-                          LEFT JOIN customers ON transaction.user_id = customers.id";
+                    $query = "SELECT transaction.*, customers.phone as phone
+                    FROM transaction 
+                    LEFT JOIN customers ON transaction.user_id = customers.id
+                    ORDER BY transaction.due DESC";
                     $sql = mysqli_query($conn, $query);
 
                     while ($row = mysqli_fetch_array($sql)) { ?>
@@ -158,7 +160,8 @@ include_once('includes/header.php');
         $('#yourTableID').DataTable({
             dom: 'Bfrtip',
             responsive: true,
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            order: [[4, 'desc']] // Assuming 'due' is the fifth column (index 4)
         });
     });
 </script>
