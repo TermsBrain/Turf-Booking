@@ -53,17 +53,18 @@ include_once('includes/header.php');
         <div class="container mt-4">
             <!-- Filter Select Box -->
             <form method="post" class="mb-3">
-                <div class="filter-container">
-                    <label for="interval">Select Interval:</label>
-                    <select id="interval" name="filter" onchange="updateChart()" class="form-select">
-                        <option value="all-time" <?php echo ($_POST['filter'] == 'all-time') ? 'selected' : ''; ?>>All Time</option>
-                        <option value="weekly" <?php echo ($_POST['filter'] == 'weekly' || !isset($_POST['filter'])) ? 'selected' : ''; ?>>Weekly</option>
-                        <option value="monthly" <?php echo ($_POST['filter'] == 'monthly' || !isset($_POST['filter'])) ? 'selected' : ''; ?>>Monthly</option>
-                        <option value="yearly" <?php echo ($_POST['filter'] == 'yearly') ? 'selected' : ''; ?>>Yearly</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Apply Filter</button>
-            </form>
+    <div class="filter-container">
+        <label for="interval">Select Interval:</label>
+        <select id="interval" name="filter" onchange="updateChart()" class="form-select">
+            <option value="last-30-days" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'last-30-days' ? 'selected' : ''; ?>>Last 30 Days</option>
+            <option value="monthly" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'monthly' ? 'selected' : ''; ?>>Monthly</option>
+            <option value="yearly" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'yearly' ? 'selected' : ''; ?>>Yearly</option>
+            <option value="all-time" <?php echo ($_POST['filter'] ?? 'last-30-days') == 'all-time' ? 'selected' : ''; ?>>All Time</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Apply</button>
+    </div>
+</form>
+
 
             <!-- Stylish Canvas for Chart.js -->
             <div class="card">
@@ -72,19 +73,16 @@ include_once('includes/header.php');
                 </div>
             </div>
 
-            <!-- Line Graph for Per Day Income (Last 30 Days) -->
-            <div class="card mt-4">
-                <div class="card-body">
-                    <canvas id="perDayChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-
             <?php
             // Function to fetch and format data for Chart.js
             function fetchDataForChart($interval, $format, $conn)
             {
-                $sql = "SELECT transaction.*, booking.date as booking_date FROM `transaction`
-                        LEFT JOIN booking ON booking.transaction_id = transaction.id";
+                // Modify the SQL query to join the `booking` and `transaction` tables
+                $sql = "SELECT DATE(b.date) AS booking_date, SUM(t.total) AS total_income 
+                        FROM booking b
+                        LEFT JOIN transaction t ON b.transaction_id = t.id
+                        WHERE b.date >= DATE_SUB(NOW(), INTERVAL 30 DAY) 
+                        GROUP BY booking_date";
                 $result = mysqli_query($conn, $sql);
 
                 // Check for errors
@@ -93,7 +91,6 @@ include_once('includes/header.php');
                 }
 
                 $data = array();
-                $perDayIncome = array();
 
                 // Fetch data and group by the specified interval from the booking table
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -106,26 +103,19 @@ include_once('includes/header.php');
                     }
 
                     // Sum up the total amount for each interval
-                    $data[$groupKey] += $row['total'];
-
-                    // Calculate per day income
-                    $dayKey = date_format($date, 'Y-m-d');
-                    if (!isset($perDayIncome[$dayKey])) {
-                        $perDayIncome[$dayKey] = 0;
-                    }
-                    $perDayIncome[$dayKey] += $row['total'];
+                    $data[$groupKey] += $row['total_income'];
                 }
 
-                return array('totalIncome' => $data, 'perDayIncome' => $perDayIncome);
+                return array('totalIncome' => $data);
             }
 
             // Check if the form is submitted
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $selectedFilter = $_POST["filter"];
-                $data = fetchDataForChart($selectedFilter, ($selectedFilter == 'monthly' ? 'F Y' : 'Y'), $conn);
+                $data = fetchDataForChart($selectedFilter, ($selectedFilter == 'monthly' ? 'F Y' : 'Y-m-d'), $conn);
             } else {
-                // Display data by default (monthly)
-                $data = fetchDataForChart('1 month', 'F Y', $conn);
+                // Display data by default (last 30 days)
+                $data = fetchDataForChart('last-30-days', 'Y-m-d', $conn);
             }
             ?>
 
@@ -186,48 +176,8 @@ include_once('includes/header.php');
                     });
                 }
 
-                // Function to create a stylish Chart.js line chart for per day income
-                function createPerDayChart(data) {
-                    var ctx = document.getElementById('perDayChart').getContext('2d');
-                    var perDayChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: Object.keys(data.perDayIncome).slice(-7), // Show only the last 30 days
-                            datasets: [{
-                                label: 'Per Day Income',
-                                data: Object.values(data.perDayIncome).slice(-7), // Show only the last 30 days
-                                fill: false,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 2
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    grid: {
-                                        color: 'rgba(0, 0, 0, 0.1)',
-                                    }
-                                },
-                                x: {
-                                    grid: {
-                                        color: 'rgba(0, 0, 0, 0)',
-                                    }
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    position: 'top',
-                                }
-                            }
-                        }
-                    });
-                }
-
-                // Call the functions to create the charts
+                // Call the function to create the chart
                 createChart(<?php echo json_encode($data); ?>);
-                createPerDayChart(<?php echo json_encode($data); ?>);
             </script>
         </div>
     </div>
