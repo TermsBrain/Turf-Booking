@@ -111,7 +111,7 @@ include_once('includes/header.php');
                         <td><?php echo $row['role'] ?></td>
                         <?php if ($_SESSION['role'] != 'manager') : ?>
                             <td>
-                                <input type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
+                                <input <?php echo ($row['role']!='admin') ? '' : 'disabled' ?> type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
                             </td>
                         <?php endif; ?>                       
                         <td>
