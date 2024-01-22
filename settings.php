@@ -149,10 +149,10 @@ if (isset($_POST['submit'])) {
         move_uploaded_file($_FILES['logo']['tmp_name'], $logoPath)) {
 
         // Rest of your code...
-        $q = "INSERT INTO `setting` (brand, favicon, logo) VALUES (?, ?, ?)";
+        $q = "INSERT INTO `setting` (brand, favicon, logo, email, phone, location, social) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = mysqli_prepare($conn, $q);
-        mysqli_stmt_bind_param($stmt, 'sss', $brand, $favicon, $logo);
+        mysqli_stmt_bind_param($stmt, 'sssssss', $brand, $favicon, $logo, $email, $phone, $location, $social );
 
         if (mysqli_stmt_execute($stmt)) {
             echo '<script>

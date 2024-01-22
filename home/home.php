@@ -89,12 +89,6 @@
 
   <section id="features" class="features section-bg">
     <div class="container" data-aos="fade-up">
-
-      <!-- <div class="section-title">
-        <h2 class="text-center">Features & Facilities</h2>
-        <p>Explore the Exceptional Amenities at Kick OFF Football Ground</p>
-      </div> -->
-
       <div class="section-title text-center pb-4">
         <h2>Features & Facilities</h2>
         <p class="mb-4">Explore the Exceptional Amenities at Kick OFF Football Ground</p>
@@ -102,16 +96,6 @@
       <div class="row">
         <div class="col-lg-6 " data-aos="fade-right" data-aos-delay="100">
           <!-- <h3>Facilities</h3> -->
-          <!-- <ul>
-            <li>Two Separate team rooms with toilet and change rooms</li>
-            <li>Drinks available to buy</li>
-            <li>Seating arrangement in the roof</li>
-            <li>Kitchen facilities</li>
-            <li>Adequate lighting and Generator</li>
-            <li>Car Parking Facilities</li>
-            <li>Top-notch sound system with wireless microphone</li>
-            <li>CCTV Camera surveillance & Free Wifi</li>
-          </ul> -->
           <!-- Facilities Section start Here! -->
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
@@ -147,17 +131,7 @@
           </div>
         </div>
         <!-- Facilities Section End Here! -->
-
         <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="100">
-          <!-- <h3>Key Features</h3> -->
-          <!-- <ul>
-            <li>The Grass of Kick OFF Football Ground has been manufactured by FIFA Licensee manufacturer of artificial turf in China</li>
-            <li>Dual-colored Astro turf</li>
-            <li>Excellent view from the roof for enjoying the match while having food</li>
-            <li>Excellent drainage system allowing players to play during rain</li>
-            <li>Rainwater does not clog</li>
-          </ul> -->
-
           <!-- Key Features Section start Here! -->
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">

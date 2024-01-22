@@ -49,6 +49,10 @@ $settings = mysqli_fetch_array($resultSettings);
                         <input type="text" value="<?php echo $settings['phone'] ?>" class="form-control" name="phone" id="phone">
                     </div>
                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" value="<?php echo $settings['email'] ?>" class="form-control" name="email" id="email">
+                    </div>
+                    <div class="form-group">
                         <label for="social">Social</label>
                         <input type="text" value="<?php echo $settings['social'] ?>" class="form-control" name="social" id="social">
                     </div>
@@ -81,7 +85,7 @@ if (isset($_POST['submit'])) {
     $logoPath = $settings['logo'];
     if ($_FILES['logo']['tmp_name'] != "") {
         $logoFileName = $_FILES['logo']['name'];
-        $logoPath = "uploads/logos/" . $logoFileName;
+        $logoPath = "assets/uploads/" . $logoFileName; // Use forward slash here
         move_uploaded_file($_FILES['logo']['tmp_name'], $logoPath);
     }
 
@@ -89,7 +93,7 @@ if (isset($_POST['submit'])) {
     $faviconPath = $settings['favicon'];
     if ($_FILES['favicon']['tmp_name'] != "") {
         $faviconFileName = $_FILES['favicon']['name'];
-        $faviconPath = "uploads/favicons/" . $faviconFileName;
+        $faviconPath = "assets/uploads/" . $faviconFileName; // Use forward slash here
         move_uploaded_file($_FILES['favicon']['tmp_name'], $faviconPath);
     }
 
