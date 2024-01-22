@@ -231,7 +231,7 @@ include_once('includes/header.php');
               var mysqlDate = inputDate.getFullYear() + '-' + month + '-' + inputDate.getDate();
               console.log(mysqlDate);
               var live_slots = [];
-              const slotArray = [];
+              var slotsArray = [];
               $.ajax({
                 url: 'api/get_slot_status.php',
                 type: 'POST',
@@ -240,39 +240,97 @@ include_once('includes/header.php');
                   date: mysqlDate,
                 },
                 success: function(response) {
-                  // slotArray = response.data;
-                  // console.log("slot array: "+response.data);
-                  for(var i=0; i<response.data.length ;i++){
-                    slotArray.push(
-                      {
-                          key:"name",
-                          value:response.data[i].name
-                      },
-                      {
-                          key:"start",
-                          value:response.data[i].start
-                      },
-                      {
-                          key:"end",
-                          value:response.data[i].end
-                      }
-                    );
-                    // console.log(" from ajax (name): "+response.data[i].name);
-                    // console.log(" from ajax (start): "+response.data[i].start);
-                    // console.log(" from ajax (end): "+response.data[i].end);
-                  }
-
-                  console.log("After success: "+slotArray)
+                  slotsArray = response;
+                  
+                  //console.log(" from ajax: "+response);
                   /*if(response.length>0){
                     for (var i = 0; i < response.length; i++) {
                         //console.log(response[i].slot_id);
                         live_slots.push(response[i].slot_id);
                     }
                   }*/
+                  //console.log(slotsArray[0].starting_slot);
+
+                  //console.log("live slots: ");
+                  //console.log(live_slots)
+
+                  const today = new Date();
+                  var dateWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                  //console.log(selectedDay);
+                  //console.log(dateWithoutTime);
+
+                  var fg = true;
+                  if (selectedDay < dateWithoutTime) {
+                    //alert('Please select a future date. ' + today);
+                    fg = false;
+                  }
+                  console.log(fg);
+
+                  const selectedElement = document.querySelector('.selected');
+                  if (selectedElement) {
+                    selectedElement.classList.remove('selected');
+                  }
+
+                  const clickedDayElement = daysContainer.children[day - 1];
+                  clickedDayElement.classList.add('selected');
+
+                  const selectedDateStr = selectedDay.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  });
+                  //alert(`You have selected: ${selectedDateStr}`);
+                  //console.log(selectedDateStr);
+                  var temp = document.getElementById('selectedDate');
+                  temp.value = selectedDateStr;
+
+                  var time_interval = document.getElementById('time-intervals');
+                  time_interval.innerHTML = "";
+                  
+
+                  /*for (let i=0; i<periods.length-1; i++){
+                    var startTime = periods[i];
+                    
+                    var endTime = periods[i+1];
+
+                    if (fg) {
+                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-center"><span class="btn btn-success btn-lg  time-slot-btn" onclick="openBookingForm('${startTime}', '${endTime}')">${startTime}-${endTime}</span></div>`;
+                    } else {
+                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
+                    }
+                    time_interval.innerHTML += span;
+                  }*/
+                  for (let i=0; i<periods.length-1; i++){
+                    var startTime = periods[i];
+                    
+                    var endTime = periods[i+1];
+
+                    if (fg) {
+                      var isBooked = false;
+                      for (let j=0; j<slotsArray.length; j++){
+                        if(periods[i]==slotsArray[j].start){
+                          isBooked = true;
+                          while(slotsArray[j].end!=periods[i]){
+                            i++;
+                          }
+                          var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-danger btn-lg time-slot-btn" >${slotsArray[j].start} - ${periods[i]} booked by <br> ${slotsArray[j].name}</span></div>`;
+                          break;
+                        }
+                      }
+                      if(isBooked === false){
+                        var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-success btn-lg  time-slot-btn pt-4" onclick="openBookingForm('${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span></div>`;
+                      }
+                    } else {
+                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
+                    }
+                    time_interval.innerHTML += span;
+                  }
                 },
                 
               });
-              /*var slotsArray = [
+              //console.log("after success:" +booked_slots);
+              var slotsArray = [
                 {
                   "name": "Mohsin",
                   "start": "12:00 PM",
@@ -284,85 +342,9 @@ include_once('includes/header.php');
                   "end": "4:00 PM"
                 },
                 
-              ];*/
+              ];
 
-              //console.log(slotsArray[0].starting_slot);
-
-              //console.log("live slots: ");
-              //console.log(live_slots)
-
-              const today = new Date();
-              var dateWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-              //console.log(selectedDay);
-              //console.log(dateWithoutTime);
-
-              var fg = true;
-              if (selectedDay < dateWithoutTime) {
-                //alert('Please select a future date. ' + today);
-                fg = false;
-              }
-              console.log(fg);
-
-              const selectedElement = document.querySelector('.selected');
-              if (selectedElement) {
-                selectedElement.classList.remove('selected');
-              }
-
-              const clickedDayElement = daysContainer.children[day - 1];
-              clickedDayElement.classList.add('selected');
-
-              const selectedDateStr = selectedDay.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              });
-              //alert(`You have selected: ${selectedDateStr}`);
-              //console.log(selectedDateStr);
-              var temp = document.getElementById('selectedDate');
-              temp.value = selectedDateStr;
-
-              var time_interval = document.getElementById('time-intervals');
-              time_interval.innerHTML = "";
               
-
-              /*for (let i=0; i<periods.length-1; i++){
-                var startTime = periods[i];
-                
-                var endTime = periods[i+1];
-
-                if (fg) {
-                  var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-center"><span class="btn btn-success btn-lg  time-slot-btn" onclick="openBookingForm('${startTime}', '${endTime}')">${startTime}-${endTime}</span></div>`;
-                } else {
-                  var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
-                }
-                time_interval.innerHTML += span;
-              }*/
-              // for (let i=0; i<periods.length-1; i++){
-              //   var startTime = periods[i];
-                
-              //   var endTime = periods[i+1];
-
-              //   if (fg) {
-              //     var isBooked = false;
-              //     for (let j=0; j<slotArray.length; j++){
-              //       if(periods[i]==slotArray[j].start){
-              //         isBooked = true;
-              //         while(slotArray[j].end!=periods[i]){
-              //           i++;
-              //         }
-              //         var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-danger btn-lg time-slot-btn" >${slotArray[j].start} - ${periods[i]} booked by <br> ${slotArray[j].name}</span></div>`;
-              //         break;
-              //       }
-              //     }
-              //     if(isBooked === false){
-              //       var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-success btn-lg  time-slot-btn" onclick="openBookingForm('${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]}</span></div>`;
-              //     }
-              //   } else {
-              //     var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
-              //   }
-              //   time_interval.innerHTML += span;
-              // }
 
             }
 

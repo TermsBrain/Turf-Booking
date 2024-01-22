@@ -31,7 +31,7 @@ if($sql) {
         $data[$i]['end'] = $end_time;
         $i++;
     }
-    echo json_encode(array("data" => $data));
+    echo json_encode($data);
 }
 else {
     echo json_encode(array("err" => mysqli_error()));
