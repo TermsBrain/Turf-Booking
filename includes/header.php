@@ -124,7 +124,7 @@
                                 <?php
                                 if ($_SESSION['role'] == 'admin' && $_SESSION['status'] == 1) { ?>
                                     <li>
-                                        <a href="settings.php"><i class="fa fa-gear fa-fw"></i>Update Settings</a>
+                                        <a href="updateSettings.php"><i class="fa fa-gear fa-fw"></i>Update Settings</a>
                                     </li>
                                 <?php
                                 }
