@@ -34,7 +34,7 @@ include_once('includes/header.php');
     <div class="card">
       <div class="card-body">
 
-        <section class="calendar-body">
+        <section class="calendar-body py-5">
           <div class="calendar">
             <div class="header">
               <button id="prevBtn">&lt;</button>
@@ -158,7 +158,7 @@ include_once('includes/header.php');
         ?>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-          //console.log(periods);
+
 
           document.addEventListener('DOMContentLoaded', function() {
             const daysContainer = document.querySelector('.days');
@@ -184,7 +184,7 @@ include_once('includes/header.php');
               const totalDays = lastDay.getDate();
 
               monthYearElement.textContent = `${getMonthName(month)} ${year}`;
-              console.log(totalDays);
+
               for (let i = 1; i <= totalDays; i++) {
                 const day = document.createElement('div');
 
@@ -196,8 +196,6 @@ include_once('includes/header.php');
                 const currentDate = new Date();
                 if (i == currentDate.getDate() && month == currentDate.getMonth() && year == currentDate.getFullYear()) {
                   selectDate(i);
-                  console.log(month + " " + year);
-                  console.log(currentDate.getMonth() + " " + currentDate.getFullYear());
                   day.classList.add('today');
                   var temp = document.getElementById('selectedDate');
                   temp.value = currentDate.toLocaleDateString('en-US', {
@@ -211,7 +209,7 @@ include_once('includes/header.php');
               }
 
               const todayIndex = new Date().getDate() - 1;
-              //daysContainer.children[todayIndex].classList.add('today');
+
             }
 
             function getMonthName(month) {
@@ -225,11 +223,10 @@ include_once('includes/header.php');
 
             function selectDate(day) {
               const selectedDay = new Date(currentYear, currentMonth, day);
-              console.log("-------"+selectedDay);
               var inputDate = new Date(selectedDay);
               var month = String(inputDate.getMonth() + 1).padStart(2, '0');
               var mysqlDate = inputDate.getFullYear() + '-' + month + '-' + inputDate.getDate();
-              console.log(mysqlDate);
+
               var live_slots = [];
               var slotsArray = [];
               $.ajax({
@@ -242,29 +239,17 @@ include_once('includes/header.php');
                 success: function(response) {
                   slotsArray = response;
                   
-                  //console.log(" from ajax: "+response);
-                  /*if(response.length>0){
-                    for (var i = 0; i < response.length; i++) {
-                        //console.log(response[i].slot_id);
-                        live_slots.push(response[i].slot_id);
-                    }
-                  }*/
-                  //console.log(slotsArray[0].starting_slot);
-
-                  //console.log("live slots: ");
-                  //console.log(live_slots)
+                
 
                   const today = new Date();
                   var dateWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-                  //console.log(selectedDay);
-                  //console.log(dateWithoutTime);
 
                   var fg = true;
                   if (selectedDay < dateWithoutTime) {
-                    //alert('Please select a future date. ' + today);
+                   
                     fg = false;
                   }
-                  console.log(fg);
+
 
                   const selectedElement = document.querySelector('.selected');
                   if (selectedElement) {
@@ -280,8 +265,7 @@ include_once('includes/header.php');
                     month: 'long',
                     day: 'numeric'
                   });
-                  //alert(`You have selected: ${selectedDateStr}`);
-                  //console.log(selectedDateStr);
+
                   var temp = document.getElementById('selectedDate');
                   temp.value = selectedDateStr;
 
@@ -289,18 +273,7 @@ include_once('includes/header.php');
                   time_interval.innerHTML = "";
                   
 
-                  /*for (let i=0; i<periods.length-1; i++){
-                    var startTime = periods[i];
-                    
-                    var endTime = periods[i+1];
-
-                    if (fg) {
-                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-center"><span class="btn btn-success btn-lg  time-slot-btn" onclick="openBookingForm('${startTime}', '${endTime}')">${startTime}-${endTime}</span></div>`;
-                    } else {
-                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
-                    }
-                    time_interval.innerHTML += span;
-                  }*/
+                  
                   for (let i=0; i<periods.length-1; i++){
                     var startTime = periods[i];
                     
@@ -315,6 +288,7 @@ include_once('includes/header.php');
                             i++;
                           }
                           var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-danger btn-lg time-slot-btn" >${slotsArray[j].start} - ${periods[i]} booked by <br> ${slotsArray[j].name}</span></div>`;
+                          i--;
                           break;
                         }
                       }
@@ -329,22 +303,7 @@ include_once('includes/header.php');
                 },
                 
               });
-              //console.log("after success:" +booked_slots);
-              var slotsArray = [
-                {
-                  "name": "Mohsin",
-                  "start": "12:00 PM",
-                  "end": "2:00 PM"
-                },
-                {
-                  "name": "Ekram",
-                  "start": "3:00 PM",
-                  "end": "4:00 PM"
-                },
-                
-              ];
 
-              
 
             }
 
@@ -410,10 +369,7 @@ include_once('includes/header.php');
 
             var mysqlDate = inputDate.getFullYear() + '-' + month + '-' + inputDate.getDate();
 
-            console.log(date);
-            console.log(mysqlDate);
 
-            //console.log(date);
             if (name === "") {
               alert("Please enter a valid Name");
             } else if (contact === "") {
@@ -438,7 +394,6 @@ include_once('includes/header.php');
                   method: method
                 },
                 success: function(response) {
-                  // console.log('debug: ' + response);
                   if (response==='1'){
                     alert("Booked successfully");
                     $('#bookingModal').modal('hide');
@@ -446,12 +401,9 @@ include_once('includes/header.php');
                   }
                   else {
                       alert('An error occurred. Please try again later.');
-                      //console.error('Error submitting booking: ' + response.err);
                   }
                 },
-                // error: function(error) {
-                //   console.error('Error submitting booking: ' + JSON.stringify(error));
-                // }
+               
               });
             }
           }
