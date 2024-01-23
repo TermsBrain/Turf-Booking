@@ -11,7 +11,7 @@ include_once('includes/header.php');
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Booking Details</h1>
+            <h1 class="page-header text-center">Booking Details</h1>
         </div>
     </div>
     <div class="row">
