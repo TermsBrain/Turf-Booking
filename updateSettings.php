@@ -26,6 +26,7 @@ $settings = mysqli_fetch_array($resultSettings);
         <div class="container">
             <div class="col-md-8">
                 <form method="post" action="" enctype="multipart/form-data">
+
                     <div class="form-group">
                         <label for="brand">Brand</label>
                         <input type="text" value="<?php echo $settings['brand'] ?>" class="form-control" name="brand" id="brand">
@@ -61,7 +62,6 @@ $settings = mysqli_fetch_array($resultSettings);
                         <input type="text" value="<?php echo $settings['location'] ?>" class="form-control" name="location" id="location">
                     </div>
 
-
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" name="submit" value="Update Settings">
                         <a class="btn btn-info" href="settings.php">Back to Settings</a>
@@ -81,12 +81,20 @@ if (isset($_POST['submit'])) {
     $phone = $_POST['phone'];
     $social = $_POST['social'];
     $location = $_POST['location'];
+
     // Handle logo upload
     $logoPath = $settings['logo'];
     if ($_FILES['logo']['tmp_name'] != "") {
         $logoFileName = $_FILES['logo']['name'];
         $logoPath = "assets/uploads/" . $logoFileName; // Use forward slash here
-        move_uploaded_file($_FILES['logo']['tmp_name'], $logoPath);
+
+        // Check if the file upload was successful
+        if (move_uploaded_file($_FILES['logo']['tmp_name'], $logoPath)) {
+            echo 'Logo upload success!';
+        } else {
+            echo 'Logo upload failed.';
+            // You may want to handle the failure, e.g., show an error message or exit the script
+        }
     }
 
     // Handle favicon upload
@@ -94,14 +102,27 @@ if (isset($_POST['submit'])) {
     if ($_FILES['favicon']['tmp_name'] != "") {
         $faviconFileName = $_FILES['favicon']['name'];
         $faviconPath = "assets/uploads/" . $faviconFileName; // Use forward slash here
-        move_uploaded_file($_FILES['favicon']['tmp_name'], $faviconPath);
+
+        // Check if the file upload was successful
+        if (move_uploaded_file($_FILES['favicon']['tmp_name'], $faviconPath)) {
+            echo 'Favicon upload success!';
+        } else {
+            echo 'Favicon upload failed.';
+            // You may want to handle the failure, e.g., show an error message or exit the script
+        }
     }
 
-    // Update settings in the database
-    $strUpdateSettings = "UPDATE `setting` SET brand='$brand', logo='$logoPath', favicon='$faviconPath' WHERE id=1";
+    // Update settings in the database using prepared statements
+    $strUpdateSettings = "UPDATE `setting` SET logo=?, favicon=?, phone=?, email=?, social=?, location=? WHERE brand=?";
+    $stmtUpdateSettings = mysqli_prepare($conn, $strUpdateSettings);
+    mysqli_stmt_bind_param($stmtUpdateSettings, 'sssssss', $logoPath, $faviconPath, $phone, $email, $social, $location, $brand);
 
-    if (mysqli_query($conn, $strUpdateSettings)) {
+    if (mysqli_stmt_execute($stmtUpdateSettings)) {
         echo "<script> window.location.replace('settings.php'); </script>";
+    } else {
+        echo 'Failed to update settings: ' . mysqli_error($conn);
     }
+
+    mysqli_stmt_close($stmtUpdateSettings);
 }
 ?>
