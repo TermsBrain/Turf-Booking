@@ -15,7 +15,16 @@ $strSettings = "SELECT * FROM `setting`";
 $resultSettings = mysqli_query($conn, $strSettings);
 $settings = mysqli_fetch_array($resultSettings);
 ?>
+<style>
 
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    img {
+        margin-top: 10px;
+    }
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -33,16 +42,16 @@ $settings = mysqli_fetch_array($resultSettings);
                     </div>
                     <div class="form-group">
                         <label for="logo">Logo</label>
-                        <input type="file" class="form-control-file" name="logo" id="logo">
+                        <input type="file" class="form-control" name="logo" id="formFile">
                         <?php if (!empty($settings['logo'])) : ?>
-                            <img src="<?php echo "assets/uploads/".$settings['logo']; ?>" alt="Logo" width="100">
+                            <img src="<?php echo "assets/uploads/" . $settings['logo']; ?>" alt="Logo" width="100">
                         <?php endif; ?>
                     </div>
                     <div class="form-group">
                         <label for="favicon">Favicon</label>
-                        <input type="file" class="form-control-file" name="favicon" id="favicon">
+                        <input type="file" class="form-control" name="favicon" id="formFile">
                         <?php if (!empty($settings['favicon'])) : ?>
-                            <img src="<?php echo "assets/uploads/".$settings['favicon']; ?>" alt="Favicon" width="50">
+                            <img src="<?php echo "assets/uploads/" . $settings['favicon']; ?>" alt="Favicon" width="50">
                         <?php endif; ?>
                     </div>
                     <div class="form-group">
