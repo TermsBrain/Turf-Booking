@@ -133,7 +133,7 @@
                         </li>
                     </ul>
                     <div class="text-center" style="margin-top: 20px;">
-                        <a class="btn btn-info" href="bookingManagement.php"><i class="fa fa-plus fa-fw"></i> Booking Now</a>
+                        <a class="btn btn-primary" href="bookingManagement.php"><i class="fa fa-plus fa-fw"></i> Booking Now</a>
                     </div>
                 </div>
 

@@ -8,6 +8,14 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
 
 include_once('includes/header.php');
 ?>
+<style>
+    #time-intervals {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+</style>
 <div id="page-wrapper">
   <div class="row">
     <div class="col-12">
@@ -34,7 +42,7 @@ include_once('includes/header.php');
     <div class="card">
       <div class="card-body">
 
-        <section class="calendar-body py-5">
+      <div class="calendar-body py-5">
           <div class="calendar">
             <div class="header">
               <button id="prevBtn">&lt;</button>
@@ -44,21 +52,25 @@ include_once('includes/header.php');
             <div class="days"></div>
           </div>
           
-        </section>
-
-        <section>
-          <div class="section-title">
-            <h3 class="text-center" ><span><b>SELECT YOUR TIME SLOT</b></span></h3>
-            <p></p>
-          </div>
-          <div class="row mx-auto calendar-body myElement"  >
-            <div class="row" id="time-intervals" >
-              
-            </div>
-            
         </div>
-          
-        </section>
+
+        <div class="page-wrapper">
+            
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header text-center">Select your time slot</h1>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div id="time-intervals" class="d-flex justify-content-center align-items-center mx-auto">
+                            <!-- here is the buttons -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         
 
@@ -282,16 +294,16 @@ include_once('includes/header.php');
                           while(slotsArray[j].end!=periods[i]){
                             i++;
                           }
-                          var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-danger btn-lg time-slot-btn" >${slotsArray[j].start} - ${periods[i]} booked by <br> ${slotsArray[j].name}</span></div>`;
+                          var span = `<span class="btn btn-danger m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " >${slotsArray[j].start} - ${periods[i]} booked by <br> ${slotsArray[j].name}</span>`;
                           i--;
                           break;
                         }
                       }
                       if(isBooked === false){
-                        var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-success btn-lg  time-slot-btn pt-4" onclick="openBookingForm('${mysqlDate}' ,'${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span></div>`;
+                        var span = `<span class="btn btn-primary m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " onclick="openBookingForm('${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span>`;
                       }
                     } else {
-                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
+                      var span = `<span class="btn btn-primary m-2 col-lg-3 col-xs-6 col-md-3 text-center" style= "padding: 10px; margin: 5px; " >${startTime}-${endTime}</span>`;
                     }
                     time_interval.innerHTML += span;
                   }
