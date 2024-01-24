@@ -264,7 +264,7 @@ include_once('includes/header.php');
         </style>
 
         <div class="row">
-            <div class="container mt-4">
+            <div class=" mt-4">
                 <!-- Filter Select Box -->
                 <form method="post" class="mb-3">
                     <div class="filter-container">
@@ -281,7 +281,7 @@ include_once('includes/header.php');
 
 
                 <!-- Stylish Canvas for Chart.js -->
-                <div class="container">
+                <div class="">
                     <div class="card">
                         <div class="card-body">
                             <canvas id="myChart" width="300" height="150"></canvas>
