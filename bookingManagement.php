@@ -300,10 +300,10 @@ include_once('includes/header.php');
                         }
                       }
                       if(isBooked === false){
-                        var span = `<span class="btn btn-primary m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " onclick="openBookingForm('${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span>`;
+                        var span = `<span class="btn btn-primary m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " onclick="openBookingForm('${mysqlDate}' ,'${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span>`;
                       }
                     } else {
-                      var span = `<span class="btn btn-primary m-2 col-lg-3 col-xs-6 col-md-3 text-center" style= "padding: 10px; margin: 5px; " >${startTime}-${endTime}</span>`;
+                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
                     }
                     time_interval.innerHTML += span;
                   }
