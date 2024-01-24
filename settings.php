@@ -10,17 +10,11 @@ include_once('includes/header.php');
 ?>
 
 <style>
-
-.container-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  /* #page-wrapper {
-        background-color: #fff;
-        margin-right: 0 !important;
-    } */
-   
+    .container-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .form-group {
         margin-bottom: 20px;
     }
@@ -45,16 +39,15 @@ include_once('includes/header.php');
     }
 </style>
 
-<div id="page-wrapper" >
+<div id="page-wrapper">
     <div class="row ">
-        <div class="col-lg-12 " >
+        <div class="col-lg-12 ">
             <h1 class="page-header text-center">Settings</h1>
         </div>
     </div>
-
     <div class="container-center">
         <div class="row">
-            <div >
+            <div>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -87,7 +80,6 @@ include_once('includes/header.php');
                             </div>
                         </div>
                     </div>
-
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title text-center" style="font-weight: bold;">Logo and Favicon</h3>
@@ -105,8 +97,9 @@ include_once('includes/header.php');
                             </div>
                         </div>
                     </div>
-
-                    <button type="submit" name="submit" class="btn btn-primary">Save Settings</button>
+                    <div class="text-center">
+                        <button type="submit" name="submit" class="btn btn-primary">Save Settings</button>
+                    </div>
                 </form>
 
             </div>

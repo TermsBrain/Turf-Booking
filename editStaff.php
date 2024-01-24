@@ -14,14 +14,21 @@ $str = "SELECT * FROM authentication WHERE id=$id";
 $result = mysqli_query($conn, $str);
 $staff = mysqli_fetch_array($result);
 ?>
+<style>
+    .container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Edit Staff</h1>
+            <h1 class="page-header text-center">Edit Staff</h1>
         </div>
     </div>
     <div class="row">
-        <div class="container">
+        <div class="container-center">
             <div class="col-md-8">
                 <form method="post" action="">
                     <div class="form-group">
@@ -44,7 +51,7 @@ $staff = mysqli_fetch_array($result);
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input class="btn btn-primary" type="submit" name="submit" value="Update Staff">
                         <a class="btn btn-info" href="staff.php">List All Staff</a>
                     </div>
