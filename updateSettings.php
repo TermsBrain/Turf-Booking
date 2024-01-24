@@ -66,7 +66,7 @@ $settings = mysqli_fetch_array($resultSettings);
                             <div class="from-row">
                                 <div class="form-group col-md-12">
                                     <label for="location">Location</label>
-                                    <textarea rows="5" style="height:100%;" type="text" value="<?php echo $settings['location'] ?>" class="form-control" name="location" id="location"></textarea>
+                                    <textarea rows="5" style="height:100%;" class="form-control" name="location" id="location"><?php echo $settings['location'] ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -112,6 +112,7 @@ if (isset($_POST['submit'])) {
     // Retrieve form data
     $brand = $_POST['brand'];
     $phone = $_POST['phone'];
+    $email = $_POST['email'];
     $social = $_POST['social'];
     $location = $_POST['location'];
 

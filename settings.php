@@ -71,7 +71,7 @@ include_once('includes/header.php');
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="location">Location:</label>
-                                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter Your location" required>
+                                    <textarea rows="5" style="height:100%;"  type="text" class="form-control" id="location" name="location" placeholder="Enter Your location" required></textarea>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="social">Social Media:</label>
@@ -161,7 +161,7 @@ if (isset($_POST['submit'])) {
 
 
     // Additional debugging statement
-    echo 'Debugging Information: ' . print_r($_FILES, true);
+    // echo 'Debugging Information: ' . print_r($_FILES, true);
 
     // File upload paths
     $faviconPath = 'assets/uploads/' . $favicon;

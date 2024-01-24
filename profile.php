@@ -94,8 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
 
     .label {
         font-weight: bold;
+        color: red;
         margin-bottom: 5px;
-        display: block;
     }
 
     .value {
@@ -138,11 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
 
     <div class="row">
         <div class="container-center">
-            <div class="card col-lg-6">
+            <div class="card  col-lg-6">
                 <div class="card-header">
                     User Information
                 </div>
-                <div class="user-info">
+                <div class="user-info container-center">
                     <div class="info-item">
                         <span class="label">Name:</span>
                         <span class="value"><?php echo $userData['name']; ?></span>
