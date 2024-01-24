@@ -4,65 +4,81 @@ include 'connection.php';
 
 if (!isset($_SESSION['id']) || $_SESSION['role'] != 'admin') {
     header('Location: login.php');
-   exit;
+    exit;
 }
 
 include_once('includes/header.php');
 ?>
+<style>
+    .container-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Add Staff</h1>
+            <h1 class="page-header text-center">Add Staff</h1>
         </div>
-        <div class="row">
+        <div class="row container-center">
             <div class="col-md-6">
                 <form class="form-horizontal form-label-left" action="" method="POST">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <label>Name</label>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center " style="font-weight: bold;">Add Information</h3>
                         </div>
-                        <div class="col-md-12">
-                            <input type="text" name="name" class="form-control">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="name" class="form-control" placeholder="Enter the Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="email" name="email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Password</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label for="role">Role</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <select name="role" class="form-control">
+                                        <option value="admin">Admin</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="staff">Staff</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" hidden>
+                                <div class="col-md-12">
+                                    <label>Status</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="status" class="form-control" value="0">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" name="submit" class="btn btn-primary text-center" value="Add Staff">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <label>Email</label>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="email" name="email" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <label>Password</label>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="text" name="password" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <label for="role">Role</label>
-                        </div>
-                        <div class="col-md-12">
-                            <select name="role" class="form-control">
-                                <option value="admin">Admin</option>
-                                <option value="manager">Manager</option>
-                                <option value="staff">Staff</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group" hidden>
-                        <div class="col-md-12">
-                            <label>Status</label>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="text" name="status" class="form-control" value="0">
-                        </div>
-                    </div>
-                    <input type="submit" name="submit" class="btn btn-primary" value="Add Staff">
                 </form>
             </div>
         </div>

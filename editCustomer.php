@@ -14,14 +14,21 @@ $str = "SELECT * FROM customers WHERE id=$id";
 $result = mysqli_query($conn, $str);
 $customer = mysqli_fetch_array($result);
 ?>
-<div id="page-wrapper">
-    <div class="row">
+<style>
+    .container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+<div id="page-wrapper" >
+    <div class="row ">
         <div class="col-lg-12">
-            <h1 class="page-header">Edit Customer</h1>
+            <h1 class="page-header text-center">Update Customer</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="container">
+    <div class="row ">
+        <div class="container-center">
             <div class="col-md-8">
                 <form method="post" action="">
                     <div class="form-group">
@@ -36,7 +43,7 @@ $customer = mysqli_fetch_array($result);
                         <label for="">Phone</label>
                         <input type="phone" value="<?php echo $customer['phone'] ?>" class="form-control" name="phone" id="">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input class="btn btn-primary" type="submit" name="submit" value="Update Customer">
                         <a class="btn btn-info" href="customers.php">List All Customer</a>
                     </div>

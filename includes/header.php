@@ -116,11 +116,11 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="profile.php"><i class="fa fa-user fa-fw"></i> Profile</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-gear fa-fw"></i> Settings<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="profile.php"><i class="fa fa-user fa-fw"></i> Profile</a>
-                                </li>
                                 <?php
                                 if ($_SESSION['role'] == 'admin' && $_SESSION['status'] == 1) { ?>
                                     <li>
