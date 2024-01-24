@@ -9,6 +9,14 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['role']) || !isset($_SESSION['st
 
 include_once('includes/header.php');
 ?>
+<style>
+    #buttonContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+</style>
 
 <div id="page-wrapper">
     <div class="row">
@@ -19,12 +27,11 @@ include_once('includes/header.php');
 
     <div class="row">
         <div class="col-lg-12 text-center">
-            <div id="buttonContainer" class="d-flex justify-content-center align-items-center">
+            <div id="buttonContainer" class="d-flex justify-content-center align-items-center mx-auto">
                 <!-- here is the buttons -->
             </div>
         </div>
     </div>
-
 
     <script>
         var buttonContainer = document.getElementById('buttonContainer');
@@ -39,8 +46,6 @@ include_once('includes/header.php');
             buttonContainer.appendChild(newButton);
         }
     </script>
-
-
 </div>
 
 <?php include_once('includes/footer.php'); ?>
