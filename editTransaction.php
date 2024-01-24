@@ -32,15 +32,22 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+<style>
+    .container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
 
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Edit Customer</h1>
+            <h1 class="page-header text-center">Edit Customer</h1>
         </div>
     </div>
     <div class="row">
-        <div class="container">
+        <div class="container-center">
             <div class="col-md-8">
                 <form method="post" action="">
                     <!-- <div class="form-group">
@@ -87,7 +94,7 @@ if (isset($_POST['submit'])) {
                                 <option value="cash" <?php echo ($transaction['method'] == 'cash') ? 'selected' : ''; ?>>Cash</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-12 text-center">
                             <input class="btn btn-primary" type="submit" name="submit" value="Update Transaction">
                             <a class="btn btn-info" href="transaction.php">List All Transaction</a>
                         </div>
