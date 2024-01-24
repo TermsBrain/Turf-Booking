@@ -10,13 +10,17 @@ include_once('includes/header.php');
 ?>
 
 <style>
-    #page-wrapper {
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
 
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* #page-wrapper {
+        background-color: #fff;
+        margin-right: 0 !important;
+    } */
+   
     .form-group {
         margin-bottom: 20px;
     }
@@ -27,12 +31,12 @@ include_once('includes/header.php');
 
     .btn-primary {
         background-color: #007bff;
-        color: #fff;
+        color: #FFFFFF;
     }
 
     /* New styles for the row */
     .row-with-box-shadow {
-        background-color: #fff;
+        background-color: #FFFFFF;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin: 20px 0;
@@ -41,20 +45,20 @@ include_once('includes/header.php');
     }
 </style>
 
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Settings</h1>
+<div id="page-wrapper" >
+    <div class="row ">
+        <div class="col-lg-12 " >
+            <h1 class="page-header text-center">Settings</h1>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-center">
         <div class="row">
-            <div class="col-lg-6 mx-auto">
+            <div >
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Brand Information</h3>
+                            <h3 class="panel-title text-center " style="font-weight: bold;">Brand Information</h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group col-md-12">
@@ -86,7 +90,7 @@ include_once('includes/header.php');
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Logo and Favicon</h3>
+                            <h3 class="panel-title text-center" style="font-weight: bold;">Logo and Favicon</h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-row">
