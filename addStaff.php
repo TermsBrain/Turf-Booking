@@ -25,7 +25,7 @@ include_once('includes/header.php');
         <div class="row container-center">
             <div class="col-md-6">
                 <form class="form-horizontal form-label-left" action="" method="POST">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title text-center " style="font-weight: bold;">Add Information</h3>
                         </div>

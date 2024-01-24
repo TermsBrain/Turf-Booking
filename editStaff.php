@@ -16,10 +16,10 @@ $staff = mysqli_fetch_array($result);
 ?>
 <style>
     .container-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 <div id="page-wrapper">
     <div class="row">
@@ -31,29 +31,36 @@ $staff = mysqli_fetch_array($result);
         <div class="container-center">
             <div class="col-md-8">
                 <form method="post" action="">
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <input type="text" value="<?php echo $staff['name'] ?>" class="form-control" name="name" id="">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Email</label>
-                        <input type="email" value="<?php echo $staff['email'] ?>" class="form-control" name="email" id="">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Password</label>
-                        <input type="text" value="<?php echo $staff['password'] ?>" class="form-control" name="password" id="">
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" name="role" id="role">
-                            <option value="admin" <?php echo $staff['role'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
-                            <option value="manager" <?php echo $staff['role'] == 'manager' ? 'selected' : ''; ?>>Manager</option>
-                        </select>
-                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center " style="font-weight: bold;">Update Information</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" value="<?php echo $staff['name'] ?>" class="form-control" name="name" id="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" value="<?php echo $staff['email'] ?>" class="form-control" name="email" id="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="text" value="<?php echo $staff['password'] ?>" class="form-control" name="password" id="">
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <select class="form-control" name="role" id="role">
+                                    <option value="admin" <?php echo $staff['role'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
+                                    <option value="manager" <?php echo $staff['role'] == 'manager' ? 'selected' : ''; ?>>Manager</option>
+                                </select>
+                            </div>
 
-                    <div class="form-group text-center">
-                        <input class="btn btn-primary" type="submit" name="submit" value="Update Staff">
-                        <a class="btn btn-info" href="staff.php">List All Staff</a>
+                            <div class="form-group text-center">
+                                <input class="btn btn-primary" type="submit" name="submit" value="Update Staff">
+                                <a class="btn btn-info" href="staff.php">List All Staff</a>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
