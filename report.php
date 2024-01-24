@@ -50,7 +50,7 @@ include_once('includes/header.php');
     </style>
 
     <div class="row">
-        <div class="container mt-4">
+        <div class=" mt-4">
             <!-- Filter Select Box -->
             <form method="post" class="mb-3">
                 <div class="filter-container">
