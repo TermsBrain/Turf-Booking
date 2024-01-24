@@ -154,7 +154,8 @@ include_once('includes/header.php');
               echo "periods.push('".$r['end_time']."');";
             }
 
-            echo "console.log(periods);</script>";
+            // echo "console.log(periods);</script>";
+            echo "</script>";
         ?>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
@@ -238,8 +239,6 @@ include_once('includes/header.php');
                 },
                 success: function(response) {
                   slotsArray = response;
-                  
-                
 
                   const today = new Date();
                   var dateWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -249,7 +248,6 @@ include_once('includes/header.php');
                    
                     fg = false;
                   }
-
 
                   const selectedElement = document.querySelector('.selected');
                   if (selectedElement) {
@@ -268,11 +266,8 @@ include_once('includes/header.php');
 
                   var temp = document.getElementById('selectedDate');
                   temp.value = selectedDateStr;
-
                   var time_interval = document.getElementById('time-intervals');
                   time_interval.innerHTML = "";
-                  
-
                   
                   for (let i=0; i<periods.length-1; i++){
                     var startTime = periods[i];
@@ -293,7 +288,7 @@ include_once('includes/header.php');
                         }
                       }
                       if(isBooked === false){
-                        var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-success btn-lg  time-slot-btn pt-4" onclick="openBookingForm('${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span></div>`;
+                        var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-success btn-lg  time-slot-btn pt-4" onclick="openBookingForm('${mysqlDate}' ,'${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span></div>`;
                       }
                     } else {
                       var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
@@ -303,8 +298,6 @@ include_once('includes/header.php');
                 },
                 
               });
-
-
             }
 
             prevBtn.addEventListener('click', () => {
@@ -326,30 +319,48 @@ include_once('includes/header.php');
             });
           });
 
-
-
-          function openBookingForm(startTime, endTime) {
+          function openBookingForm(chosenDate, startTime, endTime) {
             document.getElementById('startTime').value = startTime;
-            populateEndTimeDropdown(startTime);
+            populateEndTimeDropdown(chosenDate, startTime);
             $('#bookingModal').modal('show');
           }
 
-          function populateEndTimeDropdown(startTime) {
+          function populateEndTimeDropdown(chosenDate, startTime) {
             var endTimeDropdown = document.getElementById('endTime');
             endTimeDropdown.innerHTML = '';
             var x=periods.length+1;
-            for (let i=0; i<periods.length; i++){
-              if(x<i){
-                var option = document.createElement('option');
-                option.value = periods[i];
-                option.text = periods[i];
-                endTimeDropdown.add(option);
-              }   
-              if(periods[i]==startTime){
-                x=i;
-              }
-            }
-            
+            let flag_end_time = false;
+            $.ajax({
+                url: 'api/get_end_time.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                  date: chosenDate,
+                },
+                success: function(response) {
+                  for (let i=0; i<periods.length; i++){
+                    if(periods[i]==startTime){
+                      x=i;
+                    }
+                    if(x<i){
+                      for (let j=0; j<response.length; j++){
+                        if (periods[i] === response[j]){
+                          // console.log("DEBUG: "+periods[i]+" == "+response[j]);
+                          flag_end_time = true;
+                          break;
+                        }
+                      }
+                      if (flag_end_time){
+                          break;
+                      }
+                      var option = document.createElement('option');
+                      option.value = periods[i];
+                      option.text = periods[i];
+                      endTimeDropdown.add(option);
+                    }   
+                  }
+                }
+            });
           }
 
           function submitBookingForm() {
