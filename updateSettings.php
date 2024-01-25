@@ -11,7 +11,7 @@ include_once('includes/header.php');
 
 <?php
 // Retrieve existing settings data
-$strSettings = "SELECT * FROM `setting`";
+$strSettings = "SELECT * FROM `setting` WHERE id=1";
 $resultSettings = mysqli_query($conn, $strSettings);
 $settings = mysqli_fetch_array($resultSettings);
 ?>
@@ -28,6 +28,25 @@ $settings = mysqli_fetch_array($resultSettings);
 
     img {
         margin-top: 10px;
+    }
+
+    .custom-file {
+        margin-top: 10px;
+    }
+
+    .image-preview {
+        margin-top: 10px;
+        border: 1px solid #ddd; /* Add border style */
+        padding: 10px; /* Add padding for better appearance */
+        text-align: center; /* Center the image within the border */
+    }
+
+    .image-preview img {
+        width: 100px;
+        height: 100px;
+        height: auto;
+        border: 2px solid #ddd; /* Add border around the image */
+        border-radius: 8px; /* Add border-radius for rounded corners */
     }
 </style>
 <div id="page-wrapper">
@@ -66,33 +85,40 @@ $settings = mysqli_fetch_array($resultSettings);
                             <div class="from-row">
                                 <div class="form-group col-md-12">
                                     <label for="location">Location</label>
-                                    <textarea rows="5" style="height:100%;" class="form-control" name="location" id="location"><?php echo $settings['location'] ?></textarea>
+                                    <textarea rows="5" style="height:100%;" type="text" class="form-control" name="location" id="location"><?php echo $settings['location'] ?></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-danger">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title text-center" style="font-weight: bold;">Logo and Favicon</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="from-row">
+                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="logo">Logo</label>
-                                    <input type="file" class="form-control" name="logo" id="formFile">
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control" name="logo" id="formFile">
+                                    </div>
                                     <?php if (!empty($settings['logo'])) : ?>
-                                        <img src="<?php echo "assets/uploads/" . $settings['logo']; ?>" alt="Logo" width="100">
+                                        <div class="image-preview">
+                                            <img src="<?php echo "assets/uploads/" . $settings['logo']; ?>" alt="Logo" width="100">
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="favicon">Favicon</label>
-                                    <input type="file" class="form-control" name="favicon" id="formFile">
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control" name="favicon" id="formFileFavicon">
+                                    </div>
                                     <?php if (!empty($settings['favicon'])) : ?>
-                                        <img src="<?php echo "assets/uploads/" . $settings['favicon']; ?>" alt="Favicon" width="50">
+                                        <div class="image-preview">
+                                            <img src="<?php echo "assets/uploads/" . $settings['favicon']; ?>" alt="Favicon" width="50">
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
-
                         </div>
                         <div class="form-group text-center">
                             <input class="btn btn-primary" type="submit" name="submit" value="Update Settings">
@@ -112,7 +138,6 @@ if (isset($_POST['submit'])) {
     // Retrieve form data
     $brand = $_POST['brand'];
     $phone = $_POST['phone'];
-    $email = $_POST['email'];
     $social = $_POST['social'];
     $location = $_POST['location'];
 
@@ -147,7 +172,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Update settings in the database using prepared statements
-    $strUpdateSettings = "UPDATE `setting` SET logo=?, favicon=?, phone=?, email=?, social=?, location=? WHERE brand=?";
+    $strUpdateSettings = "UPDATE `setting` SET brand=? logo=?, favicon=?, phone=?, email=?, social=?, location=? WHERE id=1";
     $stmtUpdateSettings = mysqli_prepare($conn, $strUpdateSettings);
     mysqli_stmt_bind_param($stmtUpdateSettings, 'sssssss', $logoPath, $faviconPath, $phone, $email, $social, $location, $brand);
 

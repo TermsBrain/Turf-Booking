@@ -18,7 +18,8 @@ include_once('includes/header.php');
         <div class="table-responsive">
             <table id="yourTableID" class="table table-dark table-striped">
                 <thead>
-                    <th>Date</th>
+                    <th>Booked On</th>
+                    <th>Booked For</th>
                     <th>Contact</th>
                     <th>Slot Time</th>
                     <th>Booked By</th>
@@ -27,7 +28,7 @@ include_once('includes/header.php');
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT booking.id as booking_id,
+                    $query = "SELECT *, booking.id as booking_id,
                         booking.date as booking_date,
                         authentication.name as ref_name,
                         transaction.status as transaction_status,
@@ -45,6 +46,11 @@ include_once('includes/header.php');
 
                     while ($row = mysqli_fetch_array($sql)) { ?>
                         <tr>
+                            <td><?php
+                                $temp = $row['created_at'];
+                                $dates = explode(' ', $temp);
+                                echo $dates[0];
+                                ?></td>
                             <td><?php echo $row['booking_date']; ?></td>
                             <td><?php echo $row['phone']; ?> (<?php echo $row['cus_name']; ?>)</td>
                             <td><?php echo $row['start_time']; ?> - <?php echo $row['end_time']; ?></td>
@@ -101,7 +107,7 @@ include_once('includes/header.php');
 <script>
     $(document).ready(function() {
         $('#yourTableID').DataTable({
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
             responsive: true,
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
         });

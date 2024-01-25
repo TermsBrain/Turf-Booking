@@ -15,8 +15,18 @@ include_once('includes/header.php');
         justify-content: center;
         align-items: center;
     }
+
     .form-group {
         margin-bottom: 20px;
+    }
+
+    .form-group img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-top: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
     }
 
     label {
@@ -71,7 +81,7 @@ include_once('includes/header.php');
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="location">Location:</label>
-                                    <textarea rows="5" style="height:100%;"  type="text" class="form-control" id="location" name="location" placeholder="Enter Your location" required></textarea>
+                                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter Your location" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="social">Social Media:</label>
@@ -85,18 +95,50 @@ include_once('includes/header.php');
                             <h3 class="panel-title text-center" style="font-weight: bold;">Logo and Favicon</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="favicon">Favicon:</label>
-                                    <input type="file" class="form-control" id="favicon" name="favicon" accept="image/*">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="logo">Brand Logo:</label>
-                                    <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
-                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="favicon">Favicon:</label>
+                                <input type="file" class="form-control" id="favicon" name="favicon" accept="image/*" onchange="validateImage(this, '#favicon-preview')">
+                                <img id="favicon-preview" src="#" alt="Favicon Preview" width="50" style="display: none;">
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="logo">Brand Logo:</label>
+                                <input type="file" class="form-control" id="logo" name="logo" accept="image/*" onchange="validateImage(this, '#logo-preview')">
+                                <img id="logo-preview" src="#" alt="Logo Preview" width="100" style="display: none;">
+                            </div>
+
                         </div>
                     </div>
+
+                    <script>
+                        function validateImage(input, previewId) {
+                            const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                            const file = input.files[0];
+                            const fileName = file.name.toLowerCase();
+                            const fileExtension = fileName.split('.').pop();
+
+                            if (allowedExtensions.includes(fileExtension)) {
+                                readURL(input, previewId);
+                            } else {
+                                alert('Please upload an image with a valid extension (jpg, jpeg, png, gif).');
+                                // Clear the input field
+                                input.value = '';
+                                // Hide the preview
+                                $(previewId).attr('src', '').hide();
+                            }
+                        }
+
+                        function readURL(input, previewId) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                    $(previewId).attr('src', e.target.result).show();
+                                }
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                    </script>
                     <div class="text-center">
                         <button type="submit" name="submit" class="btn btn-primary">Save Settings</button>
                     </div>
@@ -161,7 +203,7 @@ if (isset($_POST['submit'])) {
 
 
     // Additional debugging statement
-    // echo 'Debugging Information: ' . print_r($_FILES, true);
+    echo 'Debugging Information: ' . print_r($_FILES, true);
 
     // File upload paths
     $faviconPath = 'assets/uploads/' . $favicon;

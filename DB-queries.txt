@@ -1,4 +1,5 @@
 CREATE TABLE `setting` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `brand` varchar(255),
   `logo` varchar(255),
   `favicon` varchar(255),

@@ -152,7 +152,7 @@ include_once('includes/header.php');
 <script>
     $(document).ready(function() {
         $('#yourTableID').DataTable({
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
             responsive: true,
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
         });

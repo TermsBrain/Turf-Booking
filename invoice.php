@@ -19,7 +19,7 @@
     }
 
     .invoice-header {
-        background-color: #007bff;
+        background-color: #337ab7;
         text-align: center;
         color: #ffffff;
         padding: 20px;
@@ -60,7 +60,7 @@
     }
 
     .table th {
-        background-color: #007bff;
+        background-color: #337ab7;
         color: #ffffff;
     }
 
@@ -79,7 +79,7 @@
 
     .invoice-footer button {
         padding: 12px 24px;
-        background-color: #007bff;
+        background-color: #337ab7;
         color: #ffffff;
         border: none;
         cursor: pointer;
@@ -120,6 +120,11 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
 include 'connection.php';
 include_once('includes/header.php');
 
+// Fetch settings from the database
+$querySettings = "SELECT * FROM `setting` LIMIT 1";
+$resultSettings = mysqli_query($conn, $querySettings);
+$settings = mysqli_fetch_assoc($resultSettings);
+
 $id = $_REQUEST['id'];
 $query = "SELECT *, transaction.id as transaction_id,
               booking.id as booking_id,
@@ -138,20 +143,19 @@ $query = "SELECT *, transaction.id as transaction_id,
           LEFT JOIN slot_management AS end_slot ON booking.end_slot_id = end_slot.id
           WHERE transaction.id = $id";
 $sql = mysqli_query($conn, $query);
-
-if ($row = mysqli_fetch_array($sql)) { ?>
+if ($row = mysqli_fetch_array($sql)) {
+?>
     <div id="page-wrapper">
         <div class="invoice-container">
             <div class="invoice">
                 <div class="invoice-header">
-                    <img src="home\assets\img\logo.png" alt="Company Logo">
+                    <img src="<?php echo "assets/uploads/" . $settings['logo']; ?>" alt="<?php echo $settings['brand']; ?>'s Logo">
                     <div>
-                        <h1 class="page-header">TermsBrain TURF</h1>
-                        <h4>Highway Society Road, Lal Khan Bazaar, Chattogram</h4>
-                        <p>0123 XXXX XXXX || info@termsbrain.com</p>
+                        <h1 class="page-header"><?php echo $settings['brand']; ?></h1>
+                        <h4><?php echo $settings['location']; ?></h4>
+                        <p><?php echo $settings['phone']; ?> || <?php echo $settings['email']; ?></p>
                     </div>
                 </div>
-
                 <div class="invoice-details">
                     <h2>Invoice #<?php echo $row['transaction_id']; ?></h2>
                     <p>Booked By: <?php echo $row['ref_name']; ?></p>
