@@ -302,8 +302,28 @@ include_once('includes/header.php');
                       if(isBooked === false){
                         var span = `<span class="btn btn-primary m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " onclick="openBookingForm('${mysqlDate}' ,'${periods[i]}', '${periods[i+1]}')">${periods[i]} - ${periods[i+1]} <br> --- </span>`;
                       }
-                    } else {
-                      var span = `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center"><span class="btn btn-primary time-slot-btn">${startTime}-${endTime}</span></div>`;
+                    } 
+                    else {
+                      var isBooked = false;
+                      if(slotsArray.length == 0){
+                        var span = `<span class="btn btn-warning m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " > No Booking </span>`;
+                        time_interval.innerHTML += span;
+                        break;
+                      }
+                      for (let j=0; j<slotsArray.length; j++){
+                        if(periods[i]==slotsArray[j].start){
+                          isBooked = true;
+                          while(slotsArray[j].end!=periods[i]){
+                            i++;
+                          }
+                          var span = `<span class="btn btn-danger m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " >${slotsArray[j].start} - ${periods[i]} booked by <br> ${slotsArray[j].name}</span>`;
+                          i--;
+                          break;
+                        }
+                      }
+                      if(isBooked === false){
+                        var span = `<span class="btn btn-primary m-2 col-lg-3 col-md-4 col-sm-6 col-xs-6 text-center" style= "padding: 10px; margin: 5px; " >${periods[i]} - ${periods[i+1]} <br> --- </span>`;
+                      }
                     }
                     time_interval.innerHTML += span;
                   }
