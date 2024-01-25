@@ -175,10 +175,14 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    // Extract file names without the path
+    $logoFileName = basename($logoPath);
+    $faviconFileName = basename($faviconPath);
+
     // Update settings in the database using prepared statements
     $strUpdateSettings = "UPDATE `setting` SET brand=?, logo=?, favicon=?, phone=?, email=?, social=?, location=? WHERE id=1";
     $stmtUpdateSettings = mysqli_prepare($conn, $strUpdateSettings);
-    mysqli_stmt_bind_param($stmtUpdateSettings, 'sssssss', $brand, $logoPath, $faviconPath, $phone, $_POST['email'], $social, $location);
+    mysqli_stmt_bind_param($stmtUpdateSettings, 'sssssss', $brand, $logoFileName, $faviconFileName, $phone, $_POST['email'], $social, $location);
 
     if (mysqli_stmt_execute($stmtUpdateSettings)) {
         echo "<script>window.location.replace('settings.php');</script>";

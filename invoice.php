@@ -27,7 +27,9 @@
     }
 
     .invoice-header img {
-        max-width: 150px;
+        width: 60px;
+        height: 60px;
+        mix-blend-mode: multiply;
     }
 
     .invoice-header h1 {
@@ -146,6 +148,8 @@ $sql = mysqli_query($conn, $query);
 if ($row = mysqli_fetch_array($sql)) {
 ?>
     <div id="page-wrapper">
+        <br>
+        <button class="btn btn-primary" style="display: block; margin: 0 auto;" onclick="printInvoice()">Print Invoice</button>
         <div class="invoice-container">
             <div class="invoice">
                 <div class="invoice-header">
