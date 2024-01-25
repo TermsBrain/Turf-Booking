@@ -19,7 +19,7 @@
   
   .navbar-nav .book-now-btn {
     background-color: #fff;
-    color: #2196f3;
+    color: #2d70aa;
     border-radius: 5px;
     padding: 8px 15px;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
@@ -65,7 +65,7 @@
   .cta-button {
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #3498db; /* Adjust button background color */
+    background-color: #2d70aa; /* Adjust button background color */
     color: #000000; /* Adjust button text color */
     border: none;
     border-radius: 5px;
@@ -138,7 +138,7 @@
   section#footer {
     background: linear-gradient(
       to right,
-      #3498db,
+      #2d70aa,
       #6dd5fa
     ); /* Gradient background */
     padding: 60px 0;

@@ -19,7 +19,7 @@ include_once('includes/header.php');
 <div id="page-wrapper">
   <div class="row">
     <div class="col-12">
-      <h1 class="page-header">Booking Management</h1>
+      <h1 class="page-header text-center">Booking Management</h1>
     </div>
     <!-- /.col-lg-12 -->
   </div>
@@ -55,10 +55,9 @@ include_once('includes/header.php');
         </div>
 
         <div class="page-wrapper">
-            
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header text-center">Select your time slot</h1>
+                        <h2 class="page-header text-center">Select your time slot</h2>
                     </div>
                 </div>
             
@@ -69,7 +68,6 @@ include_once('includes/header.php');
                         </div>
                     </div>
                 </div>
-
             </div>
 
         
@@ -153,6 +151,51 @@ include_once('includes/header.php');
             </div>
           </div>
         </div>
+
+        
+        <!-- modal for confirmation  -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                      <h4 class="modal-title">Booking Confirmed</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <div class="modal-body" id="modalContent">
+                      <!-- Content will be dynamically added here -->
+                  </div>
+
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                      <a href="bookingManagement.php" class="btn btn-secondary" >Close</a>
+                  </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            // Use JavaScript to open the modal, pass a value, and refresh the page when the modal is closed
+            document.getElementById('openModalButton').addEventListener('click', function () {
+                // Get the value you want to pass
+                var valueToPass = 'This is the value I want to pass';
+
+                // Update the modal content with the value
+                document.getElementById('modalContent').innerText = valueToPass;
+
+                // Show the modal
+                $('#myModal').modal('show');
+            });
+
+            // Refresh the page when the modal is fully hidden
+            $('#myModal').on('hidden.bs.modal', function () {
+                location.reload();
+            });
+        </script>
+
         <?php
             include 'connection.php';
             $sql = "SELECT * FROM slot_management WHERE status=1";
@@ -438,9 +481,17 @@ include_once('includes/header.php');
                 },
                 success: function(response) {
                   if (response==='1'){
-                    alert("Booked successfully");
+                    var valueToPass = 'Booking confirmed for '+name+' on '+date+' from '+startTime+' to '+endTime;
+
+                    // Update the modal content with the value
+                    document.getElementById('modalContent').innerText = valueToPass;
+
+                    // Show the modal
+                    
                     $('#bookingModal').modal('hide');
-                    window.location.replace('bookingManagement.php');
+
+                    $('#myModal').modal('show');
+                    
                   }
                   else {
                       alert('An error occurred. Please try again later.');

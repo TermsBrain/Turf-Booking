@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
     }
 
     .card-header {
-        background-color: #5bc0de;
+        background-color: #2d70aa;
         color: #fff;
         text-align: center;
         font-size: 1.5rem;
