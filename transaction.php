@@ -62,7 +62,7 @@ include_once('includes/header.php');
     </div>
     <div class="row">
         <div class="table-responsive">
-            <table id="yourTableID" class="table table-dark table-striped">
+            <table id="yourTableID" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <th>Date</th>
                     <th>Contact</th>
@@ -158,10 +158,97 @@ include_once('includes/header.php');
 <script>
     $(document).ready(function() {
         $('#yourTableID').DataTable({
-            dom: 'Blfrtip',
-            responsive: true,
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-            order: [[4, 'desc']] // Assuming 'due' is the fifth column (index 4)
+            "dom": '<"row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+                '<"row"<"col-sm-12"B>>' +
+                '<"row"<"col-sm-12"tr>>' +
+                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            "paging": true,
+            "autoWidth": true,
+            order: [[4, 'desc']],
+            "buttons": [{
+                    extend: 'copyHtml5',
+                    className: 'btn btn-success',
+                    text: 'Copy to Clipboard',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - Copy';
+                        }
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    className: 'btn btn-warning',
+                    text: 'Export to CSV',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - CSV';
+                        }
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    className: 'btn btn-primary',
+                    text: 'Export to Excel',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - Excel';
+                        }
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    className: 'btn btn-danger',
+                    text: 'Export to PDF',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - PDF';
+                        }
+                    }
+                },
+                'print'
+            ],
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            "pageLength": 10,
+            "language": {
+                "lengthMenu": "Show _MENU_ entries per page",
+                "zeroRecords": "No matching records found",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "paginate": {
+                    "first": "First",
+                    "previous": "Previous",
+                    "next": "Next",
+                    "last": "Last"
+                }
+            },
+            "initComplete": function(settings, json) {
+                // Apply custom styling to the buttons
+                var buttons = $('.dt-buttons button');
+                buttons.css({
+                    'background-color': '#337ab7',
+                    'border-radius': '5px',
+                    'color': '#fff',
+                    'transition': 'background-color 0.3s ease, border-radius 0.3s ease'
+                });
+
+                // Add hover effect
+                buttons.hover(
+                    function() {
+                        $(this).css('background-color', '#2d70aa');
+                    },
+                    function() {
+                        $(this).css('background-color', '#337ab7');
+                    }
+                );
+
+                var searchInput = $('.dataTables_filter input');
+                // searchInput.addClass('form-control rounded-pill'); // Bootstrap class for input styling and border-radius
+                searchInput.attr('placeholder', 'Search...');
+            }
         });
     });
 </script>
