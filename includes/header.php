@@ -133,9 +133,27 @@
                                     </li> -->
                             </ul>
                         </li>
+
                         <li>
-                            <a href="report.php"><i class="fa fa-file fa-fw"></i> Report</a>
+                            <a href="#"><i class="fa fa-file fa-fw"></i> Reports <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="report.php"><i class="fa fa-plus fa-fw"></i>Income Report</a>
+                                </li>
+                                <li>
+                                    <a href="adv_payment_report.php"><i class="fa fa-list fa-fw"></i>Advanced Report</a>
+                                </li>
+                                <li>
+                                    <a href="time_slot_report.php"><i class="fa fa-plus fa-fw"></i>Time Slot Report</a>
+                                </li>
+                                <li>
+                                    <a href="report.php"><i class="fa fa-plus fa-fw"></i>Due Report</a>
+                                </li>
+                            </ul>
                         </li>
+                        <!-- <li>
+                            <a href="report.php"><i class="fa fa-file fa-fw">Report</i> </a>
+                        </li> -->
 
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Staff<span class="fa arrow"></span></a>
