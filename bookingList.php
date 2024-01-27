@@ -16,7 +16,7 @@ include_once('includes/header.php');
     </div>
     <div class="row">
         <div class="table-responsive">
-            <table id="yourTableID" class="table table-dark table-striped">
+            <table id="yourTableID" class="table table-striped table-bordered">
                 <thead>
                     <th>Booked On</th>
                     <th>Booked For</th>
@@ -28,7 +28,8 @@ include_once('includes/header.php');
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT *, booking.id as booking_id,
+                    $query = "SELECT booking.id as booking_id,
+                    booking.created_at as booked_on_date,
                         booking.date as booking_date,
                         authentication.name as ref_name,
                         transaction.status as transaction_status,
@@ -46,11 +47,12 @@ include_once('includes/header.php');
 
                     while ($row = mysqli_fetch_array($sql)) { ?>
                         <tr>
-                            <td><?php
-                                $temp = $row['created_at'];
+                            <!-- <td><?php
+                                $temp = $row['booked_on_date'];
                                 $dates = explode(' ', $temp);
                                 echo $dates[0];
-                                ?></td>
+                                ?></td> -->
+                                <td><?php echo $row['booked_on_date']; ?></td>
                             <td><?php echo $row['booking_date']; ?></td>
                             <td><?php echo $row['phone']; ?> (<?php echo $row['cus_name']; ?>)</td>
                             <td><?php echo $row['start_time']; ?> - <?php echo $row['end_time']; ?></td>
@@ -107,9 +109,95 @@ include_once('includes/header.php');
 <script>
     $(document).ready(function() {
         $('#yourTableID').DataTable({
-            dom: 'Blfrtip',
+            "dom": '<"row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+                '<"row"<"col-sm-12"B>>' +
+                '<"row"<"col-sm-12"tr>>' +
+                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
             responsive: true,
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            "buttons": [{
+                    extend: 'copyHtml5',
+                    className: 'btn btn-success',
+                    text: 'Copy to Clipboard',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - Copy';
+                        }
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    className: 'btn btn-warning',
+                    text: 'Export to CSV',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - CSV';
+                        }
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    className: 'btn btn-primary',
+                    text: 'Export to Excel',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - Excel';
+                        }
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    className: 'btn btn-danger',
+                    text: 'Export to PDF',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - PDF';
+                        }
+                    }
+                },
+                'print'
+            ],
+            "lengthMenu": [
+                [15, 25, 50, -1],
+                [15, 25, 50, "All"]
+            ],
+            "pageLength": 15,
+            "language": {
+                "lengthMenu": "Show _MENU_ entries per page",
+                "zeroRecords": "No matching records found",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "paginate": {
+                    "first": "First",
+                    "previous": "Previous",
+                    "next": "Next",
+                    "last": "Last"
+                }
+            },
+            "initComplete": function(settings, json) {
+                // Apply custom styling to the buttons
+                var buttons = $('.dt-buttons button');
+                buttons.css({
+                    'background-color': '#337ab7',
+                    'border-radius': '5px',
+                    'color': '#fff',
+                    'transition': 'background-color 0.3s ease, border-radius 0.3s ease'
+                });
+
+                // Add hover effect
+                buttons.hover(
+                    function() {
+                        $(this).css('background-color', '#2d70aa');
+                    },
+                    function() {
+                        $(this).css('background-color', '#337ab7');
+                    }
+                );
+
+                var searchInput = $('.dataTables_filter input');
+                // searchInput.addClass('form-control rounded-pill'); // Bootstrap class for input styling and border-radius
+                searchInput.attr('placeholder', 'Search...');
+            }
         });
     });
 </script>

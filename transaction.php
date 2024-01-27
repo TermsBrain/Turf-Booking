@@ -164,6 +164,7 @@ include_once('includes/header.php');
                 '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
             "paging": true,
             "autoWidth": true,
+            responsive: true,
             order: [[4, 'desc']],
             "buttons": [{
                     extend: 'copyHtml5',
