@@ -27,7 +27,7 @@ include_once('includes/header.php');
                 <form class="form-horizontal form-label-left" action="" method="POST">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title text-center " style="font-weight: bold;">Add Information</h3>
+                            <h3 class="panel-title text-center " style="font-weight: bold;">Staff Information</h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
@@ -35,7 +35,7 @@ include_once('includes/header.php');
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="text" name="name" class="form-control" placeholder="Enter the Name">
+                                    <input type="text" name="name" class="form-control" placeholder="Enter Name">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -43,7 +43,7 @@ include_once('includes/header.php');
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="email" name="email" class="form-control">
+                                    <input type="email" name="email" class="form-control" placeholder="Enter Email">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -51,7 +51,7 @@ include_once('includes/header.php');
                                     <label>Password</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="text" name="password" class="form-control">
+                                    <input type="text" name="password" class="form-control" placeholder="Enter Password">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -60,9 +60,9 @@ include_once('includes/header.php');
                                 </div>
                                 <div class="col-md-12">
                                     <select name="role" class="form-control">
-                                        <option value="admin">Admin</option>
+                                        <option selected>- Select a Role -</option>
                                         <option value="manager">Manager</option>
-                                        <option value="staff">Staff</option>
+                                        <option value="staff">Others</option>
                                     </select>
                                 </div>
                             </div>
