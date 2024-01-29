@@ -39,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
             $updateStmt->execute();
 
             $passwordChanged = true;
-            header('Location: profile.php');
-            exit;
+            header('Location: ./profile.php');
         } else {
             $passwordMatchError = "New password and confirm password do not match.";
         }
     } else {
         $passwordError = "Old password is incorrect.";
     }
+    mysqli_close($conn);
 }
 
 ?>
