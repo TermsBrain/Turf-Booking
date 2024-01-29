@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
+if (!isset($_SESSION['id']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     header('Location: login.php');
-    exit;
+    mysqli_close($conn);
 }
+
 include 'connection.php';
 include_once('includes/header.php');
 ?>
@@ -48,14 +49,6 @@ $staff = mysqli_fetch_array($result);
                                 <label for="">Password</label>
                                 <input type="text" value="<?php echo $staff['password'] ?>" class="form-control" name="password" id="">
                             </div>
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select class="form-control" name="role" id="role">
-                                    <option value="admin" <?php echo $staff['role'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
-                                    <option value="manager" <?php echo $staff['role'] == 'manager' ? 'selected' : ''; ?>>Manager</option>
-                                </select>
-                            </div>
-
                             <div class="form-group text-center">
                                 <input class="btn btn-primary" type="submit" name="submit" value="Update Staff">
                                 <a class="btn btn-info" href="staff.php">List All Staff</a>
@@ -75,9 +68,9 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $role = $_POST['role'];
+    // $role = $_POST['role'];
 
-    $str = "UPDATE authentication SET name='" . $name . "', email='" . $email . "', password='" . $password . "', role='" . $role . "' WHERE id= $id";
+    $str = "UPDATE authentication SET name='" . $name . "', email='" . $email . "', password='" . $password . "' WHERE id= $id";
     if (mysqli_query($conn, $str)) {
         echo "<script> window.location.replace('staff.php'); </script>";
     }
