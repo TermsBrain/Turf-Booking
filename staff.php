@@ -98,7 +98,7 @@ include_once('includes/header.php');
                 <?php if ($_SESSION['role'] != 'manager') : ?>
                     <th>Status</th>
                 <?php endif; ?>
-                <th>Action</th>
+                <th <?php echo ($_SESSION['role'] != 'admin') ? 'hidden' : '' ?>>Action</th>
             </thead>
             <tbody>
                 <?php
@@ -115,8 +115,8 @@ include_once('includes/header.php');
                                 <input <?php echo ($row['role'] != 'admin') ? '' : 'disabled' ?> type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
                             </td>
                         <?php endif; ?>
-                        <td>
-                            <a class="btn btn-primary" href="editStaff.php?id=<?php echo $row['id'] ?>">Edit</a>
+                        <td <?php echo ($_SESSION['role'] != 'admin') ? 'hidden' : '' ?>>
+                            <a href="editStaff.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                 <?php
