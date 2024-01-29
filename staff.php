@@ -88,7 +88,8 @@ include_once('includes/header.php');
     </div>
     <!-- /.row -->
     <div class="row">
-        <table id="yourTableID" class="table table-dark table-striped">
+        <table id="yourTableID" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <caption class="text-center">See All Staffs</caption>
             <thead>
                 <th>ID</th>
                 <th>Name</th>
@@ -111,9 +112,9 @@ include_once('includes/header.php');
                         <td><?php echo $row['role'] ?></td>
                         <?php if ($_SESSION['role'] != 'manager') : ?>
                             <td>
-                                <input <?php echo ($row['role']!='admin') ? '' : 'disabled' ?> type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
+                                <input <?php echo ($row['role'] != 'admin') ? '' : 'disabled' ?> type="checkbox" <?php echo $row['status'] == 1 ? 'checked' : ''; ?> class="status-toggle" data-id="<?php echo $row['id']; ?>">
                             </td>
-                        <?php endif; ?>                       
+                        <?php endif; ?>
                         <td>
                             <a class="btn btn-primary" href="editStaff.php?id=<?php echo $row['id'] ?>">Edit</a>
                         </td>
@@ -152,9 +153,96 @@ include_once('includes/header.php');
 <script>
     $(document).ready(function() {
         $('#yourTableID').DataTable({
-            dom: 'Blfrtip',
-            responsive: true,
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            "dom": '<"row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+                '<"row"<"col-sm-12"B>>' +
+                '<"row"<"col-sm-12"tr>>' +
+                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            "paging": true,
+            "autoWidth": true,
+            "buttons": [{
+                    extend: 'copyHtml5',
+                    className: 'btn btn-success',
+                    text: 'Copy to Clipboard',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - Copy';
+                        }
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    className: 'btn btn-warning',
+                    text: 'Export to CSV',
+                    exportOptions: {
+                        title: function() {
+                            return 'Staff List - CSV';
+                        }
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    className: 'btn btn-primary',
+                    text: 'Export to Excel',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - Excel';
+                        }
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    className: 'btn btn-danger',
+                    text: 'Export to PDF',
+                    exportOptions: {
+                        title: function() {
+                            return 'Custom File Name - PDF';
+                        }
+                    }
+                },
+                'print'
+            ],
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            "pageLength": 10,
+            "language": {
+                "lengthMenu": "Show _MENU_ entries per page",
+                "zeroRecords": "No matching records found",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "Showing 0 to 0 of 0 entries",
+                "infoFiltered": "(filtered from _MAX_ total entries)",
+                "paginate": {
+                    "first": "First",
+                    "previous": "Previous",
+                    "next": "Next",
+                    "last": "Last"
+                }
+            },
+            "initComplete": function(settings, json) {
+                // Apply custom styling to the buttons
+                var buttons = $('.dt-buttons button');
+                buttons.css({
+                    'background-color': '#337ab7',
+                    'border-radius': '5px',
+                    'color': '#fff',
+                    'transition': 'background-color 0.3s ease, border-radius 0.3s ease'
+                });
+
+                // Add hover effect
+                buttons.hover(
+                    function() {
+                        $(this).css('background-color', '#2d70aa');
+                    },
+                    function() {
+                        $(this).css('background-color', '#337ab7');
+                    }
+                );
+
+                var searchInput = $('.dataTables_filter input');
+                // searchInput.addClass('form-control rounded-pill'); // Bootstrap class for input styling and border-radius
+                searchInput.attr('placeholder', 'Search...');
+            }
         });
 
         // Add event listener for the checkbox change event

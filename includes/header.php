@@ -2,16 +2,34 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Turf Booking Administrator</title>
+    <?php
+    include 'connection.php';
+    // Fetch the settings from the database
+    $query = "SELECT * FROM setting where id=1";
+    $result = mysqli_query($conn, $query);
 
-    <link rel="shortcut icon" href="home\assets\img\logo.png" type="image/x-icon">
+    if ($result && $row = mysqli_fetch_assoc($result)) {
+        $brand = $row['brand'];
+        $logo = $row['logo'];
+        $favicon = $row['favicon'];
+        // Add other settings if needed
+    } else {
+        // Set default values if no settings are found
+        $brand = "Terms Brain Turf Booking Administrator";
+        $logo = "assets/uploads/logo.jpg";
+        $favicon = "assets/uploads/favicon.jpg";
+        // Set other defaults if needed
+    }
+    ?>
+
+    <title><?php echo $brand; ?></title>
+    <link rel="shortcut icon" href="<?php echo "assets/uploads/" . $favicon; ?>" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link href="assets/js/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="assets/css/booking.css" rel="stylesheet">
@@ -36,7 +54,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="">Turf Management</a>
+                <a class="navbar-brand" href="index.php"><?php echo $brand; ?></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -51,8 +69,29 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="profile.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="updateSettings.php"><i class="fa fa-gear fa-fw"></i>Update Settings</a>
-                        </li>
+                        <?php
+                        if ($_SESSION['role'] == 'admin' && $_SESSION['status'] == 1) {
+
+                            $q1 = "SELECT * FROM setting WHERE id = 1";
+                            $r1 = mysqli_query($conn, $q1);
+
+                            if ($r1 && $row1 = mysqli_fetch_assoc($r1)) {
+                                // If logo is set, show "Update Settings"
+                        ?>
+                                <li>
+                                    <a href="updateSettings.php"><i class="fa fa-gear fa-fw"></i> Update Settings</a>
+                                </li>
+                            <?php
+                            } else {
+                                // If logo is not set, show "Settings"
+                            ?>
+                                <li>
+                                    <a href="settings.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                </li>
+                        <?php
+                            }
+                        }
+                        ?>
                         <li class="divider"></li>
                         <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
@@ -94,9 +133,27 @@
                                     </li> -->
                             </ul>
                         </li>
+
                         <li>
-                            <a href="report.php"><i class="fa fa-file fa-fw"></i> Report</a>
+                            <a href="#"><i class="fa fa-file fa-fw"></i> Reports <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="report.php"><i class="fa fa-plus fa-fw"></i>Income Report</a>
+                                </li>
+                                <li>
+                                    <a href="adv_payment_report.php"><i class="fa fa-list fa-fw"></i>Advanced Report</a>
+                                </li>
+                                <li>
+                                    <a href="time_slot_report.php"><i class="fa fa-plus fa-fw"></i>Time Slot Report</a>
+                                </li>
+                                <li>
+                                    <a href="report.php"><i class="fa fa-plus fa-fw"></i>Due Report</a>
+                                </li>
+                            </ul>
                         </li>
+                        <!-- <li>
+                            <a href="report.php"><i class="fa fa-file fa-fw">Report</i> </a>
+                        </li> -->
 
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Staff<span class="fa arrow"></span></a>
@@ -122,13 +179,29 @@
                             <a href="#"><i class="fa fa-gear fa-fw"></i> Settings<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <?php
-                                if ($_SESSION['role'] == 'admin' && $_SESSION['status'] == 1) { ?>
-                                    <li>
-                                        <a href="updateSettings.php"><i class="fa fa-gear fa-fw"></i>Update Settings</a>
-                                    </li>
+                                if ($_SESSION['role'] == 'admin' && $_SESSION['status'] == 1) {
+
+                                    $q1 = "SELECT * FROM setting WHERE id = 1";
+                                    $r1 = mysqli_query($conn, $q1);
+
+                                    if ($r1 && $row1 = mysqli_fetch_assoc($r1)) {
+                                        // If logo is set, show "Update Settings"
+                                ?>
+                                        <li>
+                                            <a href="updateSettings.php"><i class="fa fa-gear fa-fw"></i> Update Settings</a>
+                                        </li>
+                                    <?php
+                                    } else {
+                                        // If logo is not set, show "Settings"
+                                    ?>
+                                        <li>
+                                            <a href="settings.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                        </li>
                                 <?php
+                                    }
                                 }
                                 ?>
+
                             </ul>
                         </li>
                     </ul>

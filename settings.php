@@ -59,7 +59,7 @@ include_once('includes/header.php');
         <div class="row">
             <div>
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title text-center " style="font-weight: bold;">Brand Information</h3>
                         </div>
@@ -90,7 +90,7 @@ include_once('includes/header.php');
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title text-center" style="font-weight: bold;">Logo and Favicon</h3>
                         </div>
@@ -111,7 +111,7 @@ include_once('includes/header.php');
 
                     <script>
                         function validateImage(input, previewId) {
-                            const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                            const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'ico', 'svg'];
                             const file = input.files[0];
                             const fileName = file.name.toLowerCase();
                             const fileExtension = fileName.split('.').pop();
@@ -119,7 +119,7 @@ include_once('includes/header.php');
                             if (allowedExtensions.includes(fileExtension)) {
                                 readURL(input, previewId);
                             } else {
-                                alert('Please upload an image with a valid extension (jpg, jpeg, png, gif).');
+                                alert('Please upload an image with a valid extension (jpg, jpeg, png, gif, ico, svg).');
                                 // Clear the input field
                                 input.value = '';
                                 // Hide the preview
@@ -197,13 +197,8 @@ if (isset($_POST['submit'])) {
     $favicon = $_FILES['favicon']['name'];
     $logo = $_FILES['logo']['name'];
 
-    $favicon = $_FILES['favicon']['name'];
-    $logo = $_FILES['logo']['name'];
-
-
-
     // Additional debugging statement
-    echo 'Debugging Information: ' . print_r($_FILES, true);
+    // echo 'Debugging Information: ' . print_r($_FILES, true);
 
     // File upload paths
     $faviconPath = 'assets/uploads/' . $favicon;
