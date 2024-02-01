@@ -29,7 +29,7 @@ function fetchDataForChart($interval, $conn)
             $sql .= " WHERE b.date >= DATE_SUB(NOW(), INTERVAL 6 DAY) AND b.date <= NOW()";
             break;
         case 'last-30-days':
-            $sql .= " WHERE b.date >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+            $sql .= " WHERE b.date >= DATE_SUB(NOW(), INTERVAL 30 DAY) AND b.date <= NOW()";
             break;
         case 'monthly':
             $sql .= " WHERE b.date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";

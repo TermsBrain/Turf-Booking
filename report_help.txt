@@ -1,0 +1,167 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
+    header('Location: login.php');
+    exit;
+}
+
+include_once('includes/header.php');
+?>
+
+<style>
+    .filter-container {
+        background-color: #e1f7d5;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+</style>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header text-center">Time Slot Reports</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" mt-4">
+            <!-- Filter Select Box -->
+            <div class="filter-container">
+                <h3 class="text-center">Time Slot</h3>
+                <!-- Chart Container -->
+                <div id="timeSlotChart" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+
+<?php
+// Get the current week start and end dates
+$now = new DateTime();
+$startOfWeek = $now->modify('this week')->format('Y-m-d');
+$endOfWeek = $now->modify('this week +6 days')->format('Y-m-d');
+
+// Fetch data from the database for the current week
+$query = "SELECT 
+            DATE_FORMAT(booking.date, '%W') AS day_name,
+            start_slot.start_time as start_time, 
+            end_slot.end_time as end_time
+         FROM booking 
+         LEFT JOIN slot_management AS start_slot ON booking.start_slot_id = start_slot.id
+         LEFT JOIN slot_management AS end_slot ON booking.end_slot_id = end_slot.id
+         WHERE booking.date BETWEEN '$startOfWeek' AND '$endOfWeek'";
+
+$result = mysqli_query($conn, $query);
+
+// Process data for the chart
+$slotData = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $slotData[] = [
+        'day_name' => $row['day_name'],
+        'time_slot' => $row['start_time'] . ' - ' . $row['end_time']
+    ];
+}
+
+// Convert PHP array to JavaScript array
+echo "<script>";
+echo "var slotData = " . json_encode($slotData) . ";";
+echo "</script>";
+
+mysqli_close($conn);
+?>
+
+<!-- JavaScript to create the scatter plot using Highcharts -->
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    // Create data structure for the chart
+    var categories = [];
+    var seriesData = [];
+
+    // Process the PHP data and populate the chart data
+    for (var i = 0; i < slotData.length; i++) {
+        var dayName = slotData[i].day_name;
+        var timeSlot = slotData[i].time_slot;
+
+        if (!categories.includes(timeSlot)) {
+            categories.push(timeSlot);
+        }
+
+        var seriesIndex = seriesData.findIndex(series => series.name === dayName);
+        if (seriesIndex === -1) {
+            seriesData.push({
+                name: dayName,
+                data: [categories.indexOf(timeSlot)]
+            });
+        } else {
+            seriesData[seriesIndex].data.push(categories.indexOf(timeSlot));
+        }
+    }
+
+    // Create the scatter plot with customizations
+    Highcharts.chart('timeSlotChart', {
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Booked Slots by Time Slot and Day'
+        },
+        xAxis: {
+            title: {
+                text: 'Time Slot'
+            },
+            categories: categories
+        },
+        yAxis: {
+            title: {
+                text: 'Day'
+            },
+            categories: seriesData.map(item => item.name),
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            borderWidth: 1
+        },
+        series: seriesData.map((item, index) => ({
+            name: item.name,
+            data: item.data.map(index => ({
+                x: index,
+                y: categories.indexOf(categories[index])
+            })),
+            marker: {
+                radius: 5,
+                fillColor: getColor(index), // Customize marker fill color
+                lineColor: getLineColor(index), // Customize marker line color
+                lineWidth: 2, // Customize marker line thickness
+                symbol: 'circle' // Customize marker shape (circle, square, diamond, triangle, etc.)
+            }
+        }))
+    });
+
+    // Function to get a distinctive color based on index
+    function getColor(index) {
+        var colors = ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f'];
+        return colors[index % colors.length];
+    }
+
+    // Function to get a distinctive line color based on index
+    function getLineColor(index) {
+        var lineColors = ['#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE', '#DB843D', '#92A8CD', '#A47D7C'];
+        return lineColors[index % lineColors.length];
+    }
+});
+
+</script>
+
+<?php include_once('includes/footer.php'); ?>
+<!-- Include Highcharts library -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
