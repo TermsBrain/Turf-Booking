@@ -133,7 +133,17 @@
                                     </li> -->
                             </ul>
                         </li>
-
+                        <li>
+                            <a href="#"><i class="fa fa-ticket fa-fw"></i> Expanse <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="addExpanse.php"><i class="fa fa-plus fa-fw"></i>Add Expanses</a>
+                                </li>
+                                <li>
+                                    <a href="allExpanse.php"><i class="fa fa-list fa-fw"></i>All Expanse</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-file fa-fw"></i> Reports <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

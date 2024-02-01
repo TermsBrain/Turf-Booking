@@ -9,18 +9,11 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['role']) || !isset($_SESSION['st
 
 include_once('includes/header.php');
 
-
-// Fetch the number of customers
-$sqlCustomers = "SELECT COUNT(*) as numCustomers FROM customers";
-$resultCustomers = mysqli_query($conn, $sqlCustomers);
-$rowCustomers = mysqli_fetch_assoc($resultCustomers);
-$numCustomers = $rowCustomers['numCustomers'];
-
 // Fetch the number of staff members
-$sqlStaff = "SELECT COUNT(*) as numStaff FROM authentication";
-$resultStaff = mysqli_query($conn, $sqlStaff);
-$rowStaff = mysqli_fetch_assoc($resultStaff);
-$numStaff = $rowStaff['numStaff'];
+$sqlExpanse = "SELECT SUM(amount) as totalExpanse FROM expanse";
+$resultExpanse = mysqli_query($conn, $sqlExpanse);
+$rowExpanse = mysqli_fetch_assoc($resultExpanse);
+$totalExpanse = $rowExpanse['totalExpanse'];
 
 // Fetch the total transactions from the transaction table
 $sqlBooking = "SELECT COUNT(*) as numBooking FROM booking";
@@ -37,6 +30,7 @@ $total_due = $rowTransactions['total_due'];
 $advance = $rowTransactions['advance'];
 $cash = $rowTransactions['cash'];
 
+$totalProfit = $totalTransactions - $totalExpanse;
 
 // Include necessary files
 include_once('includes/header.php');
@@ -72,50 +66,6 @@ include_once('includes/header.php');
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $numStaff; ?></div>
-                            <div>Total Staff</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="staff.php">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Staff</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $numCustomers; ?></div>
-                            <div>Total Customers</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="customers.php">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Customer</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="row">
@@ -131,6 +81,50 @@ include_once('includes/header.php');
                 <a href="transaction.php">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $totalExpanse; ?></div>
+                            <div>Total Expanses</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="allExpanse.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">All Expanses</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-user fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo $totalProfit ?></div>
+                            <div>Total Profit</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="report.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Report</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>

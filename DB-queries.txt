@@ -79,3 +79,15 @@ CREATE TABLE `booking` (
   FOREIGN KEY (slot_id) REFERENCES slot_management(id),
   FOREIGN KEY (reference_id) REFERENCES authentication(id)
 );
+
+CREATE TABLE `expanse` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `description` varchar(255),
+  `amount` int(11),
+  `note` varchar(255),
+  `reference_id` int(11),
+  `status` int(11),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+   FOREIGN KEY (reference_id) REFERENCES authentication(id)
+);
