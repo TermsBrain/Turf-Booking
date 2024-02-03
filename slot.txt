@@ -1,0 +1,85 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
+    header('Location: login.php');
+    exit;
+}
+
+include_once('includes/header.php');
+?>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header text-center">Slot Time</h1>
+        </div>
+    </div>
+
+    <style>
+            #transactionChart,
+        #customerChart {
+            background-color: #e1f7d5;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .filter-container {
+            background-color: #e1f7d5;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .filter-container label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .filter-container select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            outline: none;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    </style>
+
+    <div class="row">
+        <div class=" mt-4">
+            <!-- Filter Select Box -->
+            <div class="filter-container">
+                <label for="interval">Select Interval:</label>
+                <select id="interval" name="filter" class="form-select">
+                    <option value="monday" <?php echo (!isset($_POST['filter']) || $_POST['filter'] == 'monday') ? 'selected' : ''; ?>>Monday</option>
+                    <option value="tuesday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'tuesday') ? 'selected' : ''; ?>>Tuesday</option>
+                    <option value="wednesday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'wednesday') ? 'selected' : ''; ?>>Wednesday</option>
+                    <option value="thursday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'thursday') ? 'selected' : ''; ?>>Thursday</option>
+                    <option value="friday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'friday') ? 'selected' : ''; ?>>Friday</option>
+                    <option value="saturday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'saturday') ? 'selected' : ''; ?>>Saturday</option>
+                    <option value="sunday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'sunday') ? 'selected' : ''; ?>>Sunday</option>
+                </select>
+            </div>
+
+            <!-- Stylish Canvas for Chart.js -->
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="myChart" width="400" height="150"></canvas>
+                </div>
+            </div>
+
+            
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+        </div>
+    </div>
+</div>
+
+<?php include_once('includes/footer.php'); ?>

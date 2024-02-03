@@ -11,226 +11,133 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
 include_once('includes/header.php');
 ?>
 
+<style>
+    .filter-container {
+        background-color: #e1f7d5;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+    }
+</style>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header text-center">All Reports</h1>
+            <h1 class="page-header text-center">Time Slot Reports</h1>
         </div>
     </div>
-
-    <style>
-        #transactionChart,
-        #customerChart {
-            background-color: #e1f7d5;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .filter-container {
-            background-color: #e1f7d5;
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .filter-container label {
-            margin-right: 10px;
-            font-weight: bold;
-            color: #007bff;
-        }
-
-        .filter-container select {
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #ced4da;
-            outline: none;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-    </style>
-
+    <div class="row">
+        <div class=" mt-4">
+            <!-- Filter Select Box -->
+            <div class="filter-container">
+                <h3 class="text-center">Time Slot</h3>
+                <!-- Chart Container -->
+                <div id="timeSlotChart" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class=" mt-4">
             <!-- Filter Select Box -->
             <div class="filter-container">
                 <label for="interval">Select Interval:</label>
                 <select id="interval" name="filter" class="form-select">
-                    <option value="last-7-days" <?php echo (!isset($_POST['filter']) || $_POST['filter'] == 'last-7-days') ? 'selected' : ''; ?>>Last 7 Days</option>
-                    <option value="last-30-days" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'last-30-days') ? 'selected' : ''; ?>>Last 30 Days</option>
-                    <option value="monthly" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'monthly') ? 'selected' : ''; ?>>Monthly</option>
-                    <option value="yearly" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'yearly') ? 'selected' : ''; ?>>Yearly</option>
-                    <!-- <option value="all-time" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'all-time') ? 'selected' : ''; ?>>All Time</option> -->
+                    <option value="monday" <?php echo (!isset($_POST['filter']) || $_POST['filter'] == 'monday') ? 'selected' : ''; ?>>Monday</option>
+                    <option value="tuesday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'tuesday') ? 'selected' : ''; ?>>Tuesday</option>
+                    <option value="wednesday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'wednesday') ? 'selected' : ''; ?>>Wednesday</option>
+                    <option value="thursday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'thursday') ? 'selected' : ''; ?>>Thursday</option>
+                    <option value="friday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'friday') ? 'selected' : ''; ?>>Friday</option>
+                    <option value="saturday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'saturday') ? 'selected' : ''; ?>>Saturday</option>
+                    <option value="sunday" <?php echo (isset($_POST['filter']) && $_POST['filter'] == 'sunday') ? 'selected' : ''; ?>>Sunday</option>
                 </select>
             </div>
 
             <!-- Stylish Canvas for Chart.js -->
             <div class="card">
                 <div class="card-body">
-                    <canvas id="myChart" width="400" height="150"></canvas>
+                    <canvas id="timeSlotChart" width="400" height="150"></canvas>
                 </div>
             </div>
+    <?php
+    // Fetch all possible time slots between 12:00 PM and 4:00 PM
+    $timeSlots = [];
+    $start_time = strtotime('12:00 PM');
+    $end_time = strtotime('9:00 PM');
 
-            <?php
-            function fetchDataForChart($interval, $format, $conn)
-            {
-                $sql = "SELECT DATE(b.date) AS booking_date, TIME(start_slot.start_time) AS start_time, TIME(end_slot.end_time) AS end_time, SUM(t.total) AS total_income 
-                        FROM booking b
-                        LEFT JOIN transaction t ON b.transaction_id = t.id
-                        LEFT JOIN slot_management AS start_slot ON b.start_slot_id = start_slot.id
-                        LEFT JOIN slot_management AS end_slot ON b.end_slot_id = end_slot.id";
+    while ($start_time < $end_time) {
+        $timeSlots[] = date('h:i A', $start_time);
+        $start_time = strtotime('+60 minutes', $start_time);
+    }
 
-                switch ($interval) {
-                    case 'last-7-days':
-                        $sql .= " WHERE b.date >= CURDATE() - INTERVAL 6 DAY AND b.date <= NOW()";
-                        break;
+    // Convert PHP array to JavaScript array for x-axis
+    echo "<script>";
+    echo "var timeSlots = " . json_encode($timeSlots) . ";";
+    echo "</script>";
 
-                    case 'last-30-days':
-                        $sql .= " WHERE b.date >= CURDATE() - INTERVAL 29 DAY AND b.date <= NOW()";
-                        break;
+    // Fetch data from the database for the current day
+    $query = "SELECT 
+            TIME_FORMAT(CONVERT_TZ(CONCAT(booking.date, ' ', start_slot.start_time), 'UTC', 'Your_Timezone'), '%h:%i %p') AS time_slot,
+            COUNT(booking.id) AS bookings_count
+         FROM booking 
+         LEFT JOIN slot_management AS start_slot ON booking.start_slot_id = start_slot.id
+         WHERE booking.date = CURDATE()
+         GROUP BY time_slot";
 
-                    case 'monthly':
-                        $sql .= " WHERE b.date >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND b.date <= NOW()";
-                        break;
+    $result = mysqli_query($conn, $query);
 
-                    case 'yearly':
-                        $sql .= " WHERE b.date >= DATE_SUB(NOW(), INTERVAL 1 YEAR) AND b.date <= NOW()";
-                        break;
-                        // Add more cases for other intervals if needed
-                }
+    // Debugging: Check if the SQL query executes correctly
+    if (!$result) {
+        die("Error in SQL: " . mysqli_error($conn));
+    }
 
-                $sql .= " GROUP BY booking_date, start_time, end_time";
+    // Process data for the chart
+    $bookedSlots = [];
 
-                $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $bookedSlots[$row['time_slot']] = $row['bookings_count'];
+    }
 
-                // Check for errors
-                if (!$result) {
-                    die("Error in SQL: " . mysqli_error($conn));
-                }
+    // Convert PHP array to JavaScript array for y-axis
+    echo "<script>";
+    echo "var bookedSlots = " . json_encode($bookedSlots) . ";";
+    echo "</script>";
 
-                $data = array();
+    mysqli_close($conn);
+    ?>
 
-                // Fetch data and group by the specified interval from the booking table
-                while ($row = mysqli_fetch_assoc($result)) {
-                    // Use the booking date for grouping
-                    $date = date_create($row['booking_date']);
-                    $groupKey = date_format($date, $format) . ' ' . $row['start_time'] . '-' . $row['end_time'];
-
-                    if (!isset($data[$groupKey])) {
-                        $data[$groupKey] = 0;
+    <!-- JavaScript to create the column chart using Highcharts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Highcharts.chart('timeSlotChart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Booked Slots Count by Time Slot'
+                },
+                xAxis: {
+                    categories: timeSlots,
+                    title: {
+                        text: 'Time Slot'
                     }
-
-                    // Sum up the total amount for each interval
-                    $data[$groupKey] += $row['total_income'];
-                }
-
-                return array('totalIncome' => $data);
-            }
-
-
-            // Display data by default (last 30 days)
-            $data = fetchDataForChart('last-7-days', 'Y-m-d', $conn);
-            ?>
-
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-            <script>
-                var myChart; // Variable to hold the Chart.js instance
-
-                // Function to create a stylish Chart.js line chart with tension
-                function createChart(data) {
-                    var ctx = document.getElementById('myChart').getContext('2d');
-
-                    // Check if a chart instance exists, destroy it before creating a new one
-                    if (window.myChart) {
-                        window.myChart.destroy();
+                },
+                yAxis: {
+                    title: {
+                        text: 'Bookings Count'
                     }
+                },
+                accessibility: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Bookings',
+                    data: timeSlots.map(slot => bookedSlots[slot] || 0)
+                }]
+            });
 
-                    var labels = [];
-                    var values = [];
-
-                    // Extract keys (labels) and values from the data.totalIncome array
-                    for (var key in data.totalIncome) {
-                        labels.push(key);
-                        values.push(data.totalIncome[key]);
-                    }
-
-                    window.myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Total Amount',
-                                data: values,
-                                fill: false,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 2,
-                                tension: 0.4, // Adjust the tension as needed
-                                pointRadius: 4,
-                                pointHoverRadius: 6,
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    grid: {
-                                        color: 'rgba(0, 0, 0, 0.1)',
-                                    }
-                                },
-                                x: {
-                                    grid: {
-                                        color: 'rgba(0, 0, 0, 0)',
-                                    }
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: true,
-                                    position: 'top',
-                                }
-                            }
-                        }
-                    });
-                }
-
-                // Function to update the chart
-                function updateChart() {
-                    // Fetch data using jQuery AJAX
-                    var selectedFilter = $('#interval').val();
-
-                    $.ajax({
-                        method: 'POST',
-                        url: 'update_chart_data.php',
-                        data: {
-                            filter: selectedFilter
-                        },
-                        dataType: 'json',
-                        cache: false, // Add this line to prevent caching
-                        success: function(response) {
-                            if (response.error) {
-                                console.error('Error:', response.error);
-                            } else {
-                                // Call the function to update the chart
-                                createChart(response.data);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('AJAX Error:', error);
-                        }
-                    });
-                }
-
-                // Bind the updateChart function to the change event of the select box
-                $('#interval').change(updateChart);
-
-                // Initial chart creation
-                createChart(<?php echo json_encode($data); ?>);
-
-            </script>
-
-        </div>
-    </div>
+        });
+    </script>
 </div>
-
 <?php include_once('includes/footer.php'); ?>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
