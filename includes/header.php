@@ -134,13 +134,13 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-ticket fa-fw"></i> Expanse <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-ticket fa-fw"></i> Expense <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="addExpanse.php"><i class="fa fa-plus fa-fw"></i>Add Expanses</a>
                                 </li>
                                 <li>
-                                    <a href="allExpanse.php"><i class="fa fa-list fa-fw"></i>All Expanse</a>
+                                    <a href="allExpanse.php"><i class="fa fa-list fa-fw"></i>All Expense</a>
                                 </li>
                             </ul>
                         </li>
@@ -149,6 +149,10 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="report.php"><i class="fa fa-plus fa-fw"></i>Income Report</a>
+                                </li>
+                                <li>
+                                <li>
+                                    <a href="exp_report.php"><i class="fa fa-plus fa-fw"></i>Expense Report</a>
                                 </li>
                                 <li>
                                     <a href="adv_payment_report.php"><i class="fa fa-list fa-fw"></i>Advanced Report</a>
