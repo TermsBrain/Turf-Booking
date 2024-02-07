@@ -1,8 +1,8 @@
 <hr>
-<footer style="background-color: #f8f9fa; padding: 20px 0;">
+<footer style="background-color: #f8f9fa; padding: 5px 0;">
     <div class="container">
         <div class="row">
-            <div class="col text-center font-weight-bold" style="font-size: 20px; color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+            <div class="col text-left font-weight-bold" style="font-size: 16px; color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
                 <p><a href="https://termsbrain.com/" style="color: black; text-decoration: none;">Terms Brain LTD.</a></p>
             </div>
         </div>

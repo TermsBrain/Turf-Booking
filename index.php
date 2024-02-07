@@ -166,7 +166,7 @@ include_once('includes/header.php');
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">৳ <?php echo $advance; ?></div>
-                            <div>Total Advance</div>
+                            <div>Total Advanced</div>
                         </div>
                     </div>
                 </div>
