@@ -101,6 +101,7 @@ include_once('includes/header.php');
                     data: values,
                     backgroundColor: pieColors,
                     borderWidth: 6
+                    
                 }]
             },
             options: {
