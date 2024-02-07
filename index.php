@@ -10,10 +10,10 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['role']) || !isset($_SESSION['st
 include_once('includes/header.php');
 
 // Fetch the number of staff members
-$sqlExpanse = "SELECT SUM(amount) as totalExpanse FROM expanse";
-$resultExpanse = mysqli_query($conn, $sqlExpanse);
-$rowExpanse = mysqli_fetch_assoc($resultExpanse);
-$totalExpanse = $rowExpanse['totalExpanse'];
+$sqlExpense = "SELECT SUM(amount) as totalExpense FROM expense";
+$resultExpense = mysqli_query($conn, $sqlExpense);
+$rowExpense = mysqli_fetch_assoc($resultExpense);
+$totalExpense = $rowExpense['totalExpense'];
 
 // Fetch the total transactions from the transaction table
 $sqlBooking = "SELECT COUNT(*) as numBooking FROM booking";
@@ -30,7 +30,7 @@ $total_due = $rowTransactions['total_due'];
 $advance = $rowTransactions['advance'];
 $cash = $rowTransactions['cash'];
 
-$totalProfit = $totalTransactions - $totalExpanse;
+$totalProfit = $totalTransactions - $totalExpense;
 
 // Include necessary files
 include_once('includes/header.php');
@@ -95,14 +95,14 @@ include_once('includes/header.php');
                             <i class="fa fa-tasks fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $totalExpanse; ?></div>
-                            <div>Total Expanses</div>
+                            <div class="huge">৳ <?php echo $totalExpense; ?></div>
+                            <div>Total Expenses</div>
                         </div>
                     </div>
                 </div>
-                <a href="allExpanse.php">
+                <a href="allExpense.php">
                     <div class="panel-footer">
-                        <span class="pull-left">All Expanses</span>
+                        <span class="pull-left">All Expenses</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -114,10 +114,10 @@ include_once('includes/header.php');
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-user fa-5x"></i>
+                            <i class="fa fa-money fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $totalProfit ?></div>
+                            <div class="huge">৳ <?php echo $totalProfit ?></div>
                             <div>Total Profit</div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@ include_once('includes/header.php');
                             <i class="fa fa-money fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $total_due; ?></div>
+                            <div class="huge">৳ <?php echo $total_due; ?></div>
                             <div>Total Due</div>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ include_once('includes/header.php');
                             <i class="fa fa-money fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $advance; ?></div>
+                            <div class="huge">৳ <?php echo $advance; ?></div>
                             <div>Total Advance</div>
                         </div>
                     </div>
@@ -187,8 +187,8 @@ include_once('includes/header.php');
                             <i class="fa fa-money fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo $cash; ?></div>
-                            <div>Total Cash</div>
+                            <div class="huge">৳ <?php echo $cash; ?></div>
+                            <div>Total Income</div>
                         </div>
                     </div>
                 </div>

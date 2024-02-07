@@ -20,14 +20,14 @@ include_once('includes/header.php');
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header text-center">Add Expanse</h1>
+            <h1 class="page-header text-center">Add Expense</h1>
         </div>
         <div class="row container-center">
             <div class="col-md-6">
                 <form class="form-horizontal form-label-left" action="" method="POST">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title text-center " style="font-weight: bold;">Add Expanse</h3>
+                            <h3 class="panel-title text-center " style="font-weight: bold;">Add Expense</h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
@@ -51,11 +51,11 @@ include_once('includes/header.php');
                                     <label>Note</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="text" name="note" class="form-control" placeholder="Enter Note If needed">
+                                <textarea rows="2" style="height:100%;" type="text" class="form-control" name="note" id="note" placeholder="Enter Note If needed"></textarea>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <input type="submit" name="submit" class="btn btn-primary text-center" value="Add Expanse">
+                                <input type="submit" name="submit" class="btn btn-primary text-center" value="Add Expense">
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
     $reference_id = $_SESSION['id'];
     $status = 1;  // Set status to 1
     
-    $q = "INSERT INTO expanse (description, amount, note, reference_id, status) VALUES ('$description', '$amount', '$note', '$reference_id', '$status')";
+    $q = "INSERT INTO expense (description, amount, note, reference_id, status) VALUES ('$description', '$amount', '$note', '$reference_id', '$status')";
     if (mysqli_query($conn, $q)) {
         // Trigger the success modal
         echo '<script>

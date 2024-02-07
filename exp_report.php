@@ -14,7 +14,7 @@ include_once('includes/header.php');
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header text-center">All Expanses</h1>
+            <h1 class="page-header text-center">All Expenses</h1>
         </div>
     </div>
 
@@ -74,7 +74,7 @@ include_once('includes/header.php');
             function fetchDataForChart($interval, $format, $conn)
             {
                 $sql = "SELECT DATE(e.created_at) AS expense_date, SUM(e.amount) AS total_expense 
-                        FROM expanse e
+                        FROM expense e
                         LEFT JOIN authentication a ON e.reference_id = a.id";
 
                 switch ($interval) {

@@ -137,10 +137,10 @@
                             <a href="#"><i class="fa fa-ticket fa-fw"></i> Expense <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="addExpanse.php"><i class="fa fa-plus fa-fw"></i>Add Expanses</a>
+                                    <a href="addExpense.php"><i class="fa fa-plus fa-fw"></i>Add Expenses</a>
                                 </li>
                                 <li>
-                                    <a href="allExpanse.php"><i class="fa fa-list fa-fw"></i>All Expense</a>
+                                    <a href="allExpense.php"><i class="fa fa-list fa-fw"></i>All Expense</a>
                                 </li>
                             </ul>
                         </li>
@@ -148,21 +148,21 @@
                             <a href="#"><i class="fa fa-file fa-fw"></i> Reports <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="report.php"><i class="fa fa-plus fa-fw"></i>Income Report</a>
+                                    <a href="report.php"><i class="fa fa-area-chart fa-fw"></i>Income Report</a>
                                 </li>
                                 <li>
                                 <li>
-                                    <a href="exp_report.php"><i class="fa fa-plus fa-fw"></i>Expense Report</a>
+                                    <a href="exp_report.php"><i class="fa fa-pie-chart fa-fw"></i>Expense Report</a>
                                 </li>
                                 <li>
-                                    <a href="adv_payment_report.php"><i class="fa fa-list fa-fw"></i>Advanced Report</a>
+                                    <a href="adv_payment_report.php"><i class="fa fa-bar-chart fa-fw"></i>Advanced Report</a>
                                 </li>
                                 <li>
-                                    <a href="time_slot_report.php"><i class="fa fa-plus fa-fw"></i>Time Slot Report</a>
+                                    <a href="time_slot_report.php"><i class="fa fa-line-chart fa-fw"></i>Time Slot Report</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="report.php"><i class="fa fa-plus fa-fw"></i>Due Report</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <!-- <li>

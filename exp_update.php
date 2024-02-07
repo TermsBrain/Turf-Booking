@@ -20,7 +20,7 @@ if (isset($_POST['filter'])) {
 function fetchDataForChart($interval, $conn)
 {
     $sql = "SELECT DATE(e.created_at) AS expense_date, SUM(e.amount) AS total_expense 
-            FROM expanse e
+            FROM expense e
             LEFT JOIN authentication a ON e.reference_id = a.id";
 
     switch ($interval) {
@@ -50,7 +50,7 @@ function fetchDataForChart($interval, $conn)
 
     $data = array();
 
-    // Fetch data and group by the specified interval from the expanse table
+    // Fetch data and group by the specified interval from the expense table
     while ($row = mysqli_fetch_assoc($result)) {
         // Use the expense date for grouping
         $date = date_create($row['expense_date']);

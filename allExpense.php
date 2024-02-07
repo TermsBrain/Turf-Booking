@@ -82,12 +82,12 @@ include_once('includes/header.php');
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header text-center">Expanse</h1>
+            <h1 class="page-header text-center">Expense</h1>
         </div>
     </div>
     <div class="row">
         <table id="yourTableID" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <caption class="text-center">See All Expanses</caption>
+            <caption class="text-center">See All Expenses</caption>
             <thead>
                 <th>ID</th>
                 <th>Description</th>
@@ -98,8 +98,8 @@ include_once('includes/header.php');
             </thead>
             <tbody>
                 <?php
-                $query = "SELECT expanse.*, authentication.name FROM expanse
-                LEFT JOIN authentication ON expanse.reference_id = authentication.id";
+                $query = "SELECT expense.*, authentication.name FROM expense
+                LEFT JOIN authentication ON expense.reference_id = authentication.id";
                 $sql = mysqli_query($conn, $query);
                 while ($row = mysqli_fetch_array($sql)) { ?>
                     <tr>
@@ -109,7 +109,7 @@ include_once('includes/header.php');
                         <td><?php echo $row['note'] ?></td>
                         <td><?php echo $row['name'] ?></td>
                         <td <?php echo (isset($_SESSION['role']) && $_SESSION['role'] != 'admin') ? 'hidden' : '' ?>>
-                            <a href="editExpanse.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
+                            <a href="editExpense.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                 <?php

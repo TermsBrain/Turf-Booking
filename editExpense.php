@@ -11,9 +11,9 @@ include_once('includes/header.php');
 ?>
 <?php
 $id = $_REQUEST['id'];
-$str = "SELECT * FROM expanse WHERE id=$id";
+$str = "SELECT * FROM expense WHERE id=$id";
 $result = mysqli_query($conn, $str);
-$expanse = mysqli_fetch_array($result);
+$expense = mysqli_fetch_array($result);
 ?>
 <style>
     .container-center {
@@ -25,7 +25,7 @@ $expanse = mysqli_fetch_array($result);
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header text-center">Edit Expanse</h1>
+            <h1 class="page-header text-center">Edit Expense</h1>
         </div>
     </div>
     <div class="row">
@@ -39,19 +39,19 @@ $expanse = mysqli_fetch_array($result);
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="">Description</label>
-                                <input type="text" value="<?php echo $expanse['description'] ?>" class="form-control" name="description" id="">
+                                <textarea rows="3" style="height:100%;" type="text" class="form-control" name="description" id="description" placeholder="Enter description"><?php echo $expense['description'] ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="">Amount</label>
-                                <input type="text" value="<?php echo $expanse['amount'] ?>" class="form-control" name="amount" id="">
+                                <input type="text" value="<?php echo $expense['amount'] ?>" class="form-control" name="amount" id="">
                             </div>
                             <div class="form-group">
                                 <label for="">Note</label>
-                                <input type="text" value="<?php echo $expanse['note'] ?>" class="form-control" name="note" id="">
+                                <textarea rows="2" style="height:100%;" type="text" class="form-control" name="note" id="note" placeholder="Enter Note If needed"><?php echo $expense['note'] ?></textarea>
                             </div>
                             <div class="form-group text-center">
-                                <input class="btn btn-primary" type="submit" name="submit" value="Update Expanse">
-                                <a class="btn btn-info" href="expanse.php">List All Expanses</a>
+                                <input class="btn btn-primary" type="submit" name="submit" value="Update Expense">
+                                <a class="btn btn-info" href="expense.php">List All Expenses</a>
                             </div>
                         </div>
                     </div>
@@ -69,9 +69,9 @@ if (isset($_POST['submit'])) {
     $amount = $_POST['amount'];
     $note = $_POST['note'];
 
-    $str = "UPDATE expanse SET description='" . $description . "', amount='" . $amount . "', note='" . $note . "' WHERE id= $id";
+    $str = "UPDATE expense SET description='" . $description . "', amount='" . $amount . "', note='" . $note . "' WHERE id= $id";
     if (mysqli_query($conn, $str)) {
-        echo "<script> window.location.replace('allExpanse.php'); </script>";
+        echo "<script> window.location.replace('allExpense.php'); </script>";
     }
 }
 ?>

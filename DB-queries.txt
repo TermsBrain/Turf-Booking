@@ -80,7 +80,7 @@ CREATE TABLE `booking` (
   FOREIGN KEY (reference_id) REFERENCES authentication(id)
 );
 
-CREATE TABLE `expanse` (
+CREATE TABLE `expense` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `description` varchar(255),
   `amount` int(11),
